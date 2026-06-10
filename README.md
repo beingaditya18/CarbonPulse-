@@ -1,6 +1,6 @@
 # 🌱 CarbonPulse AI+
 
-> **Live Demo**: [https://ecotrace-ai.vercel.app](https://ecotrace-ai.vercel.app) — **Try it now, no sign-up required.**
+> **Live Demo**: https://carbon-pulse-umber.vercel.app/ — **Try it now, no sign-up required.**
 
 > **From Awareness to Action: The intelligent, automated carbon tracking PWA powered by Explainable AI (SHAP), Digital Carbon Twins, and Google Cloud Enterprise Stack.**
 
