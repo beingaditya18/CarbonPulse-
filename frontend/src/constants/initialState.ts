@@ -1,0 +1,116 @@
+import { Challenge, Badge, UserProfile } from '@/types/store';
+
+export const INITIAL_CHALLENGES: Challenge[] = [
+  {
+    id: 'c-1',
+    title: 'Ditch the Drive',
+    description: 'Use public transit or bike for all trips under 5 miles this week.',
+    potential_impact: 45,
+    category: 'transportation',
+    status: 'pending',
+    pointsReward: 50,
+  },
+  {
+    id: 'c-2',
+    title: 'Veggie Power',
+    description: 'Adopt a fully plant-based diet for 3 days a week.',
+    potential_impact: 30,
+    category: 'food',
+    status: 'pending',
+    pointsReward: 40,
+  },
+  {
+    id: 'c-3',
+    title: 'Vampire Power Hunt',
+    description: 'Unplug all unused chargers and electronics overnight.',
+    potential_impact: 12,
+    category: 'electricity',
+    status: 'pending',
+    pointsReward: 20,
+  },
+  {
+    id: 'c-4',
+    title: 'Zero New Clothes',
+    description: 'Avoid buying any non-essential wardrobe items this month.',
+    potential_impact: 25,
+    category: 'shopping',
+    status: 'pending',
+    pointsReward: 35,
+  },
+  {
+    id: 'c-5',
+    title: 'Composting Champion',
+    description: 'Compost 100% of organic waste for the next two weeks.',
+    potential_impact: 15,
+    category: 'waste',
+    status: 'pending',
+    pointsReward: 25,
+  },
+];
+
+export const INITIAL_BADGES: Badge[] = [
+  {
+    id: 'b-1',
+    name: 'Eco Seedling',
+    description: 'Welcome to your carbon reducing journey.',
+    requirement: 'Complete the onboarding flow.',
+    pointsRequired: 0,
+    icon: '🌱',
+    unlocked: false,
+  },
+  {
+    id: 'b-2',
+    name: 'Active Tracker',
+    description: 'Log your first 5 manual carbon activities.',
+    requirement: 'Log 5 carbon activities.',
+    pointsRequired: 50,
+    icon: '📝',
+    unlocked: false,
+  },
+  {
+    id: 'b-3',
+    name: 'Green Scanner',
+    description: 'Successfully scan and extract carbon logs from a receipt.',
+    requirement: 'Scan a receipt using AI OCR.',
+    pointsRequired: 100,
+    icon: '⚡',
+    unlocked: false,
+  },
+  {
+    id: 'b-4',
+    name: 'Carbon Twin Modeler',
+    description: 'Execute your first digital carbon twin scenario simulation.',
+    requirement: 'Run a twin simulation.',
+    pointsRequired: 150,
+    icon: '👥',
+    unlocked: false,
+  },
+  {
+    id: 'b-5',
+    name: 'Challenge Conqueror',
+    description: 'Complete your first reduction challenge.',
+    requirement: 'Complete a reduction challenge.',
+    pointsRequired: 200,
+    icon: '🏆',
+    unlocked: false,
+  },
+  {
+    id: 'b-6',
+    name: 'Climate Master',
+    description: 'Reach a carbon savings level of A or higher.',
+    requirement: 'Earn 500 lifetime points.',
+    pointsRequired: 500,
+    icon: '🌍',
+    unlocked: false,
+  },
+];
+
+export const DEFAULT_USER: UserProfile = {
+  name: 'Eco Hero',
+  email: 'hero@carbonpulse.ai',
+  onboardingComplete: false,
+  ecoLevel: 1,
+  points: 0,
+  totalCarbonSaved: 0,
+  baselineEmissions: 280, // Default baseline kg CO2 per month
+};
