@@ -115,20 +115,20 @@ How CarbonPulse AI+ satisfies each judging axis specifically:
 
 | 🌐 High-Impact Landing Page | 📊 SHAP Explainable AI Insights |
 | :---: | :---: |
-| ![Landing Page](frontend/public/landing-screenshot.png) | ![Dashboard Overview](frontend/public/dashboard-overview.png) |
+| ![Landing Page](public/landing-screenshot.png) | ![Dashboard Overview](public/dashboard-overview.png) |
 | **💡 Carbon Twin Scenario Simulator** | **🏆 Global Community Impact** |
-| ![Carbon Twin](frontend/public/carbon-twin.png) | ![Community Impact](frontend/public/community-impact.png) |
+| ![Carbon Twin](public/carbon-twin.png) | ![Community Impact](public/community-impact.png) |
 
 ---
 
 ## 🧠 Behind the Mathematical Core
 
 ### 1. Explainable AI Engine (SHAP)
-Instead of arbitrary heuristic scores, CarbonPulse AI+ implements a client-side SHAP (Shapley Additive exPlanations) engine ([`src/lib/shapEngine.ts`](frontend/src/lib/shapEngine.ts)). 
+Instead of arbitrary heuristic scores, CarbonPulse AI+ implements a client-side SHAP (Shapley Additive exPlanations) engine ([`src/lib/shapEngine.ts`](src/lib/shapEngine.ts)). 
 It determines the marginal impact ($L_i$) of the user's consumption in each category relative to a regional average baseline. This explains exactly how much a user's transit, food, or shopping actions contribute to their carbon footprint grade deviation (A, B, C, D) from the norm. See [METHODOLOGY.md](METHODOLOGY.md) for the full formula and all cited emission factors.
 
 ### 2. Time-Series Digital Twin Forecasting
-The Twin simulator ([`src/lib/twinRegression.ts`](frontend/src/lib/twinRegression.ts)) fits an Ordinary Least Squares (OLS) linear regression model over the user's logging history:
+The Twin simulator ([`src/lib/twinRegression.ts`](src/lib/twinRegression.ts)) fits an Ordinary Least Squares (OLS) linear regression model over the user's logging history:
 $$y = m \cdot x + c$$
 * **Baseline Trajectory**: Projects future carbon loads over 30, 60, and 90 days if habits continue unchanged.
 * **Simulation Trajectory**: Applies category percentage reduction parameters dynamically in the client, overlaying the projected savings path side-by-side on a Recharts comparison graph.
