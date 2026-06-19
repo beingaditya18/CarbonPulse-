@@ -170,38 +170,31 @@ $$y = m \cdot x + c$$
 
 ```
 ecotrace-ai/
-├── METHODOLOGY.md           # Emission factors, SHAP math, OLS docs with citations
-├── SECURITY.md              # Threat model, HTTP headers, rate limiting, GCP layer
-└── frontend/
-    ├── public/              # Manifest icons, PWA setups, and assets
-    └── src/
-        ├── app/
-        │   ├── onboarding/  # Step-by-step onboarding wizard
-        │   ├── dashboard/   # Core layout and sub-modules
-        │   │   ├── twin/    # Digital Carbon Twin simulation page
-        │   │   ├── community/# Leaderboard & Google Maps Eco-locator
-        │   │   ├── achievements/# Unlocked badge grid collection
-        │   │   └── settings/# Profile configurations & reset options
-        │   ├── api/
-        │   │   ├── chat/    # Edge handler for Gemini chat
-        │   │   └── carbon/  # OCR parsing & insights routes
-        │   ├── page.tsx     # Sleek landing page with preview simulator
-        │   └── layout.tsx   # Root layout setting dark mode and Geist fonts
-        ├── lib/
-        │   ├── shapEngine.ts    # SHAP calculator (pure, typed, zero-any)
-        │   └── twinRegression.ts# OLS Regression model (pure, typed, zero-any)
-        ├── tests/
-        │   ├── shapEngine.test.ts   # 15 comprehensive SHAP unit tests
-        │   ├── twinRegression.test.ts# 15 comprehensive OLS unit tests
-        │   ├── rateLimiter.test.ts
-        │   ├── sanitize.test.ts
-        │   └── validators.test.ts
-        ├── utils/
-        │   ├── rateLimiter.ts   # Token-bucket edge rate limiter
-        │   ├── sanitize.ts      # XSS-safe string escaper
-        │   └── validators.ts    # Magic-bytes file upload validator
-        └── store/
-            └── useCarbonStore.ts# Persisted state with Zod validation
+├── METHODOLOGY.md           # Detailed DEFRA/EPA/IPCC factors, SHAP math, and twins documentation
+├── SECURITY.md              # CSP headers, magic-bytes checks, edge rate limiters
+├── package.json             # Root-level dependencies & scripts
+├── tsconfig.json            # Strict TypeScript compiler settings
+├── next.config.ts           # Turbopack and Edge runtime routing configuration
+├── vitest.config.ts         # Vitest test framework configuration
+├── public/                  # Static assets & icons
+└── src/
+    ├── app/
+    │   ├── calculator/      # Multi-vector 6-step questionnaire wizard
+    │   ├── onboarding/      # legacy route, redirects to calculator
+    │   ├── dashboard/       # command center and sub-modules
+    │   │   ├── twin/        # Digital Carbon Twin simulation page
+    │   │   ├── community/   # Challenges, leaderboards & locator maps
+    │   │   └── settings/    # Profile configuration options
+    │   ├── page.tsx         # Responsive landing page with preview simulator
+    │   └── layout.tsx       # Root layout setting dark mode and styles
+    ├── components/          # Reusable UI primitives and layout blocks
+    ├── lib/
+    │   ├── shapEngine.ts    # Game-theoretic SHAP attributions engine
+    │   ├── tips-engine.ts   # Dynamic Rules Engine ranking actions by savings
+    │   └── twinRegression.ts# Least-squares OLS forecasting simulator
+    ├── store/               # Zustand store with persistence and Zod schemas
+    ├── tests/               # Vitest unit test suites (48 passing tests)
+    └── utils/               # Sanitizers, rate limiters, upload validators
 ```
 
 ---
@@ -209,14 +202,13 @@ ecotrace-ai/
 ## 🚀 Getting Started & Local Setup
 
 ### 1. Install Node.js Dependencies
-Navigate to the `frontend` folder:
+Install all packages directly from the root workspace:
 ```bash
-cd ecotrace-ai/frontend
 npm install
 ```
 
 ### 2. Configure Environment Variables (Optional)
-Create a `.env.local` file in the `frontend` folder to connect to live Google Cloud services.
+Create a `.env.local` file in the root workspace to connect to live Google Cloud services.
 > **Note**: If no environment variables are defined, the application gracefully activates mock simulator fallbacks so all screens function out of the box with realistic responses.
 
 ```env
@@ -239,7 +231,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application in y
 ### 4. Run Tests
 ```bash
 npm test
-# Expected: 36 tests passing across 5 test files
+# Expected: 48 tests passing across 6 test files
 ```
 
 ### 5. Build for Production
@@ -253,11 +245,10 @@ npm run build
 ## ☁️ Production Deployment
 
 ### Single-Button Vercel Deploy
-Since the backend FastAPI app has been deprecated and code logic is unified under Next.js, deploying is simple:
+Since code logic is unified at the root level under Next.js, deploying is simple:
 1. Push the code to a GitHub repository.
 2. Link the repository to your **Vercel** dashboard.
-3. Configure the Root Directory to `ecotrace-ai/frontend`.
-4. Deploy! Vercel automatically deploys your routes to the global Edge Network.
+3. Vercel will automatically detect the root directory and deploy your routes to the global Edge Network.
 
 ---
 
