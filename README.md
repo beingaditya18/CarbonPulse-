@@ -10,7 +10,7 @@
 [![Zustand v5](https://img.shields.io/badge/Zustand-v5.0-brown?style=flat-square)](https://github.com/pmndrs/zustand)
 [![PWA](https://img.shields.io/badge/PWA-Progressive%20Web%20App-purple?style=flat-square)](https://web.dev/explore/progressive-web-apps)
 [![Vercel Edge](https://img.shields.io/badge/Vercel-Edge_Runtime-000000?logo=vercel&style=flat-square)](https://vercel.com/features/edge-network)
-[![Tests](https://img.shields.io/badge/Tests-36%20passing-brightgreen?style=flat-square)](#-evaluation-criteria)
+[![Tests](https://img.shields.io/badge/Tests-106%20passing-brightgreen?style=flat-square)](#-evaluation-criteria)
 [![Coverage](https://img.shields.io/badge/Coverage-90%25%2B-brightgreen?style=flat-square)](#testing)
 
 CarbonPulse AI+ is a production-grade, offline-first Progressive Web Application (PWA) that demystifies carbon footprint tracking, automates consumption logging through receipt scanning, and calculates mathematically verified lifestyle forecasts.
