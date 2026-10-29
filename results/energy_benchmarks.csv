@@ -1,0 +1,9 @@
+model,inference_calls,total_inference_time_sec,latency_per_sample_us,estimated_energy_kwh,computational_emissions_g_co2e,measurement_mode,grid_intensity_source
+accounting,10000,0.0063,0.63,2e-08,6e-06,CodeCarbon / Hardware TDP Model (45W),US Average eGRID 0.370 kg CO2e / kWh
+median,10000,0.2987,29.87,1.989e-05,0.00736,CodeCarbon / Hardware TDP Model (45W),US Average eGRID 0.370 kg CO2e / kWh
+ridge,10000,0.0845,8.45,1.503e-05,0.005561,CodeCarbon / Hardware TDP Model (45W),US Average eGRID 0.370 kg CO2e / kWh
+gam,10000,0.1529,15.29,1.576e-05,0.005831,CodeCarbon / Hardware TDP Model (45W),US Average eGRID 0.370 kg CO2e / kWh
+ebm,10000,0.0284,2.84,2e-08,8e-06,CodeCarbon / Hardware TDP Model (45W),US Average eGRID 0.370 kg CO2e / kWh
+rf,10000,0.8513,85.13,2.92e-05,0.010802,CodeCarbon / Hardware TDP Model (45W),US Average eGRID 0.370 kg CO2e / kWh
+xgboost,10000,0.0198,1.98,2e-08,6e-06,CodeCarbon / Hardware TDP Model (45W),US Average eGRID 0.370 kg CO2e / kWh
+mlp,10000,0.0215,2.15,3e-08,1.1e-05,CodeCarbon / Hardware TDP Model (45W),US Average eGRID 0.370 kg CO2e / kWh

@@ -1,0 +1,9 @@
+model_id,model_name,mae,rmse,r2,latency_ms,peak_memory_mb,energy_kwh_per_10k,transparency_tier,pareto_optimal_accuracy_latency,recommended_scenario
+accounting,Conventional Accounting (Activity x EF),0.3291,3.8065,1.0,0.2217,40.282,2e-08,1,True,Mandatory operational choice when utility meter data is available (exact ground truth accounting)
+median,Property Median Intensity Benchmark,114.2013,735.2653,0.1812,0.3203,0.377,1.989e-05,1,False,Non-ML baseline for municipal rough estimates when only building type and area are known
+ridge,Ridge Regression,97.9904,723.1851,0.2079,0.2245,11.17,1.503e-05,1,False,"Recommended for ultra-fast, low-memory embedded deployments requiring exact linear coefficients"
+gam,Generalized Additive Model (SplineGAM),98.8912,735.2814,0.1812,3.1899,10.658,1.576e-05,1,False,Recommended when non-linear domain shape inspection is required with transparent univariate splines
+ebm,Explainable Boosting Machine (EBM),125.9947,798.7539,0.0337,0.7638,0.804,2e-08,1,False,Suitable for moderate-scale applications prioritizing glassbox additivity over training speed
+rf,Random Forest Regressor,101.1776,711.7341,0.2328,30.1836,62.779,2.92e-05,2,False,Secondary architecture dominated in accuracy-latency space
+xgboost,XGBoost Regressor,95.3972,692.0099,0.2747,0.6709,1.539,2e-08,2,False,Recommended for unmetered portfolio screening where predictive accuracy is the primary objective
+mlp,Multilayer Perceptron (MLP),128.9753,781.8258,0.0743,0.3977,1.129,3e-08,3,False,Secondary architecture dominated in accuracy-latency space

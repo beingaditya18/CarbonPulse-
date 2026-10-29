@@ -1,0 +1,9 @@
+model,disk_size_kb,peak_allocated_memory_mb,process_rss_mb,benchmark_batch_size
+accounting,0.16,40.282,190.75,500
+median,0.38,0.377,174.83,500
+ridge,5.2,11.17,191.08,500
+gam,44.92,10.658,204.45,500
+ebm,423.75,0.804,203.75,500
+rf,63520.88,62.779,265.13,500
+xgboost,772.89,1.539,217.61,500
+mlp,389.95,1.129,219.59,500

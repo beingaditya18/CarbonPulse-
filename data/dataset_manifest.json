@@ -1,0 +1,54 @@
+{
+  "dataset_name": "City of Seattle Building Energy Benchmarking Data",
+  "dataset_version": "2015-Present (accessed October 2026)",
+  "publisher": "City of Seattle Office of Sustainability & Environment",
+  "statutory_authority": "Seattle Municipal Code (SMC) 22.920",
+  "portal_url": "https://data.seattle.gov/Built-Environment/Building-Energy-Benchmarking-Data-2015-Present/teqw-tu6e",
+  "download_url": "https://data.seattle.gov/api/views/teqw-tu6e/rows.csv?accessType=DOWNLOAD",
+  "api_endpoint": "https://data.seattle.gov/resource/teqw-tu6e.json",
+  "access_date": "2026-10-29",
+  "license": "Public Domain / City of Seattle Open Data Terms of Use",
+  "redistribution": "Open access, unrestricted research and commercial reuse",
+  "file_details": {
+    "raw_file": "data/raw/seattle_building_energy_benchmarking_raw.csv",
+    "file_size_bytes": 13321421,
+    "sha256": "d1a8227bf9c7c82aea8279a67405add617271852a985d96bb6e4ac9070e8250f"
+  },
+  "dimensions": {
+    "total_raw_observations": 38309,
+    "total_raw_features": 46,
+    "temporal_coverage": "2015 - 2025",
+    "geographic_coverage": "Seattle, Washington, USA (Latitude: 47.49 - 47.73 N, Longitude: -122.44 - -122.24 W)"
+  },
+  "target_variables": {
+    "primary_target": "TotalGHGEmissions",
+    "primary_target_description": "Total annual greenhouse gas emissions (Scope 1 direct fossil fuel + Scope 2 indirect electricity emissions)",
+    "primary_target_units": "Metric Tons of CO2 equivalent per year (Metric Tons CO2e / yr)",
+    "intensity_target": "GHGEmissionsIntensity",
+    "intensity_target_description": "Total greenhouse gas emissions normalized by building gross floor area",
+    "intensity_target_units": "kg CO2e / sq ft / year"
+  },
+  "target_provenance_and_accounting_boundary": {
+    "calculation_engine": "U.S. EPA ENERGY STAR Portfolio Manager",
+    "scope_1_activity": "NaturalGas(therms) converted via EPA fuel emission factor (~0.0531 MT CO2e/MMBtu or ~5.3 kg CO2e/therm)",
+    "scope_2_activity": "Electricity(kWh) converted via Seattle City Light utility-specific / eGRID regional emission factor",
+    "steam_activity": "SteamUse(kBtu) converted via Seattle Steam Company / Enwave district energy emission factor",
+    "ground_truth_classification": "Statutory reporting estimate based on verified utility meter aggregations. It measures agreement with standardized EPA emissions accounting rather than direct stack gas sensor measurement."
+  },
+  "leakage_controls": {
+    "activity_data_exclusion": [
+      "Electricity(kWh)",
+      "Electricity(kBtu)",
+      "NaturalGas(therms)",
+      "NaturalGas(kBtu)",
+      "SteamUse(kBtu)",
+      "SiteEnergyUse(kBtu)",
+      "SiteEnergyUseWN(kBtu)",
+      "SiteEUI(kBtu/sf)",
+      "SiteEUIWN(kBtu/sf)",
+      "SourceEUI(kBtu/sf)",
+      "SourceEUIWN(kBtu/sf)"
+    ],
+    "activity_data_role": "Used strictly for computing the Conventional Activity x Emission Factor Accounting Baseline, and withheld from the primary physical-structural ML feature matrix to prevent trivial formula identity leakage."
+  }
+}

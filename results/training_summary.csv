@@ -1,0 +1,9 @@
+model,status,training_time_sec,model_path,error
+accounting,SUCCESS,0.0,C:\Users\adity\Downloads\CarbonPulse--main\src\experiments\..\..\models\accounting.joblib,
+median,SUCCESS,0.0103,C:\Users\adity\Downloads\CarbonPulse--main\src\experiments\..\..\models\median.joblib,
+ridge,SUCCESS,0.2666,C:\Users\adity\Downloads\CarbonPulse--main\src\experiments\..\..\models\ridge.joblib,
+gam,SUCCESS,0.7466,C:\Users\adity\Downloads\CarbonPulse--main\src\experiments\..\..\models\gam.joblib,
+ebm,SUCCESS,780.0403,C:\Users\adity\Downloads\CarbonPulse--main\src\experiments\..\..\models\ebm.joblib,
+rf,SUCCESS,5.033,C:\Users\adity\Downloads\CarbonPulse--main\src\experiments\..\..\models\rf.joblib,
+xgboost,SUCCESS,4.7634,C:\Users\adity\Downloads\CarbonPulse--main\src\experiments\..\..\models\xgboost.joblib,
+mlp,SUCCESS,53.8235,C:\Users\adity\Downloads\CarbonPulse--main\src\experiments\..\..\models\mlp.joblib,

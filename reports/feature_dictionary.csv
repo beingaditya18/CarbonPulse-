@@ -1,0 +1,47 @@
+feature_name,data_type,role,unique_values,missing_pct,description
+OSEBuildingID,int64,Identifier / Grouping Key,3871,0.0,Entity or temporal tracking key for GroupKFold validation
+DataYear,int64,Identifier / Grouping Key,11,0.0,Entity or temporal tracking key for GroupKFold validation
+BuildingName,str,Identifier / Grouping Key,7208,0.0,Entity or temporal tracking key for GroupKFold validation
+BuildingType,str,ML Feature (Structural / Spatial / Architectural),7,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+TaxParcelIdentificationNumber,str,Identifier / Grouping Key,3734,0.0,Entity or temporal tracking key for GroupKFold validation
+Address,str,Identifier / Grouping Key,3854,0.0,Entity or temporal tracking key for GroupKFold validation
+City,str,ML Feature (Structural / Spatial / Architectural),2,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+State,str,ML Feature (Structural / Spatial / Architectural),1,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+ZipCode,int64,ML Feature (Structural / Spatial / Architectural),29,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+Latitude,float64,ML Feature (Structural / Spatial / Architectural),6726,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+Longitude,float64,ML Feature (Structural / Spatial / Architectural),6494,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+Neighborhood,str,ML Feature (Structural / Spatial / Architectural),14,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+CouncilDistrictCode,int64,ML Feature (Structural / Spatial / Architectural),7,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+YearBuilt,int64,ML Feature (Structural / Spatial / Architectural),122,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+NumberofFloors,int64,ML Feature (Structural / Spatial / Architectural),53,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+NumberofBuildings,int64,ML Feature (Structural / Spatial / Architectural),22,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+PropertyGFATotal,int64,ML Feature (Structural / Spatial / Architectural),3679,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+PropertyGFABuildings,int64,ML Feature (Structural / Spatial / Architectural),3671,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+PropertyGFAParking,int64,ML Feature (Structural / Spatial / Architectural),1369,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+SelfReportGFATotal,int64,ML Feature (Structural / Spatial / Architectural),3625,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+SelfReportGFABuildings,int64,ML Feature (Structural / Spatial / Architectural),3603,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+SelfReportParking,int64,ML Feature (Structural / Spatial / Architectural),1380,0.0,"Physical property, geometry, vintage, or location attribute available without meters"
+ENERGYSTARScore,float64,ML Feature (Structural / Spatial / Architectural),100,27.19,"Physical property, geometry, vintage, or location attribute available without meters"
+SiteEUIWN(kBtu/sf),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),3260,5.12,Direct energy utility meter reading directly linked to emissions target via accounting formula
+SiteEUI(kBtu/sf),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),3268,4.08,Direct energy utility meter reading directly linked to emissions target via accounting formula
+SiteEnergyUse(kBtu),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),36609,4.06,Direct energy utility meter reading directly linked to emissions target via accounting formula
+SiteEnergyUseWN(kBtu),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),36212,5.1,Direct energy utility meter reading directly linked to emissions target via accounting formula
+SourceEUIWN(kBtu/sf),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),5256,5.12,Direct energy utility meter reading directly linked to emissions target via accounting formula
+SourceEUI(kBtu/sf),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),5235,4.08,Direct energy utility meter reading directly linked to emissions target via accounting formula
+EPAPropertyType,str,ML Feature (Structural / Spatial / Architectural),73,0.05,"Physical property, geometry, vintage, or location attribute available without meters"
+LargestPropertyUseType,str,ML Feature (Structural / Spatial / Architectural),70,0.05,"Physical property, geometry, vintage, or location attribute available without meters"
+LargestPropertyUseTypeGFA,float64,ML Feature (Structural / Spatial / Architectural),6205,0.05,"Physical property, geometry, vintage, or location attribute available without meters"
+SecondLargestPropertyUseType,str,ML Feature (Structural / Spatial / Architectural),67,41.6,"Physical property, geometry, vintage, or location attribute available without meters"
+SecondLargestPropertyUseTypeGFA,float64,ML Feature (Structural / Spatial / Architectural),2855,46.51,"Physical property, geometry, vintage, or location attribute available without meters"
+ThirdLargestPropertyUseType,str,ML Feature (Structural / Spatial / Architectural),57,76.22,"Physical property, geometry, vintage, or location attribute available without meters"
+ThirdLargestPropertyUseTypeGFA,float64,ML Feature (Structural / Spatial / Architectural),1233,78.98,"Physical property, geometry, vintage, or location attribute available without meters"
+Electricity(kWh),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),36517,2.87,Direct energy utility meter reading directly linked to emissions target via accounting formula
+SteamUse(kBtu),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),1293,96.62,Direct energy utility meter reading directly linked to emissions target via accounting formula
+NaturalGas(therms),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),16741,38.71,Direct energy utility meter reading directly linked to emissions target via accounting formula
+ComplianceStatus,str,Administrative Filter,2,0.0,Statutory compliance and building lifecycle status
+ComplianceIssue,str,Administrative Filter,12,1.26,Statutory compliance and building lifecycle status
+Electricity(kBtu),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),37000,2.87,Direct energy utility meter reading directly linked to emissions target via accounting formula
+NaturalGas(kBtu),float64,Activity Meter (Withheld from ML; used for Accounting Baseline),23167,38.69,Direct energy utility meter reading directly linked to emissions target via accounting formula
+TotalGHGEmissions,float64,Target Variable,7321,3.24,Annual greenhouse gas emissions calculated via EPA Portfolio Manager
+GHGEmissionsIntensity,float64,Target Variable,5241,4.79,Annual greenhouse gas emissions calculated via EPA Portfolio Manager
+Demolished,bool,Administrative Filter,2,0.0,Statutory compliance and building lifecycle status

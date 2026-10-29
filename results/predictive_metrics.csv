@@ -1,0 +1,9 @@
+model_id,model_name,mae,rmse,r2,wape_pct,nrmse,medae,bias,test_sample_count,target_unit
+accounting,Conventional Accounting (Activity x EF),0.3291,3.8065,1.0,0.22,0.0254,0.0472,0.1149,7366,Metric Tons CO2e / yr
+median,Property Median Intensity Benchmark,114.2013,735.2653,0.1812,76.15,4.903,23.2795,-66.9025,7366,Metric Tons CO2e / yr
+ridge,Ridge Regression,97.9904,723.1851,0.2079,65.34,4.8225,20.0082,-65.0458,7366,Metric Tons CO2e / yr
+gam,Generalized Additive Model (SplineGAM),98.8912,735.2814,0.1812,65.94,4.9031,19.8192,-65.7842,7366,Metric Tons CO2e / yr
+ebm,Explainable Boosting Machine (EBM),125.9947,798.7539,0.0337,84.02,5.3264,23.528,-29.2933,7366,Metric Tons CO2e / yr
+rf,Random Forest Regressor,101.1776,711.7341,0.2328,67.47,4.7461,20.7628,-72.0207,7366,Metric Tons CO2e / yr
+xgboost,XGBoost Regressor,95.3972,692.0099,0.2747,63.61,4.6146,19.4352,-68.7663,7366,Metric Tons CO2e / yr
+mlp,Multilayer Perceptron (MLP),128.9753,781.8258,0.0743,86.01,5.2135,24.9777,-18.1925,7366,Metric Tons CO2e / yr

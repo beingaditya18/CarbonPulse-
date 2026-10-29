@@ -1,0 +1,5 @@
+ablation_id,description,features_count,mae,r2,delta_mae_vs_baseline
+feature_set_full,"Full Feature Matrix (59 structural, vintage, spatial, and use-class features)",59,95.82,0.3314,0.0
+feature_set_reduced_geometry,Reduced Geometric Features Only (12 numeric features without categorical use classes),12,107.9,0.3643,12.08
+target_transform_log1p,Ridge Regression with Log-Stabilized Target log1p(y),59,97.99,0.2079,2.17
+target_transform_native,Ridge Regression with Native Linear Target y (No transformation),59,125.63,0.4971,29.81

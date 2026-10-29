@@ -1,0 +1,7 @@
+explainer,runtime_seconds
+Ridge,0.0006
+SplineGAM,0.109
+EBM,0.0207
+RandomForest_TreeSHAP,24.7031
+XGBoost_TreeSHAP,0.1213
+MLP_SamplingSHAP,22.6047

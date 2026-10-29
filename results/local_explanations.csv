@@ -1,0 +1,6 @@
+model,sample_index,actual_emissions,top_feature,top_shap_value
+RandomForest,0,110.7,BuildingAge,0.37270503192020077
+RandomForest,1,5.3,LogGFABuildings,-0.29007772887176325
+RandomForest,2,20.9,LogGFABuildings,0.31658388273049753
+RandomForest,3,132.7,PropertyGFABuildings,0.3055158921770626
+RandomForest,4,333.4,LogGFABuildings,0.8950462672665627
