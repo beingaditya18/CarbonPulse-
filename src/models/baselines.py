@@ -78,16 +78,15 @@ class MedianIntensityBaseline(BaseEstimator, RegressorMixin):
         
     def predict(self, X_raw: pd.DataFrame) -> np.ndarray:
         df = X_raw.copy()
-        gfa = pd.to_numeric(df[self.gfa_col], errors="coerce").fillna(1).values
-        gfa = np.maximum(1, gfa)
+        gfa = pd.to_numeric(df.get(self.gfa_col, 1), errors="coerce").fillna(1.0).values
+        gfa = np.maximum(0.0, gfa)
         
-        preds = []
-        for _, row in df.iterrows():
-            grp = row.get(self.group_col, "Other")
-            intensity = self.group_intensities_.get(grp, self.global_median_intensity_)
-            preds.append(float(row[self.gfa_col] * intensity))
-            
-        return np.array(preds)
+        # Safe group extraction with fallback to global training median
+        groups = df.get(self.group_col, pd.Series(["Other"] * len(df))).fillna("Other").astype(str)
+        intensities = np.array([self.group_intensities_.get(grp, self.global_median_intensity_) for grp in groups], dtype=float)
+        
+        preds = gfa * intensities
+        return np.maximum(0.0, preds)
 
 class MeanBaseline(BaseEstimator, RegressorMixin):
     """Predicts global training mean."""

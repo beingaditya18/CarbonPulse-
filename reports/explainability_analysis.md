@@ -28,11 +28,11 @@
 | Explainer Method | Model | Runtime (Seconds) | Attribution Mechanism |
 | :--- | :--- | :--- | :--- |
 | `Ridge` | Multi-Architecture | 0.00s | Game-Theoretic Shapley / Gradient |
-| `SplineGAM` | Multi-Architecture | 0.11s | Game-Theoretic Shapley / Gradient |
-| `EBM` | Multi-Architecture | 0.02s | Game-Theoretic Shapley / Gradient |
-| `RandomForest_TreeSHAP` | Multi-Architecture | 24.70s | Game-Theoretic Shapley / Gradient |
-| `XGBoost_TreeSHAP` | Multi-Architecture | 0.12s | Game-Theoretic Shapley / Gradient |
-| `MLP_SamplingSHAP` | Multi-Architecture | 22.60s | Game-Theoretic Shapley / Gradient |
+| `SplineGAM` | Multi-Architecture | 0.46s | Game-Theoretic Shapley / Gradient |
+| `EBM` | Multi-Architecture | 0.05s | Game-Theoretic Shapley / Gradient |
+| `RandomForest_TreeSHAP` | Multi-Architecture | 85.80s | Game-Theoretic Shapley / Gradient |
+| `XGBoost_TreeSHAP` | Multi-Architecture | 1.76s | Game-Theoretic Shapley / Gradient |
+| `MLP_SamplingSHAP` | Multi-Architecture | 75.46s | Game-Theoretic Shapley / Gradient |
 
 ---
 

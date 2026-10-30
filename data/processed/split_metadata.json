@@ -93,24 +93,28 @@
       "step": "filter_demolished",
       "condition": "Demolished == True",
       "records_removed": 329,
+      "unique_buildings_lost": 74,
       "reason": "Building structure no longer exists; reporting lifecycle termination"
     },
     {
       "step": "filter_invalid_target",
       "condition": "TotalGHGEmissions is null or <= 0",
       "records_removed": 1236,
+      "unique_buildings_lost": 15,
       "reason": "Missing or non-positive emissions target cannot support supervised regression"
     },
     {
       "step": "filter_invalid_gfa",
       "condition": "PropertyGFATotal <= 0",
       "records_removed": 0,
+      "unique_buildings_lost": 0,
       "reason": "Physically impossible zero or negative building gross floor area"
     },
     {
       "step": "filter_unit_errors",
       "condition": "Calculated Intensity > 50.0 kg CO2e / sq ft",
       "records_removed": 14,
+      "unique_buildings_lost": 1,
       "reason": "Extreme data-entry unit errors (3-4 orders of magnitude beyond thermodynamic limits for buildings)"
     }
   ]

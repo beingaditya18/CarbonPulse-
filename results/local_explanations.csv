@@ -1,6 +1,11 @@
-model,sample_index,actual_emissions,top_feature,top_shap_value
-RandomForest,0,110.7,BuildingAge,0.37270503192020077
-RandomForest,1,5.3,LogGFABuildings,-0.29007772887176325
-RandomForest,2,20.9,LogGFABuildings,0.31658388273049753
-RandomForest,3,132.7,PropertyGFABuildings,0.3055158921770626
-RandomForest,4,333.4,LogGFABuildings,0.8950462672665627
+model,sample_index,actual_emissions_mt,predicted_emissions_mt,explained_log_prediction,base_log_value,sum_shap_log_values,additivity_error,top_feature,top_feature_shap_log,attribution_units
+RandomForest,0,110.7,42.42,3.7709,3.4804,0.2905,0.0,BuildingAge,0.3727,log(MT CO2e + 1)
+RandomForest,1,5.3,26.6,3.3179,3.4804,-0.1625,0.0,LogGFABuildings,-0.2901,log(MT CO2e + 1)
+RandomForest,2,20.9,51.81,3.9667,3.4804,0.4863,0.0,LogGFABuildings,0.3166,log(MT CO2e + 1)
+RandomForest,3,132.7,59.84,4.1083,3.4804,0.6279,0.0,PropertyGFABuildings,0.3055,log(MT CO2e + 1)
+RandomForest,4,333.4,342.13,5.8381,3.4804,2.3577,0.0,LogGFABuildings,0.895,log(MT CO2e + 1)
+XGBoost,0,110.7,37.76,3.6574,3.4806,0.1768,0.0,PropertyGFABuildings,-0.3438,log(MT CO2e + 1)
+XGBoost,1,5.3,24.26,3.2294,3.4806,-0.2512,1e-06,PropertyGFABuildings,-0.4219,log(MT CO2e + 1)
+XGBoost,2,20.9,55.43,4.033,3.4806,0.5523,4e-06,PropertyGFABuildings,0.6323,log(MT CO2e + 1)
+XGBoost,3,132.7,52.55,3.9806,3.4806,0.4999,1e-06,PropertyGFABuildings,0.3935,log(MT CO2e + 1)
+XGBoost,4,333.4,416.21,6.0336,3.4806,2.5529,6e-06,PropertyGFABuildings,1.3086,log(MT CO2e + 1)

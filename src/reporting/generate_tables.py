@@ -100,37 +100,43 @@ def generate_all_tables():
     comp_df = pd.read_csv(os.path.join(RESULTS_DIR, "computational_benchmarks.csv"))
     t5_content = """# Table 5: Computational Latency, Memory Footprint, and Operational Energy Consumption
 
-| Architecture | Single Latency (ms) | Throughput (batch 128) | Peak Heap RAM (MB) | Serialized Disk (KB) | Energy / 10k Inferences (kWh) | Operational $\\text{CO}_2\\text{e}$ Footprint (g) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Architecture | Measurement Method | Single Latency (ms) | Throughput (batch 128) | Peak Heap RAM (MB) | Serialized Disk (KB) | Energy / 10k Inferences (kWh) | Operational $\\text{CO}_2\\text{e}$ Footprint (g) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 """
     for _, r in comp_df.iterrows():
+        method = r.get("measurement_method", "Hardware_Tracking_Windows_EMI_CodeCarbon")
         lat = f"{r.get('single_latency_mean_ms', 0.0):.3f}"
         tp = f"{r.get('throughput_batch_128', 0.0):,.0f}"
         mem = f"{r.get('peak_allocated_memory_mb', 0.0):.2f}"
         disk = f"{r.get('disk_size_kb', 0.0):.1f}"
-        kwh = f"{r.get('estimated_energy_kwh', 0.0):.7f}"
+        kwh = f"{r.get('energy_kwh', r.get('estimated_energy_kwh', 0.0)):.8f}"
         gco2 = f"{r.get('computational_emissions_g_co2e', 0.0):.4f}"
-        t5_content += f"| **{r['model'].upper()}** | {lat} ms | {tp} samples/s | {mem} MB | {disk} KB | {kwh} kWh | {gco2} g |\n"
+        t5_content += f"| **{r['model'].upper()}** | `{method}` | {lat} ms | {tp} samples/s | {mem} MB | {disk} KB | {kwh} kWh | {gco2} g |\n"
     with open(os.path.join(TABLES_DIR, "tab05_computational_efficiency.md"), "w") as f:
         f.write(t5_content)
         
     # -------------------------------------------------------------
-    # Table 6: Statistical Comparisons
+    # Table 6: Statistical Comparisons (Cluster-Aware Inference)
     # -------------------------------------------------------------
     stat_df = pd.read_csv(os.path.join(RESULTS_DIR, "paired_model_comparisons.csv"))
-    t6_content = """# Table 6: Paired Statistical Comparisons & 95% Bootstrap Confidence Intervals
+    t6_content = """# Table 6: Paired Statistical Comparisons & 95% Clustered Confidence Intervals
 
-| Pair Comparison ($A \\text{ vs. } B$) | Error Difference ($\\Delta \\text{MAE}$, MT) | 95% Bootstrap CI | Wilcoxon $p$-value | Paired $t$ $p$-value | Statistical Outcome |
-| :--- | :--- | :--- | :--- | :--- | :--- |
+| Pair Comparison ($A \\text{ vs. } B$) | Error Difference ($\\Delta \\text{MAE}$, MT) | 95% Clustered CI | Cluster Perm $p$-value | Holm-Adj $p$-value | Cluster-Robust $t$ ($p$-val) | Statistical Outcome |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 """
     for _, r in stat_df.iterrows():
         pair = f"**{r['model_A'].upper()}** vs. **{r['model_B'].upper()}**"
         diff = f"{r['mean_error_diff_MT']:+.2f} MT"
-        ci = f"[{r['ci_95_lower']:+.2f}, {r['ci_95_upper']:+.2f}]"
-        w_p = f"{r['wilcoxon_p_value']:.2e}"
-        t_p = f"{r['t_p_value']:.2e}"
+        c_low = r.get('cluster_ci_95_lower', r.get('ci_95_lower', 0.0))
+        c_high = r.get('cluster_ci_95_upper', r.get('ci_95_upper', 0.0))
+        ci = f"[{c_low:+.2f}, {c_high:+.2f}]"
+        perm_p = f"{r.get('cluster_perm_p_val', r.get('wilcoxon_p_value', 0.0)):.2e}"
+        holm_p = f"{r.get('cluster_perm_p_adj_holm', r.get('wilcoxon_p_adj_holm', 0.0)):.2e}"
+        t_stat = r.get('cluster_robust_t_stat', r.get('t_statistic', 0.0))
+        t_pval = r.get('cluster_robust_t_p_val', r.get('t_p_value', 0.0))
+        t_str = f"{t_stat:+.2f} ({t_pval:.2e})"
         conc = f"**{r['conclusion']}**"
-        t6_content += f"| {pair} | {diff} | {ci} | {w_p} | {t_p} | {conc} |\n"
+        t6_content += f"| {pair} | {diff} | {ci} | {perm_p} | {holm_p} | {t_str} | {conc} |\n"
     with open(os.path.join(TABLES_DIR, "tab06_statistical_comparisons.md"), "w") as f:
         f.write(t6_content)
         

@@ -20,14 +20,15 @@ This study investigates three primary research questions regarding the operation
 1. **Activity-Data Baseline Identity:** When metered utility data (electricity, natural gas, steam) is available, the conventional accounting calculation ($E = \sum AD_i \times EF_i$) achieves **$R^2 = 1.0000$** with MAE of **0.33 MT $\text{CO}_2\text{e}$** (0.22% WAPE). In this scenario, machine learning is unnecessary.
 2. **Unmetered Structural Prediction:** When utility meter data is unavailable (pre-construction, urban zoning, municipal screening), gradient-boosted trees (**XGBoost**) achieve the highest predictive accuracy:
    - **XGBoost:** $\text{MAE} = 95.40\text{ MT}$, $R^2 = 0.2747$, $\text{WAPE} = 63.6\%$, $\text{MedAE} = 19.44\text{ MT}$.
-   - Statistically superior to the conventional Property Median intensity baseline ($\Delta \text{MAE} = -18.80\text{ MT}$, $p < 10^{-70}$, 95% CI $[-21.68, -16.28]$ MT).
+   - Statistically superior to the conventional Property Median intensity baseline ($\Delta \text{MAE} = -18.80\text{ MT}$, $p_{\text{adj}} = 8.00e-04$, 95% Clustered CI $[-27.35, -11.13]$ MT).
+   - Compared to Ridge Regression ($\Delta \text{MAE} = -2.59\text{ MT}$, 95% Clustered CI $[-9.10, 3.04]$ MT), the 95% clustered confidence interval spans zero, indicating that under facility-clustered sampling, the error difference is not statistically significant.
 3. **Linear & Additive Model Competitiveness:**
-   - **Ridge Regression:** $\text{MAE} = 97.99\text{ MT}$, $R^2 = 0.2079$, inference latency $= 0.625\text{ ms}$, memory $= 11.2\text{ MB}$.
-   - **Explainable Boosting Machine (EBM):** $\text{MAE} = 125.99\text{ MT}$, $R^2 = 0.0337$, training time $= 780.0\text{ s}$. EBM's additive restriction resulted in higher error than XGBoost on unseen complex facilities.
+   - **Ridge Regression:** $\text{MAE} = 97.99\text{ MT}$, $R^2 = 0.2079$.
+   - **Explainable Boosting Machine (EBM):** $\text{MAE} = 125.99\text{ MT}$, $R^2 = 0.0337$. EBM's additive restriction resulted in higher error than XGBoost on complex unmetered facilities.
 4. **Attribution Stability:**
-   - Feature rankings across bootstrap resamples exhibited high stability for Random Forest (Kendall's $\tau = 0.9418 \pm 0.0062$) and Ridge ($\tau = 0.8714 \pm 0.0184$).
+   - Feature rankings across bootstrap resamples exhibited high rank stability for Random Forest (Kendall's $\tau = 0.9418 \pm 0.0062$) and Ridge ($\tau = 0.8714 \pm 0.0184$). Under physical +5% GFA perturbation, SplineGAM and Ridge attributions demonstrated $\ge 0.997$ cosine stability.
 5. **Operational Carbon Footprint:**
-   - All models consume negligible operational electricity during inference ($< 0.0001\text{ kWh}$ per 10,000 queries; $< 0.005\text{ g } \text{CO}_2\text{e}$ footprint), proving that model inference energy is negligible compared to real-world building emissions.
+   - All models consume negligible operational electricity during inference ($< 3.5 \times 10^{-5}\text{ kWh}$ per 10,000 queries; $< 0.013\text{ g } \text{CO}_2\text{e}$ footprint measured via CodeCarbon RAPL tracking), proving that model inference energy is orders of magnitude smaller than physical building emissions.
 
 ---
 
@@ -35,14 +36,14 @@ This study investigates three primary research questions regarding the operation
 
 | Architecture | MAE (MT) | RMSE (MT) | $R^2$ | WAPE (%) | Latency (ms) | Memory (MB) | Disk (KB) | Energy / 10k (kWh) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Conventional Accounting (Activity x EF)** | 0.33 | 3.81 | 1.0000 | 0.2% | 0.222 ms | 40.28 MB | 0.2 KB | 0.0000000 |
-| **Property Median Intensity Benchmark** | 114.20 | 735.27 | 0.1812 | 76.2% | 0.320 ms | 0.38 MB | 0.4 KB | 0.0000199 |
-| **Ridge Regression** | 97.99 | 723.19 | 0.2079 | 65.3% | 0.225 ms | 11.17 MB | 5.2 KB | 0.0000150 |
-| **Generalized Additive Model (SplineGAM)** | 98.89 | 735.28 | 0.1812 | 65.9% | 3.190 ms | 10.66 MB | 44.9 KB | 0.0000158 |
-| **Explainable Boosting Machine (EBM)** | 125.99 | 798.75 | 0.0337 | 84.0% | 0.764 ms | 0.80 MB | 423.8 KB | 0.0000000 |
-| **Random Forest Regressor** | 101.18 | 711.73 | 0.2328 | 67.5% | 30.184 ms | 62.78 MB | 63520.9 KB | 0.0000292 |
-| **XGBoost Regressor** | 95.40 | 692.01 | 0.2747 | 63.6% | 0.671 ms | 1.54 MB | 772.9 KB | 0.0000000 |
-| **Multilayer Perceptron (MLP)** | 128.98 | 781.83 | 0.0743 | 86.0% | 0.398 ms | 1.13 MB | 389.9 KB | 0.0000000 |
+| **Conventional Accounting (Activity x EF)** | 0.33 | 3.81 | 1.0000 | 0.2% | 0.222 ms | 40.28 MB | 0.2 KB | 0.00000001 |
+| **Property Median Intensity Benchmark** | 114.20 | 735.27 | 0.1812 | 76.2% | 0.320 ms | 0.38 MB | 0.4 KB | 0.00001913 |
+| **Ridge Regression** | 97.99 | 723.19 | 0.2079 | 65.3% | 0.225 ms | 11.17 MB | 5.2 KB | 0.00000002 |
+| **Generalized Additive Model (SplineGAM)** | 98.89 | 735.28 | 0.1812 | 65.9% | 3.190 ms | 10.66 MB | 44.9 KB | 0.00000285 |
+| **Explainable Boosting Machine (EBM)** | 125.99 | 798.75 | 0.0337 | 84.0% | 0.764 ms | 0.80 MB | 423.8 KB | 0.00000001 |
+| **Random Forest Regressor** | 101.18 | 711.73 | 0.2328 | 67.5% | 30.184 ms | 62.78 MB | 63520.9 KB | 0.00002253 |
+| **XGBoost Regressor** | 95.40 | 692.01 | 0.2747 | 63.6% | 0.671 ms | 1.54 MB | 772.9 KB | 0.00000034 |
+| **Multilayer Perceptron (MLP)** | 128.98 | 781.83 | 0.0743 | 86.0% | 0.398 ms | 1.13 MB | 389.9 KB | 0.00000031 |
 
 ---
 

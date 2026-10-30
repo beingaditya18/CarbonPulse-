@@ -1,0 +1,465 @@
+{
+  "manifest_version": "2.0.0",
+  "generated_timestamp": "2026-10-29T18:25:35.052247",
+  "git_provenance": {
+    "commit_hash": "64f2d2c331d090a82bf2a48e643748fa37f740b2",
+    "branch": "main",
+    "clean": false
+  },
+  "runtime_environment": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu_architecture": "AMD64",
+    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "dependencies": {
+      "python": "3.12.6 (tags/v3.12.6:a4a2d2b, Sep  6 2024, 20:11:23) [MSC v.1940 64 bit (AMD64)]",
+      "sklearn": "1.9.0",
+      "xgboost": "1.7.6",
+      "interpret": "0.7.8",
+      "shap": "0.52.0",
+      "pandas": "3.0.3",
+      "numpy": "2.0.2",
+      "scipy": "1.18.0",
+      "codecarbon": "3.3.2",
+      "joblib": "1.5.3",
+      "psutil": "7.0.0"
+    }
+  },
+  "raw_dataset_provenance": {
+    "source_endpoint": "https://data.seattle.gov/resource/teqw-tu6e.csv",
+    "statutory_mandate": "City of Seattle SMC 22.920",
+    "filepath": "data/raw/seattle_building_energy_benchmarking_raw.csv",
+    "sha256": "D1A8227BF9C7C82AEA8279A67405ADD617271852A985D96BB6E4AC9070E8250F",
+    "size_bytes": 13321421
+  },
+  "experimental_protocol": {
+    "random_seed": 42,
+    "test_split_fraction": 0.2,
+    "holdout_sampling_unit": "OSEBuildingID (GroupShuffleSplit, 3,024 train vs 757 test facilities)",
+    "cross_validation_protocol": "5-fold GroupKFold on OSEBuildingID (development partition only)",
+    "target_variable": "TotalGHGEmissions (Metric Tons CO2e / yr)",
+    "log_transform_target": true,
+    "activity_meter_columns_withheld_from_ml": [
+      "Electricity(kWh)",
+      "NaturalGas(therms)",
+      "SteamUse(kBtu)"
+    ]
+  },
+  "artifacts_by_category": {
+    "cross_validation_development_partition": [
+      {
+        "path": "results/cross_validation_metrics.csv",
+        "exists": true,
+        "size_bytes": 2329,
+        "sha256": "E5C69FE9C4C4371A79DB527C1B0280B9CBA70A6439B0C8C0EB042F6754B32C00"
+      },
+      {
+        "path": "results/cross_validation_summary.csv",
+        "exists": true,
+        "size_bytes": 731,
+        "sha256": "7CDBE3BFAA44CB312A1D71F8476405B86A7A457B4C4EC00DD76EBF5A9D05E536"
+      },
+      {
+        "path": "reports/cross_validation_report.md",
+        "exists": true,
+        "size_bytes": 5002,
+        "sha256": "AFF05389F237311F887902E3208492C8D7450A07C684ADBC6A7C238A577A131B"
+      }
+    ],
+    "final_held_out_test_partition": [
+      {
+        "path": "results/predictive_metrics.csv",
+        "exists": true,
+        "size_bytes": 1021,
+        "sha256": "7D10FE7A764C7C6B07FE8D4B62EFBDB1F40FA6E275379C67EF1CC61E2B784A6C"
+      },
+      {
+        "path": "results/test_predictions.csv",
+        "exists": true,
+        "size_bytes": 1069455,
+        "sha256": "CB343DFF1F8ED7B93B2E9854AB046EDACF542F471E0108B40DB771BAA08B4114"
+      },
+      {
+        "path": "results/residuals.csv",
+        "exists": true,
+        "size_bytes": 1174854,
+        "sha256": "9866A8C35954D02036CFD4647972E9E32F3FDA0141972DCD711F95D27650FA51"
+      },
+      {
+        "path": "results/subgroup_performance.csv",
+        "exists": true,
+        "size_bytes": 5379,
+        "sha256": "2691720E250C3CAC6ED1B129DC949F201A93D7CA08C98D9BECC436C566EA246F"
+      },
+      {
+        "path": "results/paired_model_comparisons.csv",
+        "exists": true,
+        "size_bytes": 1858,
+        "sha256": "44FBCF89B7958F4ACF2DF7BD31B48E447266B9430B139A4676DB805889765510"
+      },
+      {
+        "path": "results/pareto_analysis.csv",
+        "exists": true,
+        "size_bytes": 1528,
+        "sha256": "A32E96C95F7FA1B81FFC42CC4AB6CBDEB7562AAEFA0407631D163A24142EBD92"
+      },
+      {
+        "path": "reports/predictive_performance.md",
+        "exists": true,
+        "size_bytes": 14145,
+        "sha256": "D1C43427F7A1E715A2ADEEC29285CBE7E43EFEDDF99213B30D573B163C8CAE39"
+      },
+      {
+        "path": "reports/statistical_validation.md",
+        "exists": true,
+        "size_bytes": 3915,
+        "sha256": "6C2227375B5DAD8C69D237261186EC662543BDE481833EB38C5E976942023221"
+      }
+    ],
+    "explainability_and_stability": [
+      {
+        "path": "results/global_feature_importance.csv",
+        "exists": true,
+        "size_bytes": 8124,
+        "sha256": "96B73552C8B73D507FCBDAF256759AAB3E7923A42844D5C5453302D5310FBA78"
+      },
+      {
+        "path": "results/local_explanations.csv",
+        "exists": true,
+        "size_bytes": 1128,
+        "sha256": "2B444389F1D8B6154146F3003EF12A2C8DF1F296378A0B6E3C49B4038ED46467"
+      },
+      {
+        "path": "results/explanation_metadata.json",
+        "exists": true,
+        "size_bytes": 907,
+        "sha256": "C8597BAE8FBE80E23758FBF89728CCD1B39130240B5A7076738D37A4EC70CFED"
+      },
+      {
+        "path": "results/explanation_stability.csv",
+        "exists": true,
+        "size_bytes": 676,
+        "sha256": "78CF14F55CB58C1272BB46FD6DF530351BD43D770287EA2FA43678C2C9356928"
+      },
+      {
+        "path": "results/explainer_runtimes.csv",
+        "exists": true,
+        "size_bytes": 153,
+        "sha256": "7E1CB34B6C3116E0D73C46B2F937050C9CD36C589E6F3D6CD3374EB2F53A04F1"
+      },
+      {
+        "path": "reports/explainability_analysis.md",
+        "exists": true,
+        "size_bytes": 2486,
+        "sha256": "059827F8288295BFAB0367D72CE9AFE5F485A52CAF55C3DDE72DAA6967398C5F"
+      },
+      {
+        "path": "reports/explanation_stability.md",
+        "exists": true,
+        "size_bytes": 1819,
+        "sha256": "F0EAD057868357717F84F353FC73E27F809FC6AA076646333388B501EA7F067F"
+      }
+    ],
+    "computational_efficiency_and_green_ai": [
+      {
+        "path": "results/latency_benchmarks.csv",
+        "exists": true,
+        "size_bytes": 759,
+        "sha256": "3D1509E1EB3970518B5449CE8371909AC7DDD95621226E324528547338CC9075"
+      },
+      {
+        "path": "results/memory_benchmarks.csv",
+        "exists": true,
+        "size_bytes": 325,
+        "sha256": "0F991784F47138DB860DC1420B3DCF5506DAED75096CFF8B3AED606355A69D30"
+      },
+      {
+        "path": "results/energy_benchmarks.csv",
+        "exists": true,
+        "size_bytes": 2285,
+        "sha256": "C392B6099FE14CE60AD1FC8FC09A55B5FD2C11A9609B524CB810EF43D48B471F"
+      },
+      {
+        "path": "results/computational_benchmarks.csv",
+        "exists": true,
+        "size_bytes": 2593,
+        "sha256": "1D3864C26C8359529EDCBBB35C44AEE07EABE4D0B5D8FEB86F2AB200B16D9345"
+      },
+      {
+        "path": "reports/computational_efficiency.md",
+        "exists": true,
+        "size_bytes": 2953,
+        "sha256": "1499BC478C7EF6A8132D20E6219BE3C82FDB4DF0601A6B7F4AA7248705BAB040"
+      }
+    ],
+    "dataset_and_partitioning_provenance": [
+      {
+        "path": "data/dataset_manifest.json",
+        "exists": true,
+        "size_bytes": 3046,
+        "sha256": "883FC6CAFB795D1640F8EA3B0EA4133FBD621446B77E854817B86B76A77CB612"
+      },
+      {
+        "path": "data/processed/split_metadata.json",
+        "exists": true,
+        "size_bytes": 3842,
+        "sha256": "1D075A1A9A6AD17EA58E08D9D21240AC53B7248144DA0E182BD47F4E29C03309"
+      },
+      {
+        "path": "data/processed/train_groups.parquet",
+        "exists": true,
+        "size_bytes": 57066,
+        "sha256": "7D7CB5320710A76330BC68A478258359353679E410BD3F6F3A043BC06A97BBEE"
+      },
+      {
+        "path": "data/processed/test_groups.parquet",
+        "exists": true,
+        "size_bytes": 10316,
+        "sha256": "7551BADCAF98A7AB9F7D5073076DEECCADCAE6FF6ACF1C02BEDF507EE61B5BC0"
+      },
+      {
+        "path": "reports/dataset_audit.md",
+        "exists": true,
+        "size_bytes": 7261,
+        "sha256": "228F0533E1F464872FC5F300CCCF045D18534D048690D92839D7EA468811A3D0"
+      },
+      {
+        "path": "reports/data_quality_report.md",
+        "exists": true,
+        "size_bytes": 3918,
+        "sha256": "A4EE5346B3CF97F2933BB5883508F1C4E9889FB5448BB31B7A6C20A515DB52C3"
+      }
+    ],
+    "publication_tables": [
+      {
+        "path": "tables/tab01_dataset_properties.md",
+        "exists": true,
+        "size_bytes": 1829,
+        "sha256": "27176D67EF7FB1BC41D6B2DEB82A295B83B2067A015E602400B2BEE1B57617A6"
+      },
+      {
+        "path": "tables/tab02_experimental_configurations.md",
+        "exists": true,
+        "size_bytes": 1617,
+        "sha256": "E4651975240B94035FD4BFC86FD3197C6EA283EFF190EF44A2C2BA54AC461CA2"
+      },
+      {
+        "path": "tables/tab03_predictive_metrics.md",
+        "exists": true,
+        "size_bytes": 1063,
+        "sha256": "B34ABDD939602048492407DB0F2436884868A1B6B8F53B7F03E82CA22E50A5B4"
+      },
+      {
+        "path": "tables/tab04_explanation_stability.md",
+        "exists": true,
+        "size_bytes": 975,
+        "sha256": "77A4F034BB100E8275C4EDED0EE63487B7E6E7894E5CB018B5DB018F7A464C0A"
+      },
+      {
+        "path": "tables/tab05_computational_efficiency.md",
+        "exists": true,
+        "size_bytes": 1476,
+        "sha256": "8ADD42772CFD2F417AAA76FDDAC2430FDEFBF4B9008C44900495DB60BE628D34"
+      },
+      {
+        "path": "tables/tab06_statistical_comparisons.md",
+        "exists": true,
+        "size_bytes": 1351,
+        "sha256": "69C61A1B6DF9DFED1C289D2D5A2239190911AF1FF045565FBE77080CCB54E2C2"
+      },
+      {
+        "path": "tables/tab07_ablation_analysis.md",
+        "exists": true,
+        "size_bytes": 706,
+        "sha256": "D5634B4BEAC9D12FC44CAAFA812EC8F979538472D880D38BAAA69E90031DC3D0"
+      },
+      {
+        "path": "tables/tab08_limitations_reproducibility.md",
+        "exists": true,
+        "size_bytes": 1327,
+        "sha256": "394B22F6FE058C9775350B9EA20CBA1B66B1DFBB519969A545BA8C5C6FD49AE7"
+      }
+    ],
+    "publication_figures": [
+      {
+        "path": "figures/fig01_research_pipeline.png",
+        "exists": true,
+        "size_bytes": 164815,
+        "sha256": "9BF7283C0F087C201BDB298326CBF65A9CA94A13A7E151EF8BBD7E05CF8D9A18"
+      },
+      {
+        "path": "figures/fig01_research_pipeline.pdf",
+        "exists": true,
+        "size_bytes": 21956,
+        "sha256": "136DF9ECB4952F61BA47F25885391B0707A62B21B1AB040EC59143AD41934A7A"
+      },
+      {
+        "path": "figures/fig02_target_distribution.png",
+        "exists": true,
+        "size_bytes": 239960,
+        "sha256": "E1D2D7E87ACA39CFD7187A0011730BAE62EA983AE7F513C89C000EDC718483FF"
+      },
+      {
+        "path": "figures/fig02_target_distribution.pdf",
+        "exists": true,
+        "size_bytes": 40600,
+        "sha256": "67BD2C06665168352BCC4EDD43E4B38794326DA9170E1DA9DBBFB1FE2EAC8ACC"
+      },
+      {
+        "path": "figures/fig03_data_quality_missingness.png",
+        "exists": true,
+        "size_bytes": 234092,
+        "sha256": "D6DFC102469402E892612DB9B255930B97AAC9CBC0897CFDE341400F8771F534"
+      },
+      {
+        "path": "figures/fig03_data_quality_missingness.pdf",
+        "exists": true,
+        "size_bytes": 30806,
+        "sha256": "95CDF1B640A3878D6645AE4E9C4449FD699459013ED583BF3A50F1002C0F75EB"
+      },
+      {
+        "path": "figures/fig04_correlation_analysis.png",
+        "exists": true,
+        "size_bytes": 374117,
+        "sha256": "B546A6125FD9452A855817322CDD7C0D63933DDDCA71321E299816852B484A23"
+      },
+      {
+        "path": "figures/fig04_correlation_analysis.pdf",
+        "exists": true,
+        "size_bytes": 32372,
+        "sha256": "8CD4E6814A8D256B2EA7E8D9A7D7A6A8D47A77BA13DAF2BBC00064A947024309"
+      },
+      {
+        "path": "figures/fig05_actual_vs_predicted.png",
+        "exists": true,
+        "size_bytes": 638805,
+        "sha256": "80A9EEC32925D46D0D0AC30E9D3621F5ABE92B80DB25DA7D8848D7EE08EC6D78"
+      },
+      {
+        "path": "figures/fig05_actual_vs_predicted.pdf",
+        "exists": true,
+        "size_bytes": 290268,
+        "sha256": "6D0B43EF55F99E8DC1E54F3ADE6BD316083CFD12FDA21B70B69FE818323D7219"
+      },
+      {
+        "path": "figures/fig06_residual_distribution.png",
+        "exists": true,
+        "size_bytes": 263344,
+        "sha256": "5517CEEEACA569D44BB86EC80CF2B4D0EF983E9E666D66468DEFC88EA9FF924D"
+      },
+      {
+        "path": "figures/fig06_residual_distribution.pdf",
+        "exists": true,
+        "size_bytes": 33101,
+        "sha256": "8D0641489291E15DE1C01FAD8E926C0108C7A573894F26269B0F558967AB8FAE"
+      },
+      {
+        "path": "figures/fig07_model_mae_rmse_comparison.png",
+        "exists": true,
+        "size_bytes": 215174,
+        "sha256": "B0A9DD5647ABF3FB38E23EAD6B5DACA761F5C5C80E26CF4C9C82092EE15DB3AC"
+      },
+      {
+        "path": "figures/fig07_model_mae_rmse_comparison.pdf",
+        "exists": true,
+        "size_bytes": 30519,
+        "sha256": "0FAF019F884E93313BB5D3FE05D95B322A7BAF861B2D5EBD345B179A0E0D4DCF"
+      },
+      {
+        "path": "figures/fig08_model_r2_comparison.png",
+        "exists": true,
+        "size_bytes": 130967,
+        "sha256": "11CC82165A6805EB8D94988CBC2EF965723B676E1BD5AF72B6031B607A4809A0"
+      },
+      {
+        "path": "figures/fig08_model_r2_comparison.pdf",
+        "exists": true,
+        "size_bytes": 31230,
+        "sha256": "CEFFC1609B1A611E345A1C117EFCEE4A4ECBA8BEFFD9F64BC5AE912CDCD08860"
+      },
+      {
+        "path": "figures/fig09_feature_effect_curves.png",
+        "exists": true,
+        "size_bytes": 919773,
+        "sha256": "1A474F498D5A6BE61228516C9A9CC7F5D98A5A73A741EC600BD7CE484FE93053"
+      },
+      {
+        "path": "figures/fig09_feature_effect_curves.pdf",
+        "exists": true,
+        "size_bytes": 141457,
+        "sha256": "6BB69207F6F22F31EC8769E71A77A60BD130FA359FFC4B6EF9828B30DAD8BE09"
+      },
+      {
+        "path": "figures/fig10_shap_global_importance.png",
+        "exists": true,
+        "size_bytes": 213641,
+        "sha256": "B2BC1F1EFEFF2B19C9BC062C834811DA2DD8D2E143BA68062D8331200316FDD7"
+      },
+      {
+        "path": "figures/fig10_shap_global_importance.pdf",
+        "exists": true,
+        "size_bytes": 33293,
+        "sha256": "2C04B3EF593548266AE6EE09391C176473F71EB076A62F4E7A96DCDEFC892040"
+      },
+      {
+        "path": "figures/fig11_local_explanation_examples.png",
+        "exists": true,
+        "size_bytes": 109365,
+        "sha256": "6ACF68FAB86CAFE046E8F8206F86E30265A79030C2F7B5796AADD8032E7EC739"
+      },
+      {
+        "path": "figures/fig11_local_explanation_examples.pdf",
+        "exists": true,
+        "size_bytes": 25757,
+        "sha256": "4ED870DFB3B34718CA87250768F9EC7137484C608FA59CDA38177D840BE156F7"
+      },
+      {
+        "path": "figures/fig12_explanation_stability.png",
+        "exists": true,
+        "size_bytes": 101469,
+        "sha256": "FB7E62C468EEDB7D2250855E1A5AE55CD523BC4BBF9B3E98F2E82E5939BC2E60"
+      },
+      {
+        "path": "figures/fig12_explanation_stability.pdf",
+        "exists": true,
+        "size_bytes": 27273,
+        "sha256": "E407F3F58B57F94AD92790D01645DA4570BAC3375FD5DFF93ED7135D355D15D9"
+      },
+      {
+        "path": "figures/fig13_latency_memory_comparison.png",
+        "exists": true,
+        "size_bytes": 178689,
+        "sha256": "CF0E03D1FFDB86C5BF94A5072B08344B6FE113D5ADE90C20DAE9ACC05100ACBA"
+      },
+      {
+        "path": "figures/fig13_latency_memory_comparison.pdf",
+        "exists": true,
+        "size_bytes": 29210,
+        "sha256": "B2B281E28FD86D79991F77ADBB7230ED477F823462338058F8E0821F621CDA2C"
+      },
+      {
+        "path": "figures/fig14_computational_energy_footprint.png",
+        "exists": true,
+        "size_bytes": 123749,
+        "sha256": "A02734B806989DFC87FD8244B78CB8D4760BD5245955EC2289F6203E44A7757C"
+      },
+      {
+        "path": "figures/fig14_computational_energy_footprint.pdf",
+        "exists": true,
+        "size_bytes": 32186,
+        "sha256": "EF8641BD84B32169F8839D91909AADBBFF0CD2F61520D4764D2FEDCFB9BE5759"
+      },
+      {
+        "path": "figures/fig15_pareto_frontier.png",
+        "exists": true,
+        "size_bytes": 150748,
+        "sha256": "B29FDAC258FF2B3B3E7495750DA099E3D68DA1D327851A782759A2FF0AD04166"
+      },
+      {
+        "path": "figures/fig15_pareto_frontier.pdf",
+        "exists": true,
+        "size_bytes": 31872,
+        "sha256": "E26D656D7A372EE62E2741488C80F500E060D3585286DE385FED35AD0FC83A70"
+      }
+    ]
+  }
+}

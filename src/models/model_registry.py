@@ -71,6 +71,39 @@ class SplineGAMRegressor(BaseEstimator, RegressorMixin):
     def coef_(self):
         return self.pipeline_.named_steps["regressor"].coef_
 
+    @property
+    def intercept_(self):
+        return self.pipeline_.named_steps["regressor"].intercept_
+
+    def compute_term_contributions(self, X):
+        """
+        Calculates the univariate spline term contribution f_j(X_j) for each input feature j.
+        Returns an (N, P) array where column j contains f_j(X_j).
+        In this additive GAM, sum_j f_j(X_{i,j}) + intercept_ == raw_prediction_i.
+        """
+        X_mat = X.values if hasattr(X, "values") else np.asarray(X)
+        splines_step = self.pipeline_.named_steps["splines"]
+        reg_step = self.pipeline_.named_steps["regressor"]
+        Xt = splines_step.transform(X_mat)
+        coef = reg_step.coef_
+        N, P = X_mat.shape
+        n_bases_per_feature = Xt.shape[1] // P
+        
+        terms = np.zeros((N, P), dtype=float)
+        for j in range(P):
+            start_col = j * n_bases_per_feature
+            end_col = (j + 1) * n_bases_per_feature
+            terms[:, j] = np.dot(Xt[:, start_col:end_col], coef[start_col:end_col])
+        return terms
+
+    def feature_importances(self, X):
+        """
+        Global feature importance defined as the sample standard deviation of each term
+        contribution f_j(X_j), measuring the dispersion of the feature's marginal effect.
+        """
+        terms = self.compute_term_contributions(X)
+        return np.std(terms, axis=0)
+
 def get_model(model_name: str, config: dict = None, use_log_target: bool = True):
     """
     Factory creating configured model instance.

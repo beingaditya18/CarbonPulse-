@@ -1,40 +1,38 @@
 # Statistical Validation & Hypothesis Testing Report
 
-**Study:** Explainable AI for Carbon Emissions Estimation: A Comparative Evaluation  
+**Manuscript:** Explainable AI for Carbon Emissions Estimation: A Comparative Evaluation  
 **Dataset:** City of Seattle Building Energy Benchmarking Data  
-**Sample Size:** 7,366 paired evaluations across 757 unseen facilities  
-**Confidence Level:** 95% Paired Bootstrap Confidence Intervals (1,000 resamples)  
-**Hypothesis Tests:** Two-sided Paired Wilcoxon Signed-Rank Test & Paired t-Test  
-**Significance Threshold:** $\alpha = 0.01$  
+**Statistical Design:** Cluster-Aware Paired Inference Protocol  
 **Date:** October 2026  
 
 ---
 
-## 1. Paired Model Comparison Matrix
-
-| Model Comparison ($A \text{ vs. } B$) | Mean Error Difference ($\Delta \text{MAE}$, MT) | 95% Bootstrap CI | Wilcoxon $p$-value | Paired $t$ $p$-value | Statistical Conclusion |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **XGBOOST** vs. **MEDIAN** | -18.80 MT | [-21.68, -16.28] | 5.15e-73 | 2.89e-49 | **XGBOOST superior** |
-| **XGBOOST** vs. **RIDGE** | -2.59 MT | [-4.61, -0.59] | 1.28e-18 | 8.71e-03 | **XGBOOST superior** |
-| **XGBOOST** vs. **GAM** | -3.49 MT | [-5.38, -1.63] | 1.55e-13 | 6.35e-04 | **XGBOOST superior** |
-| **XGBOOST** vs. **EBM** | -30.60 MT | [-36.96, -24.39] | 1.32e-92 | 1.60e-20 | **XGBOOST superior** |
-| **XGBOOST** vs. **RF** | -5.78 MT | [-7.16, -4.42] | 1.56e-12 | 8.38e-17 | **XGBOOST superior** |
-| **XGBOOST** vs. **MLP** | -33.58 MT | [-40.61, -27.39] | 2.57e-78 | 2.97e-23 | **XGBOOST superior** |
-| **RIDGE** vs. **MEDIAN** | -16.21 MT | [-19.37, -12.97] | 1.30e-30 | 2.36e-22 | **RIDGE superior** |
-| **EBM** vs. **MEDIAN** | +11.79 MT | [+5.79, +18.27] | 3.03e-02 | 9.95e-05 | **No significant difference** |
+## 1. Methodology & Theoretical Assumptions
+* **Independent Sampling Unit:** Physical facility structure (`OSEBuildingID`, $M=757$ independent facility clusters in held-out test split).
+* **Target Estimand:** Difference in Mean Absolute Error $\Delta\text{MAE}_{A,B} = \mathbb{E}[|y - \hat{y}_A| - |y - \hat{y}_B|]$ on identical observations.
+* **Intra-Cluster Correlation:** Observations within the same facility share unobserved architectural, structural, and microclimatic determinants across consecutive reporting cycles. Standard row-level tests violate independence and inflate Type I error rates.
+* **Cluster Sign-Flip Permutation Test:** Under $H_0$, Model A and Model B errors are exchangeable within each cluster. Randomly multiplying cluster total error contrasts by Rademacher signs ($S_k \in \{-1, +1\}$) non-parametrically estimates the finite-sample null distribution under arbitrary longitudinal covariance.
+* **Cluster-Level Wilcoxon Signed-Rank Test:** Conducted on independent cluster-aggregated mean differences $\{\bar{D}_k\}_{k=1}^K$ to evaluate non-parametric shift in the cluster-level error distribution.
+* **Cluster-Robust Standard Errors (CRVE):** Liang-Zeger cluster-robust sandwich estimator with $K - 1 = 756$ degrees of freedom.
+* **Multiple Testing Correction:** Controls family-wise error rate at $\alpha = 0.01$ via the step-down Holm-Bonferroni method across all candidate comparisons.
 
 ---
 
-## 2. Statistical Inferences & Defensible Claims
+## 2. Cluster-Aware Comparison Results
 
-1. **XGBoost vs. Heuristic Median Benchmark:**
-   - XGBoost achieves a statistically significant reduction in absolute error compared to the conventional property-type median baseline ($p < 10^{-15}$, 95% CI $[-22.1, -15.5]$ MT $\text{CO}_2\text{e}$).
-   - **Supported Claim:** Machine learning provides statistically validated predictive value over conventional median benchmarks for unmetered building emissions estimation.
+| Model A | Model B | Mean $\Delta$MAE (MT) | Cluster 95% CI | Cluster Perm $p$-val | Holm-Adj $p$-val | Cluster-Robust $t$ ($p$-val) | Conclusion |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **XGBOOST** | MEDIAN | -18.80 | [-27.35, -11.13] | 0.0001 | 0.0008 | -4.66 (3.76e-06) | **XGBOOST superior** |
+| **XGBOOST** | RIDGE | -2.59 | [-9.10, +3.04] | 0.409 | 0.659 | -0.86 (3.89e-01) | No significant difference |
+| **XGBOOST** | GAM | -3.49 | [-10.54, +2.14] | 0.283 | 0.659 | -1.12 (2.63e-01) | No significant difference |
+| **XGBOOST** | EBM | -30.60 | [-54.02, -13.50] | 0.0001 | 0.0008 | -2.99 (2.91e-03) | **XGBOOST superior** |
+| **XGBOOST** | RF | -5.78 | [-10.09, -2.13] | 0.0022 | 0.0088 | -2.77 (5.75e-03) | **XGBOOST superior** |
+| **XGBOOST** | MLP | -33.58 | [-52.82, -16.94] | 0.0002 | 0.0012 | -3.83 (1.41e-04) | **XGBOOST superior** |
+| **RIDGE** | MEDIAN | -16.21 | [-27.86, -7.57] | 0.0002 | 0.0012 | -3.05 (2.38e-03) | **RIDGE superior** |
+| **EBM** | MEDIAN | +11.79 | [-3.80, +32.61] | 0.22 | 0.659 | +1.27 (2.04e-01) | No significant difference |
 
-2. **XGBoost vs. Ridge & GAM:**
-   - XGBoost exhibits lower mean absolute error than Ridge and SplineGAM with non-overlapping bootstrap intervals.
-   - However, Ridge and SplineGAM achieve competitive accuracy ($	ext{MAE} \approx 98\text{ MT}$) while offering direct closed-form transparent coefficients or spline plots.
+---
 
-3. **EBM Performance Caveat:**
-   - EBM underperformed gradient-boosted trees and regularized linear regression on unseen test buildings ($	ext{MAE} = 125.99\text{ MT}$ vs $95.40\text{ MT}$ for XGBoost).
-   - This empirical finding demonstrates that intrinsic additivity with restricted interaction pairs can suffer variance penalties when extrapolating to complex heterogeneous building facilities.
+## 3. Key Statistical Findings & Methodological Interpretations
+1. **Machine Learning Value Over Median Baseline:** XGBoost demonstrates a statistically significant error reduction over the Property-Type Median Benchmark ($\Delta\text{MAE} = -18.80\text{ MT}$, $p_{\text{adj}} < 10^{-3}$, 95% Clustered CI strictly excluding zero), confirming that architectural and mechanical features provide legitimate predictive value for unmetered screening.
+2. **Linear vs Non-linear Differences Under Facility Clustering:** While XGBoost achieves the lowest point-estimate error ($\text{MAE} = 95.40\text{ MT}$ vs Ridge $\text{MAE} = 97.99\text{ MT}$), the 95% cluster-bootstrap confidence interval for $\Delta\text{MAE}$ spans zero ($[-9.10, +3.04]\text{ MT}$). This proves that when variance is clustered at the facility level, the performance difference between XGBoost and regularized linear modeling is **not statistically significant**, demonstrating that Ridge regression remains highly competitive in practice.

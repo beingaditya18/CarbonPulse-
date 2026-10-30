@@ -1,9 +1,9 @@
-model_A,model_B,mean_error_diff_MT,ci_95_lower,ci_95_upper,wilcoxon_stat,wilcoxon_p_value,t_statistic,t_p_value,statistically_significant_p01,conclusion
-xgboost,median,-18.8042,-21.6818,-16.2815,10267623.0,5.15e-73,-14.8645,2.89e-49,True,XGBOOST superior
-xgboost,ridge,-2.5932,-4.6071,-0.5894,11958876.0,1.28e-18,-2.624,0.00871,True,XGBOOST superior
-xgboost,gam,-3.4941,-5.3829,-1.6323,12218910.0,1.55e-13,-3.4177,0.000635,True,XGBOOST superior
-xgboost,ebm,-30.5975,-36.9632,-24.3914,9840915.5,1.32e-92,-9.3135,1.6e-20,True,XGBOOST superior
-xgboost,rf,-5.7804,-7.1583,-4.4166,12276046.0,1.56e-12,-8.3457,8.38e-17,True,XGBOOST superior
-xgboost,mlp,-33.5781,-40.6093,-27.3944,10146892.0,2.57e-78,-9.9675,2.97e-23,True,XGBOOST superior
-ridge,median,-16.211,-19.3659,-12.9731,11467113.0,1.3e-30,-9.7566,2.36e-22,True,RIDGE superior
-ebm,median,11.7933,5.7937,18.2662,13171012.0,0.0303,3.8939,9.95e-05,False,No significant difference
+model_A,model_B,mean_error_diff_MT,cluster_ci_95_lower,cluster_ci_95_upper,cluster_perm_p_val,cluster_wilcoxon_stat,cluster_wilcoxon_p_val,cluster_robust_t_stat,cluster_robust_t_p_val,cluster_robust_se,independent_sampling_unit,n_clusters,n_observations,cluster_perm_p_value_formatted,cluster_perm_p_adj_holm,statistically_significant_p01,conclusion
+xgboost,median,-18.8042,-27.3483,-11.1325,9.999000099990002e-05,109050.0,1.0904451904390297e-08,-4.6588,3.757287080211308e-06,4.0362,OSEBuildingID,757,7366,0.0001,0.0008,True,XGBOOST superior
+xgboost,ridge,-2.5932,-9.1015,3.0418,0.40905909409059094,125257.0,0.0025017437819370558,-0.8615,0.38921155875266134,3.0099,OSEBuildingID,757,7366,0.409,0.659,False,No significant difference
+xgboost,gam,-3.4941,-10.5353,2.1433,0.28287171282871715,128309.0,0.011868794958788868,-1.1212,0.2625468893576551,3.1163,OSEBuildingID,757,7366,0.283,0.659,False,No significant difference
+xgboost,ebm,-30.5975,-54.0152,-13.4997,9.999000099990002e-05,97479.0,2.1956293151608215e-14,-2.9863,0.0029147371681307738,10.2459,OSEBuildingID,757,7366,0.0001,0.0008,True,XGBOOST superior
+xgboost,rf,-5.7804,-10.0883,-2.1266,0.0021997800219978004,132465.0,0.06792923324926409,-2.7695,0.005752719917580138,2.0872,OSEBuildingID,757,7366,0.0022,0.0088,True,XGBOOST superior
+xgboost,mlp,-33.5781,-52.8209,-16.9399,0.00019998000199980003,103090.0,1.9959826523901156e-11,-3.8267,0.00014061435255947937,8.7747,OSEBuildingID,757,7366,0.0002,0.0012,True,XGBOOST superior
+ridge,median,-16.211,-27.8595,-7.5693,0.00019998000199980003,122081.0,0.0003839997101170442,-3.048,0.0023843170163262766,5.3186,OSEBuildingID,757,7366,0.0002,0.0012,True,RIDGE superior
+ebm,median,11.7933,-3.8023,32.6073,0.2196780321967803,133245.0,0.08990972981425448,1.2709,0.20414363069031613,9.2793,OSEBuildingID,757,7366,0.22,0.659,False,No significant difference

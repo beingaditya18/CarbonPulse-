@@ -221,9 +221,10 @@ def generate_all_figures():
     loc_path = os.path.join(RESULTS_DIR, "local_explanations.csv")
     if os.path.exists(loc_path):
         loc_df = pd.read_csv(loc_path).head(5)
+        val_col = "top_feature_shap_log" if "top_feature_shap_log" in loc_df.columns else "top_shap_value"
         fig, ax = plt.subplots(figsize=(9, 4))
-        sns.barplot(data=loc_df, x="top_shap_value", y="top_feature", palette="vlag", ax=ax)
-        ax.set_xlabel("Local SHAP Attribution (Marginal Deviation)")
+        sns.barplot(data=loc_df, x=val_col, y="top_feature", palette="vlag", ax=ax)
+        ax.set_xlabel("Local Attribution (log scale deviation)")
         ax.set_ylabel("Dominant Local Feature")
         ax.set_title("Figure 11: Local Attribution Breakdown for Representative Buildings", fontweight="bold")
     else:
@@ -295,7 +296,7 @@ def generate_all_figures():
 
 def create_figure_captions_document():
     doc_path = os.path.join(RESULTS_DIR, "..", "reports", "figure_captions.md")
-    content = """# Research Manuscript Figure Captions
+    content = r"""# Research Manuscript Figure Captions
 
 **Manuscript Title:** Explainable AI for Carbon Emissions Estimation: A Comparative Evaluation of Predictive Accuracy, Interpretability, and Computational Efficiency  
 **Date:** October 2026  

@@ -1,8 +1,9 @@
-model,test_type,kendall_tau_mean,kendall_tau_std,spearman_rho_mean,spearman_rho_std,num_comparisons
-ridge,Bootstrap_Rank_Stability,0.8714,0.0184,0.964,0.0094,10
-rf,Bootstrap_Rank_Stability,0.9418,0.0062,0.993,0.0013,10
-xgboost,Bootstrap_Rank_Stability,0.7641,0.0442,0.8915,0.0437,10
-ridge,Local_Input_Perturbation_2%,,,0.9457,0.0383,20
-gam,Local_Input_Perturbation_2%,,,0.9835,0.0168,20
-rf,Local_Input_Perturbation_2%,,,0.8501,0.319,20
-xgboost,Local_Input_Perturbation_2%,,,0.8732,0.1758,20
+model,test_type,kendall_tau_mean,kendall_tau_std,spearman_rho_mean,spearman_rho_std,explanation_cosine_sim,pred_rel_change_mean,num_comparisons
+ridge,Bootstrap_Rank_Stability,0.8714,0.0184,0.964,0.0094,,,10
+gam,Bootstrap_Rank_Stability,0.8985,0.0203,0.9793,0.0073,,,10
+rf,Bootstrap_Rank_Stability,0.9418,0.0062,0.993,0.0013,,,10
+xgboost,Bootstrap_Rank_Stability,0.7641,0.0442,0.8915,0.0437,,,10
+ridge,Physical_Perturbation_+5%_GFA,0.9613,0.0643,,,0.9979,0.0475,25
+gam,Physical_Perturbation_+5%_GFA,0.9978,0.0022,,,0.9999,0.0485,25
+rf,Physical_Perturbation_+5%_GFA,0.9134,0.1281,,,0.949,0.4992,25
+xgboost,Physical_Perturbation_+5%_GFA,0.9666,0.0392,,,0.9856,0.1216,25

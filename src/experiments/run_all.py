@@ -45,14 +45,15 @@ def main():
     # 3. Create CV Splits & Experimental Protocol
     run_step("3. GroupKFold Cross-Validation Splitting", [sys.executable, "src/experiments/create_splits.py"])
     
-    # 4. Model Training
+    # 4. GroupKFold Cross-Validation Model Evaluation
     if not args.skip_train:
-        run_step("4. Candidate Model Architecture Training", [sys.executable, "src/experiments/run_training.py"])
+        run_step("4. 5-Fold GroupKFold Cross-Validation Evaluation", [sys.executable, "src/experiments/run_cross_validation.py"])
+        run_step("5. Candidate Model Architecture Training", [sys.executable, "src/experiments/run_training.py"])
     else:
-        print("\nSkipping Step 4 (Model Training) as requested via --skip-train.")
+        print("\nSkipping Steps 4-5 (Cross-Validation & Training) as requested via --skip-train.")
         
-    # 5. Held-Out Evaluation
-    run_step("5. Held-Out Test Evaluation & Metrics", [sys.executable, "src/experiments/run_evaluation.py"])
+    # 6. Held-Out Evaluation
+    run_step("6. Held-Out Test Evaluation & Metrics", [sys.executable, "src/experiments/run_evaluation.py"])
     
     # 6. Explainability Benchmarks
     run_step("6. Explainability & Attribution Benchmarks", [sys.executable, "src/explainability/run_explainers.py"])

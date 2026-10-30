@@ -1,0 +1,21 @@
+{
+  "causal_disclaimer": "Feature importance reflects predictive attribution within the empirical correlation structure of training data, not physical or causal intervention.",
+  "models": {
+    "RandomForest": {
+      "prediction_function": "RandomForestRegressor.predict (inner estimator)",
+      "output_scale": "log1p_space (log(MT CO2e + 1))",
+      "expected_value_baseline": 3.4804,
+      "expected_value_units": "log(MT CO2e + 1)",
+      "max_local_additivity_error": 6.394884621840902e-14,
+      "local_accuracy_verified": true
+    },
+    "XGBoost": {
+      "prediction_function": "XGBRegressor.predict (inner estimator)",
+      "output_scale": "log1p_space (log(MT CO2e + 1))",
+      "expected_value_baseline": 3.4806,
+      "expected_value_units": "log(MT CO2e + 1)",
+      "max_local_additivity_error": 7.152557373046875e-06,
+      "local_accuracy_verified": true
+    }
+  }
+}

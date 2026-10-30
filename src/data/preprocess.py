@@ -67,11 +67,15 @@ def clean_dataset(df_raw: pd.DataFrame) -> tuple[pd.DataFrame, list[dict]]:
     if "Demolished" in df.columns:
         demolished_mask = df["Demolished"] == True
         drop_count = int(demolished_mask.sum())
+        dem_bldgs = set(df.loc[demolished_mask, "OSEBuildingID"].dropna())
         df = df[~demolished_mask]
+        rem_bldgs = set(df["OSEBuildingID"].dropna())
+        bldgs_lost = len(dem_bldgs - rem_bldgs)
         decisions_log.append({
             "step": "filter_demolished",
             "condition": "Demolished == True",
             "records_removed": drop_count,
+            "unique_buildings_lost": bldgs_lost,
             "reason": "Building structure no longer exists; reporting lifecycle termination"
         })
         
@@ -79,22 +83,30 @@ def clean_dataset(df_raw: pd.DataFrame) -> tuple[pd.DataFrame, list[dict]]:
     target_col = "TotalGHGEmissions"
     target_valid_mask = df[target_col].notna() & (df[target_col] > 0)
     drop_count = int((~target_valid_mask).sum())
+    inv_bldgs = set(df.loc[~target_valid_mask, "OSEBuildingID"].dropna())
     df = df[target_valid_mask]
+    rem_bldgs = set(df["OSEBuildingID"].dropna())
+    bldgs_lost = len(inv_bldgs - rem_bldgs)
     decisions_log.append({
         "step": "filter_invalid_target",
         "condition": "TotalGHGEmissions is null or <= 0",
         "records_removed": drop_count,
+        "unique_buildings_lost": bldgs_lost,
         "reason": "Missing or non-positive emissions target cannot support supervised regression"
     })
     
     # 3. Filter impossible gross floor area
     gfa_valid_mask = df["PropertyGFATotal"] > 0
     drop_count = int((~gfa_valid_mask).sum())
+    gfa_bldgs = set(df.loc[~gfa_valid_mask, "OSEBuildingID"].dropna())
     df = df[gfa_valid_mask]
+    rem_bldgs = set(df["OSEBuildingID"].dropna())
+    bldgs_lost = len(gfa_bldgs - rem_bldgs)
     decisions_log.append({
         "step": "filter_invalid_gfa",
         "condition": "PropertyGFATotal <= 0",
         "records_removed": drop_count,
+        "unique_buildings_lost": bldgs_lost,
         "reason": "Physically impossible zero or negative building gross floor area"
     })
     
@@ -104,11 +116,15 @@ def clean_dataset(df_raw: pd.DataFrame) -> tuple[pd.DataFrame, list[dict]]:
     calc_intensity = (df["TotalGHGEmissions"] * 1000.0) / df["PropertyGFATotal"]
     unit_error_mask = calc_intensity > 50.0
     drop_count = int(unit_error_mask.sum())
+    unit_bldgs = set(df.loc[unit_error_mask, "OSEBuildingID"].dropna())
     df = df[~unit_error_mask]
+    rem_bldgs = set(df["OSEBuildingID"].dropna())
+    bldgs_lost = len(unit_bldgs - rem_bldgs)
     decisions_log.append({
         "step": "filter_unit_errors",
         "condition": "Calculated Intensity > 50.0 kg CO2e / sq ft",
         "records_removed": drop_count,
+        "unique_buildings_lost": bldgs_lost,
         "reason": "Extreme data-entry unit errors (3-4 orders of magnitude beyond thermodynamic limits for buildings)"
     })
     
@@ -214,6 +230,14 @@ def partition_and_preprocess(
     # Also save un-scaled raw features (needed for tree models, EBM, and interpretability where raw scale is preferred)
     X_train_raw.to_parquet(os.path.join(PROCESSED_DATA_DIR, "train_features_raw.parquet"), index=False)
     X_test_raw.to_parquet(os.path.join(PROCESSED_DATA_DIR, "test_features_raw.parquet"), index=False)
+    
+    # Save facility cluster identifiers for clustered bootstrap and cross-validation
+    pd.DataFrame({"OSEBuildingID": train_df["OSEBuildingID"].values}).to_parquet(
+        os.path.join(PROCESSED_DATA_DIR, "train_groups.parquet"), index=False
+    )
+    pd.DataFrame({"OSEBuildingID": test_df["OSEBuildingID"].values}).to_parquet(
+        os.path.join(PROCESSED_DATA_DIR, "test_groups.parquet"), index=False
+    )
     
     # Save metadata and pipeline
     joblib.dump(preprocessor, os.path.join(PROCESSED_DATA_DIR, "preprocessor.joblib"))

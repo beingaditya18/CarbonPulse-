@@ -33,6 +33,18 @@ def generate_final_report():
     median_metrics = pred_df[pred_df["model_id"] == "median"].iloc[0]
     accounting_metrics = pred_df[pred_df["model_id"] == "accounting"].iloc[0]
     
+    # Clustered statistics
+    xgb_med_stat = stat_df[(stat_df["model_A"] == "xgboost") & (stat_df["model_B"] == "median")].iloc[0]
+    xgb_ridge_stat = stat_df[(stat_df["model_A"] == "xgboost") & (stat_df["model_B"] == "ridge")].iloc[0]
+    c_low_med = xgb_med_stat.get('cluster_ci_95_lower', xgb_med_stat.get('ci_95_lower'))
+    c_high_med = xgb_med_stat.get('cluster_ci_95_upper', xgb_med_stat.get('ci_95_upper'))
+    p_adj_med = xgb_med_stat.get('cluster_perm_p_adj_holm', xgb_med_stat.get('wilcoxon_p_adj_holm'))
+    xgb_med_str = f"$\\Delta \\text{{MAE}} = {xgb_med_stat['mean_error_diff_MT']:.2f}\\text{{ MT}}$, $p_{{\\text{{adj}}}} = {p_adj_med:.2e}$, 95% Clustered CI $[{c_low_med:.2f}, {c_high_med:.2f}]$ MT"
+
+    c_low_ridge = xgb_ridge_stat.get('cluster_ci_95_lower', xgb_ridge_stat.get('ci_95_lower'))
+    c_high_ridge = xgb_ridge_stat.get('cluster_ci_95_upper', xgb_ridge_stat.get('ci_95_upper'))
+    xgb_ridge_str = f"$\\Delta \\text{{MAE}} = {xgb_ridge_stat['mean_error_diff_MT']:.2f}\\text{{ MT}}$, 95% Clustered CI $[{c_low_ridge:.2f}, {c_high_ridge:.2f}]$ MT"
+
     report_content = f"""# Final Experimental Research Report
 
 **Manuscript Title:** Explainable AI for Carbon Emissions Estimation: A Comparative Evaluation of Predictive Accuracy, Interpretability, and Computational Efficiency  
@@ -55,14 +67,15 @@ This study investigates three primary research questions regarding the operation
 1. **Activity-Data Baseline Identity:** When metered utility data (electricity, natural gas, steam) is available, the conventional accounting calculation ($E = \\sum AD_i \\times EF_i$) achieves **$R^2 = 1.0000$** with MAE of **{accounting_metrics['mae']:.2f} MT $\\text{{CO}}_2\\text{{e}}$** ({accounting_metrics['wape_pct']:.2f}% WAPE). In this scenario, machine learning is unnecessary.
 2. **Unmetered Structural Prediction:** When utility meter data is unavailable (pre-construction, urban zoning, municipal screening), gradient-boosted trees (**XGBoost**) achieve the highest predictive accuracy:
    - **XGBoost:** $\\text{{MAE}} = {xgb_metrics['mae']:.2f}\\text{{ MT}}$, $R^2 = {xgb_metrics['r2']:.4f}$, $\\text{{WAPE}} = {xgb_metrics['wape_pct']:.1f}\\%$, $\\text{{MedAE}} = {xgb_metrics['medae']:.2f}\\text{{ MT}}$.
-   - Statistically superior to the conventional Property Median intensity baseline ($\\Delta \\text{{MAE}} = -18.80\\text{{ MT}}$, $p < 10^{{-70}}$, 95% CI $[-21.68, -16.28]$ MT).
+   - Statistically superior to the conventional Property Median intensity baseline ({xgb_med_str}).
+   - Compared to Ridge Regression ({xgb_ridge_str}), the 95% clustered confidence interval spans zero, indicating that under facility-clustered sampling, the error difference is not statistically significant.
 3. **Linear & Additive Model Competitiveness:**
-   - **Ridge Regression:** $\\text{{MAE}} = {ridge_metrics['mae']:.2f}\\text{{ MT}}$, $R^2 = {ridge_metrics['r2']:.4f}$, inference latency $= 0.625\\text{{ ms}}$, memory $= 11.2\\text{{ MB}}$.
-   - **Explainable Boosting Machine (EBM):** $\\text{{MAE}} = {ebm_metrics['mae']:.2f}\\text{{ MT}}$, $R^2 = {ebm_metrics['r2']:.4f}$, training time $= 780.0\\text{{ s}}$. EBM's additive restriction resulted in higher error than XGBoost on unseen complex facilities.
+   - **Ridge Regression:** $\\text{{MAE}} = {ridge_metrics['mae']:.2f}\\text{{ MT}}$, $R^2 = {ridge_metrics['r2']:.4f}$.
+   - **Explainable Boosting Machine (EBM):** $\\text{{MAE}} = {ebm_metrics['mae']:.2f}\\text{{ MT}}$, $R^2 = {ebm_metrics['r2']:.4f}$. EBM's additive restriction resulted in higher error than XGBoost on complex unmetered facilities.
 4. **Attribution Stability:**
-   - Feature rankings across bootstrap resamples exhibited high stability for Random Forest (Kendall's $\\tau = 0.9418 \\pm 0.0062$) and Ridge ($\\tau = 0.8714 \\pm 0.0184$).
+   - Feature rankings across bootstrap resamples exhibited high rank stability for Random Forest (Kendall's $\\tau = 0.9418 \\pm 0.0062$) and Ridge ($\\tau = 0.8714 \\pm 0.0184$). Under physical +5% GFA perturbation, SplineGAM and Ridge attributions demonstrated $\\ge 0.997$ cosine stability.
 5. **Operational Carbon Footprint:**
-   - All models consume negligible operational electricity during inference ($< 0.0001\\text{{ kWh}}$ per 10,000 queries; $< 0.005\\text{{ g }} \\text{{CO}}_2\\text{{e}}$ footprint), proving that model inference energy is negligible compared to real-world building emissions.
+   - All models consume negligible operational electricity during inference ($< 3.5 \\times 10^{{-5}}\\text{{ kWh}}$ per 10,000 queries; $< 0.013\\text{{ g }} \\text{{CO}}_2\\text{{e}}$ footprint measured via CodeCarbon RAPL tracking), proving that model inference energy is orders of magnitude smaller than physical building emissions.
 
 ---
 
@@ -77,7 +90,8 @@ This study investigates three primary research questions regarding the operation
         lat = f"{c_sub['single_latency_mean_ms'].iloc[0]:.3f}" if not c_sub.empty and 'single_latency_mean_ms' in c_sub else "N/A"
         mem = f"{c_sub['peak_allocated_memory_mb'].iloc[0]:.2f}" if not c_sub.empty and 'peak_allocated_memory_mb' in c_sub else "N/A"
         disk = f"{c_sub['disk_size_kb'].iloc[0]:.1f}" if not c_sub.empty and 'disk_size_kb' in c_sub else "N/A"
-        kwh = f"{c_sub['estimated_energy_kwh'].iloc[0]:.7f}" if not c_sub.empty and 'estimated_energy_kwh' in c_sub else "N/A"
+        kwh_val = c_sub['energy_kwh'].iloc[0] if not c_sub.empty and 'energy_kwh' in c_sub else (c_sub['estimated_energy_kwh'].iloc[0] if not c_sub.empty and 'estimated_energy_kwh' in c_sub else None)
+        kwh = f"{kwh_val:.8f}" if kwh_val is not None else "N/A"
         report_content += f"| **{r['model_name']}** | {r['mae']:.2f} | {r['rmse']:.2f} | {r['r2']:.4f} | {r['wape_pct']:.1f}% | {lat} ms | {mem} MB | {disk} KB | {kwh} |\n"
         
     report_content += """

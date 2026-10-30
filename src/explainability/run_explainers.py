@@ -11,6 +11,7 @@ Saves global rankings, local explanations, and runtime metrics.
 import os
 import sys
 import time
+import json
 import joblib
 import numpy as np
 import pandas as pd
@@ -55,23 +56,32 @@ def run_all_explainers(sample_size: int = 150):
         timing_dict["Ridge"] = round(time.perf_counter() - t0, 4)
         global_importance_dict["Ridge_abs_coef"] = np.abs(coefs)
         
-    # 2. SplineGAM Feature Importance
+    # 2. SplineGAM Feature Importance (Mathematical Univariate Shape Effects)
     gam_path = os.path.join(MODELS_DIR, "gam.joblib")
     if os.path.exists(gam_path):
-        print("Extracting SplineGAM feature effects...")
+        print("Extracting SplineGAM feature effects via exact univariate spline term contributions...")
         t0 = time.perf_counter()
         gam_model = joblib.load(gam_path)
         inner_gam = gam_model.regressor_ if hasattr(gam_model, "regressor_") else gam_model
-        # Basis coefficients magnitude per feature
-        timing_dict["SplineGAM"] = round(time.perf_counter() - t0, 4)
-        # Approximate GAM feature attribution by standard deviation of spline predictions
-        gam_imps = np.zeros(len(feature_names))
-        for j, feat in enumerate(feature_names):
-            col_vals = X_sample.copy()
-            # Perturb feature to isolate its marginal effect
-            gam_imps[j] = np.std(inner_gam.predict(col_vals.values))
-        global_importance_dict["SplineGAM_effect_std"] = gam_imps
         
+        if hasattr(inner_gam, "feature_importances"):
+            gam_imps = inner_gam.feature_importances(X_sample)
+        else:
+            # Fallback direct term extraction from fitted pipeline
+            splines = inner_gam.pipeline_.named_steps["splines"]
+            reg = inner_gam.pipeline_.named_steps["regressor"]
+            Xt = splines.transform(X_sample.values)
+            n_bases_per_feat = Xt.shape[1] // len(feature_names)
+            gam_imps = np.zeros(len(feature_names))
+            for j in range(len(feature_names)):
+                s_col = j * n_bases_per_feat
+                e_col = (j + 1) * n_bases_per_feat
+                term_j = np.dot(Xt[:, s_col:e_col], reg.coef_[s_col:e_col])
+                gam_imps[j] = float(np.std(term_j))
+                
+        timing_dict["SplineGAM"] = round(time.perf_counter() - t0, 4)
+        global_importance_dict["SplineGAM_effect_std"] = gam_imps
+
     # 3. Explainable Boosting Machine (EBM) Intrinsic Importance
     ebm_path = os.path.join(MODELS_DIR, "ebm.joblib")
     if os.path.exists(ebm_path):
@@ -90,11 +100,17 @@ def run_all_explainers(sample_size: int = 150):
             print(f"  Note on EBM explain_global: {e}")
             global_importance_dict["EBM_importance"] = np.zeros(len(feature_names))
         timing_dict["EBM"] = round(time.perf_counter() - t0, 4)
-        
-    # 4. TreeSHAP on Random Forest
+
+    # Explanation Metadata Registry (Documenting Output Scales and Baselines)
+    explanation_metadata = {
+        "causal_disclaimer": "Feature importance reflects predictive attribution within the empirical correlation structure of training data, not physical or causal intervention.",
+        "models": {}
+    }
+
+    # 4. TreeSHAP on Random Forest (Log-Transformed Target Space)
     rf_path = os.path.join(MODELS_DIR, "rf.joblib")
     if os.path.exists(rf_path):
-        print("Computing TreeSHAP for Random Forest...")
+        print("Computing TreeSHAP for Random Forest (log-space attributions)...")
         t0 = time.perf_counter()
         rf_model = joblib.load(rf_path)
         inner_rf = rf_model.regressor_ if hasattr(rf_model, "regressor_") else rf_model
@@ -102,21 +118,42 @@ def run_all_explainers(sample_size: int = 150):
         shap_rf = explainer_rf.shap_values(X_sample)
         timing_dict["RandomForest_TreeSHAP"] = round(time.perf_counter() - t0, 4)
         global_importance_dict["RF_TreeSHAP_mean_abs"] = np.mean(np.abs(shap_rf), axis=0)
+
+        # Baseline expected value in log space
+        expected_val_rf = float(np.atleast_1d(explainer_rf.expected_value)[0])
+        raw_pred_log_rf = inner_rf.predict(X_sample.values)
+        local_additivity_errors_rf = np.abs((expected_val_rf + np.sum(shap_rf, axis=1)) - raw_pred_log_rf)
         
-        # Save sample local explanation
+        explanation_metadata["models"]["RandomForest"] = {
+            "prediction_function": "RandomForestRegressor.predict (inner estimator)",
+            "output_scale": "log1p_space (log(MT CO2e + 1))",
+            "expected_value_baseline": round(expected_val_rf, 4),
+            "expected_value_units": "log(MT CO2e + 1)",
+            "max_local_additivity_error": float(np.max(local_additivity_errors_rf)),
+            "local_accuracy_verified": bool(np.max(local_additivity_errors_rf) < 1e-4)
+        }
+
+        # Save sample local explanations with transparent scale semantics
         for i in range(min(5, len(X_sample))):
+            top_idx = int(np.argmax(np.abs(shap_rf[i])))
             local_explanations.append({
                 "model": "RandomForest",
                 "sample_index": i,
-                "actual_emissions": y_sample[i],
-                "top_feature": feature_names[np.argmax(np.abs(shap_rf[i]))],
-                "top_shap_value": shap_rf[i][np.argmax(np.abs(shap_rf[i]))]
+                "actual_emissions_mt": round(float(y_sample[i]), 2),
+                "predicted_emissions_mt": round(float(np.expm1(raw_pred_log_rf[i])), 2),
+                "explained_log_prediction": round(float(raw_pred_log_rf[i]), 4),
+                "base_log_value": round(expected_val_rf, 4),
+                "sum_shap_log_values": round(float(np.sum(shap_rf[i])), 4),
+                "additivity_error": round(float(local_additivity_errors_rf[i]), 6),
+                "top_feature": feature_names[top_idx],
+                "top_feature_shap_log": round(float(shap_rf[i][top_idx]), 4),
+                "attribution_units": "log(MT CO2e + 1)"
             })
-            
-    # 5. TreeSHAP on XGBoost
+
+    # 5. TreeSHAP on XGBoost (Log-Transformed Target Space)
     xgb_path = os.path.join(MODELS_DIR, "xgboost.joblib")
     if os.path.exists(xgb_path):
-        print("Computing TreeSHAP for XGBoost...")
+        print("Computing TreeSHAP for XGBoost (log-space attributions)...")
         t0 = time.perf_counter()
         xgb_model = joblib.load(xgb_path)
         inner_xgb = xgb_model.regressor_ if hasattr(xgb_model, "regressor_") else xgb_model
@@ -124,7 +161,36 @@ def run_all_explainers(sample_size: int = 150):
         shap_xgb = explainer_xgb.shap_values(X_sample)
         timing_dict["XGBoost_TreeSHAP"] = round(time.perf_counter() - t0, 4)
         global_importance_dict["XGBoost_TreeSHAP_mean_abs"] = np.mean(np.abs(shap_xgb), axis=0)
-        
+
+        expected_val_xgb = float(np.atleast_1d(explainer_xgb.expected_value)[0])
+        raw_pred_log_xgb = inner_xgb.predict(X_sample.values)
+        local_additivity_errors_xgb = np.abs((expected_val_xgb + np.sum(shap_xgb, axis=1)) - raw_pred_log_xgb)
+
+        explanation_metadata["models"]["XGBoost"] = {
+            "prediction_function": "XGBRegressor.predict (inner estimator)",
+            "output_scale": "log1p_space (log(MT CO2e + 1))",
+            "expected_value_baseline": round(expected_val_xgb, 4),
+            "expected_value_units": "log(MT CO2e + 1)",
+            "max_local_additivity_error": float(np.max(local_additivity_errors_xgb)),
+            "local_accuracy_verified": bool(np.max(local_additivity_errors_xgb) < 1e-4)
+        }
+
+        for i in range(min(5, len(X_sample))):
+            top_idx = int(np.argmax(np.abs(shap_xgb[i])))
+            local_explanations.append({
+                "model": "XGBoost",
+                "sample_index": i,
+                "actual_emissions_mt": round(float(y_sample[i]), 2),
+                "predicted_emissions_mt": round(float(np.expm1(raw_pred_log_xgb[i])), 2),
+                "explained_log_prediction": round(float(raw_pred_log_xgb[i]), 4),
+                "base_log_value": round(expected_val_xgb, 4),
+                "sum_shap_log_values": round(float(np.sum(shap_xgb[i])), 4),
+                "additivity_error": round(float(local_additivity_errors_xgb[i]), 6),
+                "top_feature": feature_names[top_idx],
+                "top_feature_shap_log": round(float(shap_xgb[i][top_idx]), 4),
+                "attribution_units": "log(MT CO2e + 1)"
+            })
+
     # 6. Sampling Explainer on MLP
     mlp_path = os.path.join(MODELS_DIR, "mlp.joblib")
     if os.path.exists(mlp_path):
@@ -132,13 +198,17 @@ def run_all_explainers(sample_size: int = 150):
         t0 = time.perf_counter()
         mlp_model = joblib.load(mlp_path)
         inner_mlp = mlp_model.regressor_ if hasattr(mlp_model, "regressor_") else mlp_model
-        # Use background medoid of 30 samples for fast tractable estimation
-        background = X_sample.iloc[:30].values
+        background = X_sample.iloc[:15].values
         explainer_mlp = shap.SamplingExplainer(inner_mlp.predict, background)
-        shap_mlp = explainer_mlp.shap_values(X_sample.iloc[:30].values)
+        shap_mlp = explainer_mlp.shap_values(X_sample.iloc[:15].values)
         timing_dict["MLP_SamplingSHAP"] = round(time.perf_counter() - t0, 4)
         global_importance_dict["MLP_SHAP_mean_abs"] = np.mean(np.abs(shap_mlp), axis=0)
-        
+
+    # Save explanation metadata JSON
+    meta_path = os.path.join(RESULTS_DIR, "explanation_metadata.json")
+    with open(meta_path, "w") as f:
+        json.dump(explanation_metadata, f, indent=2)
+
     # Save global feature importance CSV
     importance_df = pd.DataFrame(global_importance_dict)
     importance_df.to_csv(os.path.join(RESULTS_DIR, "global_feature_importance.csv"), index=False)
