@@ -2,30 +2,22 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 /**
- * Next.js Middleware to enforce dynamic Content Security Policy (CSP) nonces
+ * Next.js Middleware to enforce Content Security Policy (CSP)
  * and apply standard HTTP security headers to protect against common web vulnerability vectors.
  */
 export function middleware(request: NextRequest): NextResponse {
-  // Generate a cryptographically secure random base64 nonce
-  // btoa(crypto.randomUUID()) is safe for the Edge runtime and browser context
-  const nonce = btoa(crypto.randomUUID());
-
-  const isDev = process.env.NODE_ENV !== 'production';
-
-  // Formulate strict Content Security Policy
-  // Note: 'unsafe-eval' is required by React/Next.js dev server for Fast Refresh and error stack reconstruction
+  // Formulate Content Security Policy compatible with Next.js client bundles, RSC Flight scripts, and Vercel preview tooling
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' maps.googleapis.com ${isDev ? "'unsafe-eval'" : ''};
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' maps.googleapis.com https://vercel.live;
     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     img-src 'self' blob: data: *.googleapis.com *.gstatic.com;
     font-src 'self' fonts.gstatic.com;
-    connect-src 'self' *.googleapis.com *.google.com;
+    connect-src 'self' *.googleapis.com *.google.com https://vercel.live;
     frame-ancestors 'none';
   `.replace(/\s{2,}/g, ' ').trim();
 
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-nonce', nonce);
   requestHeaders.set('Content-Security-Policy', cspHeader);
 
   const response = NextResponse.next({

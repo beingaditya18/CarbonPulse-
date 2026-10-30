@@ -20,12 +20,9 @@ export default function LandingPage() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMounted(true);
-      const isDarkClass = document.documentElement.classList.contains('dark');
-      setIsDark(isDarkClass);
-    }, 0);
-    return () => clearTimeout(timer);
+    setMounted(true);
+    const isDarkClass = document.documentElement.classList.contains('dark');
+    setIsDark(isDarkClass);
   }, []);
 
   const toggleTheme = () => {
@@ -38,7 +35,7 @@ export default function LandingPage() {
     }
   };
 
-  if (!mounted) return null;
+  const isOnboarded = mounted ? Boolean(user?.onboardingComplete) : false;
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-zinc-950 text-zinc-100' : 'bg-white text-slate-900'}`}>
@@ -109,10 +106,10 @@ export default function LandingPage() {
               </button>
 
               <Link
-                href={user.onboardingComplete ? "/dashboard" : "/calculator"}
+                href={isOnboarded ? "/dashboard" : "/calculator"}
                 className="bg-white hover:bg-emerald-50 text-[#047857] px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm flex items-center gap-1.5 border border-white hover:border-emerald-100"
               >
-                {user.onboardingComplete ? 'Access Workspace' : 'Start Assessment'} <ArrowRight className="w-4 h-4" />
+                {isOnboarded ? 'Access Workspace' : 'Start Assessment'} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </nav>
@@ -123,7 +120,7 @@ export default function LandingPage() {
       <div className={`${isDark ? 'bg-zinc-950' : 'bg-gradient-to-b from-emerald-50/40 via-white to-white'}`}>
         <main className="max-w-7xl mx-auto px-6 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7">
-            <HeroSection onboardingComplete={user.onboardingComplete} isDark={isDark} />
+            <HeroSection onboardingComplete={isOnboarded} isDark={isDark} />
           </div>
           <PreviewSimulator isDark={isDark} />
         </main>

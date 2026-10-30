@@ -64,7 +64,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     router.push('/');
   };
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 text-center text-slate-700">
+        <div className="space-y-4 bg-white p-8 rounded-3xl border border-emerald-100 shadow-xl max-w-sm">
+          <Loader2 className="w-8 h-8 animate-spin text-[#047857] mx-auto" />
+          <p className="text-sm font-semibold">Loading carbon workspace...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!user.onboardingComplete) {
     router.replace('/calculator');

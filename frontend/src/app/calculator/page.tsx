@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useCarbonStore } from '@/store/useCarbonStore';
 import {
   Leaf, ArrowLeft, ArrowRight, Sparkles, Globe,
-  Car, Zap, Apple, ShoppingBag, BarChart3, AlertCircle
+  Car, Zap, Apple, ShoppingBag, BarChart3, AlertCircle, Loader2
 } from 'lucide-react';
 import { calculateMultiVectorBaseline } from '@/utils/carbonCalculations';
 
@@ -112,7 +112,16 @@ export default function CalculatorPage() {
     }
   }, [step]);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 text-center text-slate-700">
+        <div className="space-y-4 bg-white p-8 rounded-3xl border border-emerald-100 shadow-xl max-w-sm">
+          <Loader2 className="w-8 h-8 animate-spin text-[#047857] mx-auto" />
+          <p className="text-sm font-semibold">Initializing assessment calculator...</p>
+        </div>
+      </div>
+    );
+  }
 
   const currentAnswers = {
     region,
