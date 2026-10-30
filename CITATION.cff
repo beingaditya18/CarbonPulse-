@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software or empirical benchmark suite, please cite it as below."
+title: "CarbonPulse: Explainable Machine Learning for Screening-Level Building Emissions Estimation Without Meter Data"
+version: 1.0.0
+date-released: "2026-10-30"
+license: MIT
+repository-code: "https://github.com/beingaditya18/CarbonPulse-"
+authors:
+  - family-names: "Mandloi"
+    given-names: "Aditya"
+    # orcid: "https://orcid.org/TODO"
+    # affiliation: "TODO"
+  - family-names: "Agrawal"
+    given-names: "Anshika"
+    # orcid: "https://orcid.org/TODO"
+    # affiliation: "TODO"
+keywords:
+  - "building emissions"
+  - "greenhouse gas estimation"
+  - "explainable AI"
+  - "TreeSHAP"
+  - "clustered inference"
+  - "Seattle benchmarking"
+  - "environmental machine learning"

@@ -1,0 +1,24 @@
+{
+  "title": "CarbonPulse: Explainable Machine Learning for Screening-Level Building Emissions Estimation Without Meter Data",
+  "upload_type": "software",
+  "description": "Replication package and empirical benchmarking pipeline for screening-level greenhouse gas emissions estimation using municipal building energy benchmarking records, physics-constrained feature engineering, and cluster-aware statistical evaluation.",
+  "creators": [
+    {
+      "name": "Mandloi, Aditya"
+    },
+    {
+      "name": "Agrawal, Anshika"
+    }
+  ],
+  "access_right": "open",
+  "license": "mit",
+  "keywords": [
+    "building emissions",
+    "explainable AI",
+    "SHAP",
+    "clustered inference",
+    "Seattle benchmarking",
+    "environmental machine learning",
+    "statistical benchmarking"
+  ]
+}
