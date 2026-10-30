@@ -22,7 +22,7 @@ export function TwinForecastChart({
     const dailyPoints = [];
     const baseDaily = baselineProjected / days;
     const simDaily = simulatedProjected / days;
-    
+
     let baseCumulative = 0;
     let simCumulative = 0;
 
@@ -52,27 +52,27 @@ export function TwinForecastChart({
       >
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-            <XAxis dataKey="day" stroke="#52525b" fontSize={11} tickLine={false} />
-            <YAxis stroke="#52525b" fontSize={11} tickLine={false} />
-            <Tooltip 
-              contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: '12px' }}
-              labelStyle={{ color: '#a1a1aa', fontWeight: 'bold' }}
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis dataKey="day" stroke="#64748b" fontSize={11} tickLine={false} />
+            <YAxis stroke="#64748b" fontSize={11} tickLine={false} />
+            <Tooltip
+              contentStyle={{ backgroundColor: '#ffffff', borderColor: '#cbd5e1', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', color: '#0f172a' }}
+              labelStyle={{ color: '#047857', fontWeight: 'bold' }}
             />
-            <Line 
-              type="monotone" 
-              dataKey="Baseline" 
-              stroke="#52525b" 
-              strokeDasharray="4 4" 
-              strokeWidth={2} 
-              dot={false} 
+            <Line
+              type="monotone"
+              dataKey="Baseline"
+              stroke="#94a3b8"
+              strokeDasharray="4 4"
+              strokeWidth={2}
+              dot={false}
             />
-            <Line 
-              type="monotone" 
-              dataKey="Simulated" 
-              stroke="#10b981" 
-              strokeWidth={3} 
-              dot={false} 
+            <Line
+              type="monotone"
+              dataKey="Simulated"
+              stroke="#047857"
+              strokeWidth={3}
+              dot={false}
             />
           </LineChart>
         </ResponsiveContainer>

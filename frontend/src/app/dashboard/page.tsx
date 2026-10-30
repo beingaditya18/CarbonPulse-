@@ -12,12 +12,12 @@ import { RecentActivity } from '@/components/dashboard/RecentActivity';
 import { ChatCoachCard } from '@/features/dashboard/components/ChatCoachCard';
 import { ManualLogDialog } from '@/features/dashboard/components/ManualLogDialog';
 import { EmptyDashboard } from '@/components/feedback/EmptyDashboard';
-import { TrendingDown, Check, Plus, Lightbulb } from 'lucide-react';
+import { TrendingDown, Check, Plus, Lightbulb, Leaf } from 'lucide-react';
 import { getRecommendations } from '@/lib/tips-engine';
 
-
 /**
- * DashboardPage is the central command center for tracking, SHAP explanations, and AI coach.
+ * DashboardPage is the central environmental command center for tracking, SHAP explanations, and AI climate coaching.
+ * Styled with crisp white cards, rich green headers/accents, and clear data typography.
  */
 export default function DashboardPage() {
   const {
@@ -27,7 +27,6 @@ export default function DashboardPage() {
     clearChat,
     user,
   } = useCarbonStore();
-
 
   const [mounted, setMounted] = useState<boolean>(false);
   const [showAddDialog, setShowAddDialog] = useState<boolean>(false);
@@ -68,7 +67,7 @@ export default function DashboardPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const recommendations = user.calculatorAnswers 
+  const recommendations = user.calculatorAnswers
     ? getRecommendations(user.calculatorAnswers).slice(0, 3)
     : [];
 
@@ -86,25 +85,31 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      
-      {/* HEADER BAR */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+
+      {/* ── HEADER & WORKSPACE BANNER ────────────────────────────────────────────── */}
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight">Eco Dashboard</h1>
-          <p className="text-zinc-500 mt-1">
-            Track, explain, and manage your localized carbon emissions.
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-[#047857] border border-emerald-200 mb-2 uppercase tracking-wider">
+            <Leaf className="w-3 h-3" /> SMC 22.920 Compliance Registry
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">
+            Building & Footprint Command Center
+          </h1>
+          <p className="text-sm text-slate-500 mt-0.5 font-medium">
+            Verified observational tracking, game-theoretic SHAP attributions, and real-time intervention forecasts.
           </p>
         </div>
+
         <button
           onClick={() => setShowAddDialog(true)}
-          className="bg-zinc-100 hover:bg-white text-zinc-950 px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+          className="bg-[#047857] hover:bg-[#065f46] text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 cursor-pointer shadow-sm hover:shadow-md self-start sm:self-center shrink-0"
           aria-label="Add manual carbon footprint log entry"
         >
-          <Plus className="w-4 h-4" /> Log Manual
+          <Plus className="w-4 h-4 stroke-[3]" /> Log Activity
         </button>
       </header>
 
-      {/* OCR UPLOADER CARD */}
+      {/* ── OCR RECEIPT UPLOADER CARD ────────────────────────────────────────────── */}
       <QuickActions
         ocrScanStep={ocrScanStep}
         ocrFeedback={ocrFeedback}
@@ -112,13 +117,13 @@ export default function DashboardPage() {
         onDemoScan={handleDemoScan}
       />
 
-      {/* GRID OVERVIEW */}
+      {/* ── MAIN DASHBOARD GRID ─────────────────────────────────────────────────── */}
       {logs.length === 0 ? (
         <EmptyDashboard />
       ) : (
-        <main className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left main grids */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+          {/* Left Main Column: Gauge, Chart & Activity Table */}
           <div className="lg:col-span-8 space-y-8">
             <EmissionsSummary
               currentEmissions={currentEmissions}
@@ -137,16 +142,21 @@ export default function DashboardPage() {
             />
           </div>
 
-          {/* Right sidebar */}
+          {/* Right Sidebar: Interventions, Tips & Climate Coach */}
           <aside className="lg:col-span-4 space-y-8">
-            {/* Action cards checklist */}
-            <section className="bg-zinc-900 border border-zinc-800/80 p-6 rounded-2xl space-y-6 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-500/5 rounded-full blur-xl"></div>
-              <div>
-                <h2 className="text-lg font-bold flex items-center gap-1.5">
-                  <TrendingDown className="w-5 h-5 text-emerald-500" /> Next Reduction Actions
-                </h2>
-                <p className="text-xs text-zinc-500 mt-1 font-semibold uppercase tracking-wider">What to do next</p>
+
+            {/* Action Cards Checklist */}
+            <section className="bg-white border border-slate-200/90 p-6 rounded-2xl space-y-5 shadow-xs relative overflow-hidden">
+              <div className="border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <div className="p-1.5 bg-emerald-100 text-[#047857] rounded-lg">
+                    <TrendingDown className="w-4 h-4" />
+                  </div>
+                  <h2 className="text-base font-bold text-slate-900">Priority Reduction Actions</h2>
+                </div>
+                <p className="text-[11px] text-slate-500 mt-1 font-semibold uppercase tracking-wider">
+                  Quantified Facility Challenges
+                </p>
               </div>
 
               <div className="space-y-3">
@@ -154,38 +164,41 @@ export default function DashboardPage() {
                   .filter((c) => c.status !== 'completed')
                   .slice(0, 3)
                   .map((challenge) => (
-                    <div 
-                      key={challenge.id} 
-                      className={`p-4 rounded-xl border flex flex-col justify-between gap-3 transition-colors ${
-                        challenge.status === 'accepted' 
-                          ? 'bg-emerald-500/5 border-emerald-500/20' 
-                          : 'bg-zinc-950 border-zinc-800/80'
-                       }`}
+                    <div
+                      key={challenge.id}
+                      className={`p-3.5 rounded-xl border flex flex-col justify-between gap-2.5 transition-colors ${challenge.status === 'accepted'
+                        ? 'bg-emerald-50/60 border-emerald-300'
+                        : 'bg-slate-50/80 border-slate-200 hover:border-emerald-200'
+                        }`}
                     >
                       <div>
                         <div className="flex justify-between items-start gap-2">
-                          <span className="font-bold text-sm text-zinc-200 leading-tight">{challenge.title}</span>
-                          <span className="text-[10px] shrink-0 uppercase tracking-widest font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                          <span className="font-bold text-xs sm:text-sm text-slate-900 leading-tight">
+                            {challenge.title}
+                          </span>
+                          <span className="text-[10px] shrink-0 uppercase tracking-wider font-extrabold text-[#047857] bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-200">
                             -{challenge.potential_impact} kg/mo
                           </span>
                         </div>
-                        <p className="text-xs text-zinc-500 mt-1 leading-relaxed font-semibold">{challenge.description}</p>
+                        <p className="text-xs text-slate-500 mt-1 leading-normal font-medium">
+                          {challenge.description}
+                        </p>
                       </div>
 
-                      <div className="flex items-center gap-2 justify-end">
+                      <div className="flex items-center gap-2 justify-end pt-1">
                         {challenge.status === 'accepted' ? (
                           <button
                             onClick={() => completeChallenge(challenge.id)}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-all shadow-md cursor-pointer"
+                            className="bg-[#047857] hover:bg-[#065f46] text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-all shadow-xs cursor-pointer"
                           >
-                            Complete Challenge
+                            Mark Completed
                           </button>
                         ) : (
                           <button
                             onClick={() => acceptChallenge(challenge.id)}
-                            className="border border-zinc-805 hover:border-zinc-700 text-zinc-400 hover:text-white font-semibold text-xs px-3 py-1.5 rounded-lg transition-all cursor-pointer"
+                            className="border border-slate-200 hover:border-emerald-500 bg-white text-slate-700 hover:text-[#047857] font-semibold text-xs px-3 py-1.5 rounded-lg transition-all cursor-pointer shadow-2xs"
                           >
-                            Accept Challenge
+                            Accept Action
                           </button>
                         )}
                       </div>
@@ -193,9 +206,9 @@ export default function DashboardPage() {
                   ))}
 
                 {challenges.filter((c) => c.status !== 'completed').length === 0 && (
-                  <div className="text-center py-4 bg-emerald-500/5 rounded-xl border border-emerald-500/10">
-                    <Check className="w-6 h-6 text-emerald-500 mx-auto mb-1" />
-                    <p className="text-xs text-emerald-400 font-bold">All challenges conquerered! Check achievements vault.</p>
+                  <div className="text-center py-4 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-800">
+                    <Check className="w-5 h-5 text-emerald-600 mx-auto mb-1" />
+                    <p className="text-xs font-bold">All actions completed! High-efficiency tier achieved.</p>
                   </div>
                 )}
               </div>
@@ -203,38 +216,39 @@ export default function DashboardPage() {
 
             {/* AI Recommendations Card */}
             {recommendations.length > 0 && (
-              <section className="bg-zinc-900 border border-zinc-800/80 p-6 rounded-2xl space-y-6 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-500/5 rounded-full blur-xl"></div>
-                <div>
-                  <h2 className="text-lg font-bold flex items-center gap-1.5">
-                    <Lightbulb className="w-5 h-5 text-yellow-500" /> AI Carbon Actions
-                  </h2>
-                  <p className="text-xs text-zinc-500 mt-1 font-semibold uppercase tracking-wider">Quantified Personal Savings</p>
+              <section className="bg-white border border-slate-200/90 p-6 rounded-2xl space-y-5 shadow-xs relative overflow-hidden">
+                <div className="border-b border-slate-100 pb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-amber-100 text-amber-700 rounded-lg">
+                      <Lightbulb className="w-4 h-4" />
+                    </div>
+                    <h2 className="text-base font-bold text-slate-900">Intervention Recommendations</h2>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-1 font-semibold uppercase tracking-wider">
+                    Derived from Baseline Matrix
+                  </p>
                 </div>
 
                 <div className="space-y-3">
                   {recommendations.map((tip) => (
-                    <div 
-                      key={tip.id} 
-                      className="p-4 rounded-xl border bg-zinc-950 border-zinc-800/85 flex flex-col justify-between gap-2.5"
+                    <div
+                      key={tip.id}
+                      className="p-3.5 rounded-xl border bg-slate-50 border-slate-200/80 flex flex-col justify-between gap-1.5"
                     >
-                      <div>
-                        <div className="flex justify-between items-start gap-2">
-                          <span className="font-extrabold text-sm text-zinc-200 leading-tight">{tip.title}</span>
-                          <span className="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full shrink-0">
-                            -{Math.round(tip.annualSavings)} kg/yr
-                          </span>
-                        </div>
-                        <p className="text-xs text-zinc-500 mt-1 leading-relaxed font-semibold">{tip.description}</p>
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="font-bold text-xs sm:text-sm text-slate-900 leading-tight">{tip.title}</span>
+                        <span className="text-[10px] uppercase font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full shrink-0 border border-emerald-200">
+                          -{Math.round(tip.annualSavings)} kg/yr
+                        </span>
                       </div>
+                      <p className="text-xs text-slate-500 mt-0.5 leading-normal font-medium">{tip.description}</p>
                     </div>
                   ))}
                 </div>
               </section>
             )}
 
-
-            {/* Conversations assistant */}
+            {/* Conversational AI Climate Coach */}
             <ChatCoachCard
               chatHistory={chatHistory}
               chatInput={chatInput}
@@ -243,12 +257,13 @@ export default function DashboardPage() {
               onSendMessage={handleSendMessage}
               onClearChat={clearChat}
             />
+
           </aside>
 
-        </main>
+        </div>
       )}
 
-      {/* POPUP LOG INPUT DIALOG */}
+      {/* ── POPUP LOG INPUT DIALOG ──────────────────────────────────────────────── */}
       <ManualLogDialog
         isOpen={showAddDialog}
         onClose={() => setShowAddDialog(false)}

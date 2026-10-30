@@ -10,10 +10,13 @@ export function middleware(request: NextRequest): NextResponse {
   // btoa(crypto.randomUUID()) is safe for the Edge runtime and browser context
   const nonce = btoa(crypto.randomUUID());
 
+  const isDev = process.env.NODE_ENV !== 'production';
+
   // Formulate strict Content Security Policy
+  // Note: 'unsafe-eval' is required by React/Next.js dev server for Fast Refresh and error stack reconstruction
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' maps.googleapis.com;
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' maps.googleapis.com ${isDev ? "'unsafe-eval'" : ''};
     style-src 'self' 'unsafe-inline' fonts.googleapis.com;
     img-src 'self' blob: data: *.googleapis.com *.gstatic.com;
     font-src 'self' fonts.gstatic.com;

@@ -19,33 +19,42 @@ interface ShapExplanationsCardProps {
  */
 export function ShapExplanationsCard({ explanations }: ShapExplanationsCardProps) {
   return (
-    <section className="bg-zinc-900 border border-zinc-800/80 p-6 rounded-2xl space-y-6">
-      <div>
-        <div className="flex items-center gap-2 text-emerald-500">
-          <Sparkles className="w-5 h-5 animate-pulse" />
-          <h2 className="text-lg font-bold">SHAP Advanced Carbon Explanations</h2>
+    <section className="bg-white dark:bg-zinc-900 border border-slate-200/90 dark:border-zinc-800 p-6 rounded-2xl shadow-xs space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-zinc-800 pb-4">
+        <div>
+          <div className="flex items-center gap-2 text-[#047857] dark:text-emerald-400">
+            <Sparkles className="w-5 h-5 animate-pulse" />
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">SHAP Advanced Carbon Explanations</h2>
+          </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium tracking-wide">
+            Game-theoretic attribution relative to localized EPA regional baseline
+          </p>
         </div>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-semibold uppercase tracking-wider">
-          Powered by Google Vertex AI Custom Explainer
-        </p>
+        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-[#065f46] border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800">
+          Vertex AI Custom Explainer
+        </span>
       </div>
 
       <div className="space-y-4">
         {explanations.map((exp) => (
-          <div key={exp.feature} className="space-y-2 border-b border-zinc-800/50 pb-4 last:border-b-0 last:pb-0">
+          <div key={exp.feature} className="space-y-2 border-b border-slate-100 dark:border-zinc-800/60 pb-4 last:border-b-0 last:pb-0">
             <div className="flex justify-between items-center text-sm font-semibold">
-              <span className="text-zinc-300">{exp.feature}</span>
-              <span className={exp.direction === 'higher' ? 'text-amber-500' : 'text-emerald-500'}>
+              <span className="text-slate-800 dark:text-zinc-200">{exp.feature}</span>
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                exp.direction === 'higher' 
+                  ? 'bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800' 
+                  : 'bg-emerald-50 text-[#065f46] border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800'
+              }`}>
                 {exp.direction === 'higher' ? '+' : '-'}{exp.impact}% relative impact
               </span>
             </div>
-            <div className="w-full h-2 bg-zinc-950 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-slate-100 dark:bg-zinc-950 rounded-full overflow-hidden">
               <div 
-                className={`h-full rounded-full transition-all duration-300 ${exp.direction === 'higher' ? 'bg-amber-500' : 'bg-emerald-500'}`}
+                className={`h-full rounded-full transition-all duration-300 ${exp.direction === 'higher' ? 'bg-amber-500' : 'bg-[#047857]'}`}
                 style={{ width: `${exp.impact}%` }}
               ></div>
             </div>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
+            <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed font-medium">
               {exp.description}
             </p>
           </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, ChangeEvent, KeyboardEvent, DragEvent } from 'react';
-import { Camera, Loader2, Check, AlertCircle } from 'lucide-react';
+import { Camera, Loader2, Check, AlertCircle, UploadCloud } from 'lucide-react';
 
 interface OcrScannerCardProps {
   ocrScanStep: 'idle' | 'scanning' | 'success' | 'error';
@@ -11,7 +11,8 @@ interface OcrScannerCardProps {
 }
 
 /**
- * OcrScannerCard handles secure local upload dropzones and AI OCR mock simulation triggers.
+ * OcrScannerCard handles secure local upload dropzones and AI OCR receipt parsing.
+ * Formatted for environmental standard white & green web aesthetic.
  */
 export function OcrScannerCard({
   ocrScanStep,
@@ -77,15 +78,17 @@ export function OcrScannerCard({
   };
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800/80 p-6 rounded-2xl space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="bg-white border border-slate-200/90 p-6 rounded-2xl space-y-5 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
         <div>
-          <h3 className="text-lg font-bold text-zinc-100 flex items-center gap-2">
-            <Camera className="w-5 h-5 text-emerald-500" />
-            Receipt OCR Ingestion
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+            <span className="p-1.5 bg-emerald-100 text-[#047857] rounded-lg">
+              <Camera className="w-4 h-4" />
+            </span>
+            Utility Bill & Receipt Ingestion
           </h3>
-          <p className="text-xs text-zinc-500 mt-1 font-semibold uppercase tracking-wider">
-            Google Cloud Vision OCR Ingestion Pipeline
+          <p className="text-xs text-slate-500 mt-1 font-semibold uppercase tracking-wider">
+            Google Cloud Vision OCR • Energy Star Activity Parser
           </p>
         </div>
 
@@ -93,9 +96,9 @@ export function OcrScannerCard({
           <button
             onClick={onDemoScan}
             disabled={ocrScanStep === 'scanning'}
-            className="border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-900 text-zinc-300 px-4 py-2 rounded-xl font-semibold text-sm transition-all cursor-pointer"
+            className="border border-emerald-200 bg-emerald-50/80 hover:bg-emerald-100 text-[#047857] px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-2xs"
           >
-            Demo OCR Scan
+            Demo Scan (Electric Bill)
           </button>
         </div>
       </div>
@@ -110,7 +113,7 @@ export function OcrScannerCard({
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onClick={triggerFileSelect}
-        className="border-2 border-dashed border-zinc-850 hover:border-emerald-500/50 hover:bg-zinc-950/20 transition-all p-8 rounded-xl text-center cursor-pointer"
+        className="border-2 border-dashed border-emerald-200/90 hover:border-[#047857] bg-emerald-50/20 hover:bg-emerald-50/50 transition-all p-7 rounded-2xl text-center cursor-pointer group"
       >
         <input
           ref={fileInputRef}
@@ -126,34 +129,39 @@ export function OcrScannerCard({
           Drag and drop a receipt file here, or press Enter to open the file picker. Supported formats are JPEG, PNG, WebP, and PDF files up to 5 megabytes.
         </p>
         <div className="flex flex-col items-center justify-center gap-2">
-          <Camera className="w-8 h-8 text-zinc-650" />
-          <span className="text-sm font-bold text-zinc-300">Drag & drop files here or click to browse</span>
-          <span className="text-xs text-zinc-500">Supports JPEG, PNG, WebP, PDF (Max 5MB)</span>
+          <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#047857] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
+            <UploadCloud className="w-6 h-6 stroke-[2.2]" />
+          </div>
+          <span className="text-sm font-bold text-slate-800">
+            Drag & drop receipts, utility bills, or click to browse
+          </span>
+          <span className="text-xs text-slate-500 font-medium">
+            Accepted formats: JPEG, PNG, WebP, PDF (Max 5MB)
+          </span>
         </div>
       </div>
 
       {/* OCR SCANNER STATUS FEEDBACK BANNER */}
       {ocrScanStep !== 'idle' && (
-        <div className={`p-4 rounded-xl border flex items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-300 ${
-          ocrScanStep === 'scanning' 
-            ? 'bg-blue-500/10 border-blue-500/20 text-blue-400' 
-            : ocrScanStep === 'success' 
-              ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' 
-              : 'bg-red-500/10 border-red-500/20 text-red-400'
-        }`}>
+        <div className={`p-4 rounded-xl border flex items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-300 ${ocrScanStep === 'scanning'
+            ? 'bg-blue-50 border-blue-200 text-blue-800'
+            : ocrScanStep === 'success'
+              ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
+              : 'bg-red-50 border-red-200 text-red-900'
+          }`}>
           <div className="flex items-center gap-2">
             {ocrScanStep === 'scanning' ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
+              <Loader2 className="w-5 h-5 animate-spin text-blue-600" />
             ) : ocrScanStep === 'success' ? (
-              <Check className="w-5 h-5" />
+              <Check className="w-5 h-5 text-emerald-600 stroke-[3]" />
             ) : (
-              <AlertCircle className="w-5 h-5" />
+              <AlertCircle className="w-5 h-5 text-red-600" />
             )}
-            <span className="text-sm font-semibold">{ocrFeedback}</span>
+            <span className="text-xs sm:text-sm font-bold">{ocrFeedback}</span>
           </div>
           {ocrScanStep === 'scanning' && (
-            <div className="w-24 h-1 bg-zinc-800 rounded-full overflow-hidden shrink-0">
-              <div className="h-full bg-blue-500 animate-pulse w-full"></div>
+            <div className="w-24 h-1.5 bg-blue-200 rounded-full overflow-hidden shrink-0">
+              <div className="h-full bg-blue-600 animate-pulse w-full"></div>
             </div>
           )}
         </div>
