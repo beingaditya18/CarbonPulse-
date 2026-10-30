@@ -30,6 +30,7 @@ venv/
 env/
 .env/
 ENV/
+.env*
 
 # Testing & Coverage
 .pytest_cache/
@@ -47,7 +48,9 @@ Thumbs.db
 *.swp
 *~
 
-# Node / Next.js (if dependencies installed locally)
+# Node / Next.js
 node_modules/
+**/node_modules/
 .next/
+**/.next/
 out/

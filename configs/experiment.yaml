@@ -85,7 +85,7 @@ models:
     random_state: 42
 
 benchmarking:
-  warmup_runs: 5
+  warmup_runs: 10
   latency_repetitions: 100
   batch_sizes: [1, 32, 128, 512]
   grid_emissions_factor_kg_per_kwh: 0.370 # Regional electricity grid intensity for computational footprint (kg CO2e / kWh)
