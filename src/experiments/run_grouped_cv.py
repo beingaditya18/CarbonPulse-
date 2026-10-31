@@ -100,8 +100,8 @@ def safe_predict(model: Any, X: Any, y_train_ref: np.ndarray, model_name: str) -
         fold_median = float(np.median(y_train_ref))
         preds[invalid_mask] = fold_median
 
-    # Enforce physical constraints: non-negative and bounded
-    preds = np.clip(preds, a_min=0.0, a_max=100000.0)
+    # Enforce physical constraints: non-negative and bounded (25,000 MT CO2e)
+    preds = np.clip(preds, a_min=0.0, a_max=25000.0)
     return preds
 
 def compute_fold_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
@@ -339,6 +339,11 @@ def run_grouped_cross_validation(
         fold_df.to_csv(metrics_csv, index=False)
         summary_df.to_csv(summary_csv, index=False)
 
+        # Also write canonical cross_validation_metrics.csv and cross_validation_summary.csv
+        fold_df.to_csv(os.path.join(RESULTS_DIR, "cross_validation_metrics.csv"), index=False)
+        summary_df.to_csv(os.path.join(RESULTS_DIR, "cross_validation_summary.csv"), index=False)
+        report_canonical_md = os.path.join(REPORTS_DIR, "cross_validation_report.md")
+
         # Markdown Report Generation
         report_content = f"""# Grouped K-Fold Cross-Validation Report (5 Folds)
 
@@ -372,6 +377,8 @@ def run_grouped_cross_validation(
             report_content += "| " + " | ".join(str(row[h]) for h in headers) + " |\n"
 
         with open(report_md, "w", encoding="utf-8") as f:
+            f.write(report_content)
+        with open(report_canonical_md, "w", encoding="utf-8") as f:
             f.write(report_content)
 
         logger.info("Saved Grouped CV artifacts to %s, %s, and %s", metrics_csv, summary_csv, report_md)

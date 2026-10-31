@@ -311,3 +311,39 @@ def test_cluster_robust_crve_computation():
     naive_se = np.std(diff, ddof=1) / np.sqrt(N)
     # With perfect positive intra-cluster correlation, cluster SE must be substantially larger than naive SE!
     assert cr_se > naive_se * 1.5, f"Cluster SE ({cr_se}) should account for correlation and exceed naive SE ({naive_se})"
+
+
+# 13. Grouped Cross-Validation Fold Stability Test
+def test_grouped_cv_fold_stability_under_10x_median():
+    """
+    Verifies that no cross-validation fold MAE for any candidate regression model
+    exceeds 10x the Property-Type Median Benchmark MAE on that fold.
+    Guarantees that numerical overflow in inverse target transformation (expm1)
+    and unscaled extreme features do not destabilize the evaluation.
+    """
+    cv_path = os.path.join(RESULTS_DIR, "cross_validation_metrics.csv")
+    if not os.path.exists(cv_path):
+        cv_path = os.path.join(RESULTS_DIR, "grouped_cv_metrics.csv")
+    assert os.path.exists(cv_path), f"Grouped CV metrics not found at {cv_path}"
+    
+    cv_df = pd.read_csv(cv_path)
+    assert not cv_df.empty, "Cross-validation metrics CSV is empty"
+    
+    folds = cv_df["fold"].unique()
+    assert len(folds) >= 5, f"Expected at least 5 CV folds, found {len(folds)}"
+    
+    for f in folds:
+        f_sub = cv_df[cv_df["fold"] == f]
+        med_row = f_sub[f_sub["model"] == "median"]
+        assert not med_row.empty, f"Median benchmark missing from fold {f}"
+        med_mae = float(med_row["mae"].iloc[0])
+        threshold_10x = 10.0 * med_mae
+        
+        for _, row in f_sub.iterrows():
+            m_name = str(row["model"])
+            m_mae = float(row["mae"])
+            assert m_mae <= threshold_10x, (
+                f"Numerical stability violation: Model '{m_name}' on Fold {f} has MAE = {m_mae:.2f} MT, "
+                f"which exceeds 10x the median-benchmark MAE ({threshold_10x:.2f} MT)!"
+            )
+

@@ -104,6 +104,20 @@ class SplineGAMRegressor(BaseEstimator, RegressorMixin):
         terms = self.compute_term_contributions(X)
         return np.std(terms, axis=0)
 
+def safe_log1p_inverse(y_log):
+    """
+    Inverse transform np.log1p -> np.expm1 with strict numerical and physical bounding:
+    - Protects against NaN / -inf / +inf.
+    - Clips log predictions to [0.0, np.log1p(25_000.0)] (~10.1267) to prevent
+      exponential blowup from unconstrained linear or neural network extrapolation
+      on extreme out-of-distribution inputs (e.g. 15.2M sqft campuses or 300-building clusters).
+    - Guarantees non-negative emissions in original tonne scale.
+    """
+    y_arr = np.asarray(y_log, dtype=np.float64)
+    y_clean = np.nan_to_num(y_arr, nan=0.0, posinf=10.12667, neginf=0.0)
+    y_clipped = np.clip(y_clean, 0.0, 10.12667)
+    return np.expm1(y_clipped)
+
 def get_model(model_name: str, config: dict = None, use_log_target: bool = True):
     """
     Factory creating configured model instance.
@@ -199,12 +213,12 @@ def get_model(model_name: str, config: dict = None, use_log_target: bool = True)
     else:
         raise ValueError(f"Unknown model identifier: '{model_name}'")
         
-    # Wrap in TransformedTargetRegressor with log1p / expm1 if requested to handle extreme positive skew
+    # Wrap in TransformedTargetRegressor with log1p / safe_log1p_inverse if requested to handle extreme positive skew
     if use_log_target and name not in ["accounting", "median", "mean"]:
         return TransformedTargetRegressor(
             regressor=base_model,
             func=np.log1p,
-            inverse_func=np.expm1
+            inverse_func=safe_log1p_inverse
         )
         
     return base_model
