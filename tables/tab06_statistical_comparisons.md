@@ -1,6 +1,6 @@
 # Table 6: Paired Statistical Comparisons & 95% Clustered Confidence Intervals
 
-| Pair Comparison ($A \text{ vs. } B$) | Record $\Delta \text{MAE}$ (MT) | Building $\Delta \text{MAE}$ (MT) | 95% Clustered CI | Cluster Perm $p$-value | Holm-Adj $p$-value | Statistical Outcome |
+| Pair Comparison ($A \\text{ vs. } B$) | Record $\\Delta \\text{MAE}$ (MT) | Building $\\Delta \\text{MAE}$ (MT) | 95% Clustered CI | Cluster Perm $p$-value | Holm-Adj $p$-value | Statistical Outcome |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **XGBOOST** vs. **MEDIAN** | -18.80 MT | -17.28 MT | [-27.31, -11.49] | 0.0001 | 0.0008 | **XGBOOST superior** |
 | **XGBOOST** vs. **RIDGE** | -2.59 MT | -1.92 MT | [-8.78, +3.11] | 0.411 | 0.658 | No significant difference |
