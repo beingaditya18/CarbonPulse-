@@ -1,0 +1,113 @@
+alpha,method,stratification,group,sample_size,marginal_coverage_pct,mean_width_tonnes,median_width_tonnes
+0.1,Observation Split (Tonne),BuildingType,Other,4055,90.41,159.06,148.01
+0.1,Observation Split (Tonne),BuildingType,Office,1086,86.28,183.88,163.15
+0.1,Observation Split (Tonne),BuildingType,Multifamily Housing,339,94.99,156.85,143.02
+0.1,Observation Split (Tonne),BuildingType,Non-Refrigerated Warehouse,336,94.05,155.14,145.13
+0.1,Observation Split (Tonne),BuildingType,K-12 School,318,89.94,183.99,175.09
+0.1,Observation Split (Tonne),BuildingType,Mixed Use Property,294,73.81,180.43,163.37
+0.1,Observation Split (Tonne),BuildingType,Hotel,201,66.67,217.14,243.75
+0.1,Observation Split (Tonne),BuildingType,Worship Facility,151,97.35,157.55,153.02
+0.1,Observation Split (Tonne),FloorAreaQuartile,Q1 (<=25k),1894,98.31,136.57,134.17
+0.1,Observation Split (Tonne),FloorAreaQuartile,Q2 (25k-50k),1571,93.57,146.46,143.17
+0.1,Observation Split (Tonne),FloorAreaQuartile,Q3 (50k-100k),1993,91.42,163.7,159.2
+0.1,Observation Split (Tonne),FloorAreaQuartile,Q4 (>100k),1908,68.34,220.69,243.75
+0.1,Observation Split (Tonne),ApplicabilityDomain,In-Domain,6877,88.37,165.78,151.68
+0.1,Observation Split (Tonne),ApplicabilityDomain,Out-of-Domain,489,77.91,196.32,202.75
+0.1,Facility Split (Tonne),BuildingType,Other,4055,87.92,123.4,116.16
+0.1,Facility Split (Tonne),BuildingType,Office,1086,79.28,142.16,131.31
+0.1,Facility Split (Tonne),BuildingType,Multifamily Housing,339,91.45,121.17,111.18
+0.1,Facility Split (Tonne),BuildingType,Non-Refrigerated Warehouse,336,88.1,121.93,113.28
+0.1,Facility Split (Tonne),BuildingType,K-12 School,318,83.02,147.23,143.24
+0.1,Facility Split (Tonne),BuildingType,Mixed Use Property,294,71.43,139.6,131.53
+0.1,Facility Split (Tonne),BuildingType,Hotel,201,49.25,166.53,180.06
+0.1,Facility Split (Tonne),BuildingType,Worship Facility,151,87.42,125.49,121.18
+0.1,Facility Split (Tonne),FloorAreaQuartile,Q1 (<=25k),1894,97.62,104.66,102.33
+0.1,Facility Split (Tonne),FloorAreaQuartile,Q2 (25k-50k),1571,88.03,114.27,111.33
+0.1,Facility Split (Tonne),FloorAreaQuartile,Q3 (50k-100k),1993,86.8,130.47,127.35
+0.1,Facility Split (Tonne),FloorAreaQuartile,Q4 (>100k),1908,60.9,169.28,180.06
+0.1,Facility Split (Tonne),ApplicabilityDomain,In-Domain,6877,83.99,128.95,119.83
+0.1,Facility Split (Tonne),ApplicabilityDomain,Out-of-Domain,489,71.17,151.31,170.91
+0.1,Facility Split (Log),BuildingType,Other,4055,89.2,237.96,122.89
+0.1,Facility Split (Log),BuildingType,Office,1086,91.99,415.08,191.48
+0.1,Facility Split (Log),BuildingType,Multifamily Housing,339,93.51,201.9,100.3
+0.1,Facility Split (Log),BuildingType,Non-Refrigerated Warehouse,336,78.27,176.56,109.83
+0.1,Facility Split (Log),BuildingType,K-12 School,318,90.88,343.64,245.52
+0.1,Facility Split (Log),BuildingType,Mixed Use Property,294,86.73,599.4,192.47
+0.1,Facility Split (Log),BuildingType,Hotel,201,95.02,897.27,622.36
+0.1,Facility Split (Log),BuildingType,Worship Facility,151,88.08,166.11,145.6
+0.1,Facility Split (Log),FloorAreaQuartile,Q1 (<=25k),1894,90.5,71.1,60.22
+0.1,Facility Split (Log),FloorAreaQuartile,Q2 (25k-50k),1571,85.17,117.81,100.99
+0.1,Facility Split (Log),FloorAreaQuartile,Q3 (50k-100k),1993,90.02,198.08,173.57
+0.1,Facility Split (Log),FloorAreaQuartile,Q4 (>100k),1908,89.36,945.38,621.9
+0.1,Facility Split (Log),ApplicabilityDomain,In-Domain,6877,88.91,291.13,139.51
+0.1,Facility Split (Log),ApplicabilityDomain,Out-of-Domain,489,89.37,1055.62,370.82
+0.1,Facility CQR (LightGBM),BuildingType,Other,4055,89.35,176.21,99.91
+0.1,Facility CQR (LightGBM),BuildingType,Office,1086,89.78,271.35,218.85
+0.1,Facility CQR (LightGBM),BuildingType,Multifamily Housing,339,91.74,128.77,79.48
+0.1,Facility CQR (LightGBM),BuildingType,Non-Refrigerated Warehouse,336,91.07,202.01,159.9
+0.1,Facility CQR (LightGBM),BuildingType,K-12 School,318,81.76,197.89,146.87
+0.1,Facility CQR (LightGBM),BuildingType,Mixed Use Property,294,88.1,391.18,231.06
+0.1,Facility CQR (LightGBM),BuildingType,Hotel,201,79.1,470.54,286.2
+0.1,Facility CQR (LightGBM),BuildingType,Worship Facility,151,90.07,129.2,123.21
+0.1,Facility CQR (LightGBM),FloorAreaQuartile,Q1 (<=25k),1894,93.03,61.84,52.04
+0.1,Facility CQR (LightGBM),FloorAreaQuartile,Q2 (25k-50k),1571,85.81,119.88,111.09
+0.1,Facility CQR (LightGBM),FloorAreaQuartile,Q3 (50k-100k),1993,89.76,173.22,148.47
+0.1,Facility CQR (LightGBM),FloorAreaQuartile,Q4 (>100k),1908,84.54,534.65,369.38
+0.1,Facility CQR (LightGBM),ApplicabilityDomain,In-Domain,6877,88.32,200.6,127.9
+0.1,Facility CQR (LightGBM),ApplicabilityDomain,Out-of-Domain,489,89.57,595.59,270.5
+0.2,Observation Split (Tonne),BuildingType,Other,4055,81.58,82.28,80.54
+0.2,Observation Split (Tonne),BuildingType,Office,1086,69.24,92.25,95.68
+0.2,Observation Split (Tonne),BuildingType,Multifamily Housing,339,87.61,80.03,75.55
+0.2,Observation Split (Tonne),BuildingType,Non-Refrigerated Warehouse,336,76.79,82.19,77.65
+0.2,Observation Split (Tonne),BuildingType,K-12 School,318,61.95,100.04,107.61
+0.2,Observation Split (Tonne),BuildingType,Mixed Use Property,294,62.93,93.14,95.9
+0.2,Observation Split (Tonne),BuildingType,Hotel,201,36.82,103.61,108.81
+0.2,Observation Split (Tonne),BuildingType,Worship Facility,151,77.48,87.52,85.55
+0.2,Observation Split (Tonne),FloorAreaQuartile,Q1 (<=25k),1894,94.14,68.93,66.7
+0.2,Observation Split (Tonne),FloorAreaQuartile,Q2 (25k-50k),1571,79.89,77.66,75.7
+0.2,Observation Split (Tonne),FloorAreaQuartile,Q3 (50k-100k),1993,78.22,90.6,91.73
+0.2,Observation Split (Tonne),FloorAreaQuartile,Q4 (>100k),1908,48.38,106.98,108.81
+0.2,Observation Split (Tonne),ApplicabilityDomain,In-Domain,6877,76.09,85.75,84.21
+0.2,Observation Split (Tonne),ApplicabilityDomain,Out-of-Domain,489,58.69,97.23,108.81
+0.2,Facility Split (Tonne),BuildingType,Other,4055,79.28,74.48,74.12
+0.2,Facility Split (Tonne),BuildingType,Office,1086,67.03,82.94,89.26
+0.2,Facility Split (Tonne),BuildingType,Multifamily Housing,339,83.19,72.31,69.13
+0.2,Facility Split (Tonne),BuildingType,Non-Refrigerated Warehouse,336,72.32,74.52,71.23
+0.2,Facility Split (Tonne),BuildingType,K-12 School,318,60.38,90.23,95.96
+0.2,Facility Split (Tonne),BuildingType,Mixed Use Property,294,60.88,84.3,89.48
+0.2,Facility Split (Tonne),BuildingType,Hotel,201,34.33,91.84,95.96
+0.2,Facility Split (Tonne),BuildingType,Worship Facility,151,71.52,79.69,79.13
+0.2,Facility Split (Tonne),FloorAreaQuartile,Q1 (<=25k),1894,92.56,62.47,60.28
+0.2,Facility Split (Tonne),FloorAreaQuartile,Q2 (25k-50k),1571,77.85,70.82,69.28
+0.2,Facility Split (Tonne),FloorAreaQuartile,Q3 (50k-100k),1993,76.32,82.61,85.31
+0.2,Facility Split (Tonne),FloorAreaQuartile,Q4 (>100k),1908,44.08,95.02,95.96
+0.2,Facility Split (Tonne),ApplicabilityDomain,In-Domain,6877,73.65,77.5,77.79
+0.2,Facility Split (Tonne),ApplicabilityDomain,Out-of-Domain,489,55.83,87.04,95.96
+0.2,Facility Split (Log),BuildingType,Other,4055,81.31,158.59,81.9
+0.2,Facility Split (Log),BuildingType,Office,1086,86.0,276.64,127.62
+0.2,Facility Split (Log),BuildingType,Multifamily Housing,339,84.37,134.56,66.85
+0.2,Facility Split (Log),BuildingType,Non-Refrigerated Warehouse,336,64.29,117.67,73.2
+0.2,Facility Split (Log),BuildingType,K-12 School,318,71.07,229.02,163.63
+0.2,Facility Split (Log),BuildingType,Mixed Use Property,294,72.11,399.48,128.28
+0.2,Facility Split (Log),BuildingType,Hotel,201,79.6,598.01,414.79
+0.2,Facility Split (Log),BuildingType,Worship Facility,151,77.48,110.71,97.04
+0.2,Facility Split (Log),FloorAreaQuartile,Q1 (<=25k),1894,81.89,47.39,40.14
+0.2,Facility Split (Log),FloorAreaQuartile,Q2 (25k-50k),1571,75.05,78.52,67.31
+0.2,Facility Split (Log),FloorAreaQuartile,Q3 (50k-100k),1993,79.93,132.01,115.68
+0.2,Facility Split (Log),FloorAreaQuartile,Q4 (>100k),1908,81.29,630.07,414.48
+0.2,Facility Split (Log),ApplicabilityDomain,In-Domain,6877,79.44,194.03,92.98
+0.2,Facility Split (Log),ApplicabilityDomain,Out-of-Domain,489,84.05,703.54,247.14
+0.2,Facility CQR (LightGBM),BuildingType,Other,4055,79.78,135.25,76.73
+0.2,Facility CQR (LightGBM),BuildingType,Office,1086,77.99,166.7,118.6
+0.2,Facility CQR (LightGBM),BuildingType,Multifamily Housing,339,85.25,97.72,59.36
+0.2,Facility CQR (LightGBM),BuildingType,Non-Refrigerated Warehouse,336,77.98,140.11,112.92
+0.2,Facility CQR (LightGBM),BuildingType,K-12 School,318,63.84,147.46,107.48
+0.2,Facility CQR (LightGBM),BuildingType,Mixed Use Property,294,75.17,279.52,158.95
+0.2,Facility CQR (LightGBM),BuildingType,Hotel,201,67.16,390.18,199.23
+0.2,Facility CQR (LightGBM),BuildingType,Worship Facility,151,74.83,96.48,93.51
+0.2,Facility CQR (LightGBM),FloorAreaQuartile,Q1 (<=25k),1894,81.63,44.93,37.65
+0.2,Facility CQR (LightGBM),FloorAreaQuartile,Q2 (25k-50k),1571,74.79,81.54,71.4
+0.2,Facility CQR (LightGBM),FloorAreaQuartile,Q3 (50k-100k),1993,80.93,127.22,108.26
+0.2,Facility CQR (LightGBM),FloorAreaQuartile,Q4 (>100k),1908,71.59,411.27,262.77
+0.2,Facility CQR (LightGBM),ApplicabilityDomain,In-Domain,6877,77.65,146.12,92.81
+0.2,Facility CQR (LightGBM),ApplicabilityDomain,Out-of-Domain,489,73.62,504.24,189.21
