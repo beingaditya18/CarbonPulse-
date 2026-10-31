@@ -1,3 +1,5 @@
-model,display_name,comparisons,kendall_tau_mean,kendall_tau_std,kendall_tau_median,kendall_tau_min,kendall_tau_max,spearman_rho_mean,spearman_rho_std,spearman_rho_median,spearman_rho_min,spearman_rho_max
-ridge,Ridge Regression (|Beta|),3,0.8613,0.0137,0.8667,0.8457,0.8714,0.9587,0.0092,0.9631,0.9482,0.9648
-xgboost,XGBoost (TreeSHAP),3,0.8753,0.0234,0.8738,0.8527,0.8995,0.9757,0.0065,0.9759,0.9691,0.9821
+model,display_name,target_refits,successful_refits,refits_differ_from_target,comparisons,kendall_tau_mean,kendall_tau_std,kendall_tau_median,kendall_tau_min,kendall_tau_max,spearman_rho_mean,spearman_rho_std,spearman_rho_median,spearman_rho_min,spearman_rho_max
+xgboost,XGBoost,50,50,False,1225,0.7594,0.0364,0.7592,0.6517,0.8761,0.8895,0.0368,0.8929,0.772,0.9753
+rf,Random Forest,50,50,False,1225,0.9405,0.0107,0.9416,0.903,0.9755,0.9924,0.0026,0.9928,0.9805,0.9981
+ridge,Ridge Regression,50,50,False,1225,0.8805,0.0222,0.8808,0.7931,0.9416,0.9691,0.0119,0.9708,0.9104,0.9921
+gam,SplineGAM,50,50,False,1225,0.8907,0.0185,0.8901,0.8328,0.9591,0.976,0.007,0.9763,0.9513,0.9952

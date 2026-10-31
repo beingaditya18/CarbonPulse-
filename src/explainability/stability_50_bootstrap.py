@@ -54,46 +54,40 @@ def extract_global_importance(
 ) -> np.ndarray:
     """
     Extracts global feature importance vectors tailored to model architecture:
-    - For Tree Ensembles (XGBoost, RF): Computes mean absolute TreeSHAP values.
-    - For Ridge: Computes absolute standardized linear weights.
-    - For SplineGAM: Computes sample standard deviation of spline basis shape functions.
+    - For Tree Ensembles (XGBoost, RF): Global feature importance (impurity/gain importance).
+    - For Ridge: Standardized absolute linear coefficients (|beta_j|).
+    - For SplineGAM: Sample standard deviation of univariate spline component functions.
     """
     inner = model.regressor_ if hasattr(model, "regressor_") else model
 
     if model_name in ["xgboost", "xgb"]:
-        # TreeSHAP for XGBoost
-        explainer = shap.TreeExplainer(inner)
-        shap_vals = explainer.shap_values(X_sample)
-        # Average absolute impact per feature
-        return np.mean(np.abs(shap_vals), axis=0)
+        if hasattr(inner, "feature_importances_"):
+            return np.asarray(inner.feature_importances_, dtype=np.float64)
+        return np.ones(feature_count, dtype=np.float64)
 
     elif model_name in ["rf", "random_forest"]:
-        # TreeSHAP for Random Forest
-        explainer = shap.TreeExplainer(inner)
-        shap_vals = explainer.shap_values(X_sample)
-        return np.mean(np.abs(shap_vals), axis=0)
+        if hasattr(inner, "feature_importances_"):
+            return np.asarray(inner.feature_importances_, dtype=np.float64)
+        return np.ones(feature_count, dtype=np.float64)
 
     elif model_name == "ridge":
-        # Standardized linear coefficients
         if hasattr(inner, "coef_"):
-            return np.abs(inner.coef_)
-        return np.ones(feature_count)
+            return np.abs(np.asarray(inner.coef_, dtype=np.float64))
+        return np.ones(feature_count, dtype=np.float64)
 
     elif model_name == "gam":
-        # SplineGAM component dispersion
         if hasattr(inner, "feature_importances"):
-            return inner.feature_importances(X_sample)
+            return np.asarray(inner.feature_importances(X_sample), dtype=np.float64)
         elif hasattr(inner, "compute_term_contributions"):
             terms = inner.compute_term_contributions(X_sample)
-            return np.std(terms, axis=0)
+            return np.asarray(np.std(terms, axis=0), dtype=np.float64)
         else:
-            return np.ones(feature_count)
+            return np.ones(feature_count, dtype=np.float64)
 
     else:
-        # Fallback to feature_importances_ if present
         if hasattr(inner, "feature_importances_"):
-            return inner.feature_importances_
-        return np.ones(feature_count)
+            return np.asarray(inner.feature_importances_, dtype=np.float64)
+        return np.ones(feature_count, dtype=np.float64)
 
 def compute_pairwise_correlations(rankings: List[np.ndarray]) -> Tuple[List[float], List[float]]:
     """
@@ -119,9 +113,10 @@ def compute_distribution_stats(values: List[float]) -> Dict[str, float]:
     arr = np.array(values, dtype=np.float64)
     if len(arr) == 0:
         return {"mean": 0.0, "std": 0.0, "median": 0.0, "min": 0.0, "max": 0.0, "q25": 0.0, "q75": 0.0}
+    std_val = float(np.std(arr, ddof=1)) if len(arr) > 1 else 0.0
     return {
         "mean": round(float(np.mean(arr)), 4),
-        "std": round(float(np.std(arr, ddof=1)), 4),
+        "std": round(std_val, 4),
         "median": round(float(np.median(arr)), 4),
         "min": round(float(np.min(arr)), 4),
         "max": round(float(np.max(arr)), 4),
@@ -180,40 +175,45 @@ def run_scaled_stability_experiment(
 
     # 3. Execute Bootstrap Refits
     display_names = {
-        "xgboost": "XGBoost (TreeSHAP)",
-        "rf": "Random Forest (TreeSHAP)",
-        "ridge": "Ridge Regression (|Beta|)",
-        "gam": "SplineGAM (Basis SD)"
+        "xgboost": "XGBoost",
+        "rf": "Random Forest",
+        "ridge": "Ridge Regression",
+        "gam": "SplineGAM"
     }
 
     for model_name in models:
-        logger.info("Starting 50 bootstrap refits for %s...", model_name.upper())
+        logger.info("Starting %d bootstrap refits for %s...", n_bootstrap, model_name.upper())
         t0_model = time.perf_counter()
+        successful_count = 0
 
         for b in range(n_bootstrap):
-            # Deterministic seed progression
-            bootstrap_seed = RANDOM_SEED + b
-            np.random.seed(bootstrap_seed)
+            try:
+                # Deterministic seed progression
+                bootstrap_seed = RANDOM_SEED + b
+                np.random.seed(bootstrap_seed)
 
-            # Sample without replacement at subsample_ratio
-            sample_size = int(n_train * subsample_ratio)
-            b_idx = np.random.choice(n_train, size=sample_size, replace=False)
-            X_b = X_train_df.iloc[b_idx].values
-            y_b = y_train[b_idx]
+                # Sample without replacement at subsample_ratio
+                sample_size = int(n_train * subsample_ratio)
+                b_idx = np.random.choice(n_train, size=sample_size, replace=False)
+                X_b = X_train_df.iloc[b_idx].values
+                y_b = y_train[b_idx]
 
-            # Fit model
-            m = get_model(model_name, use_log_target=True)
-            m.fit(X_b, y_b)
+                # Fit model
+                m = get_model(model_name, use_log_target=True)
+                m.fit(X_b, y_b)
 
-            # Extract global feature importance
-            imps = extract_global_importance(m, model_name, X_eval, n_features)
-            model_rankings[model_name].append(imps)
+                # Extract global feature importance
+                imps = extract_global_importance(m, model_name, X_eval, n_features)
+                model_rankings[model_name].append(imps)
+                successful_count += 1
+            except Exception as e:
+                logger.error("[%s] Refit %d failed: %s", model_name.upper(), b + 1, e)
 
             if (b + 1) % 10 == 0 or (b + 1) == n_bootstrap:
-                logger.info("[%s] Completed %d/%d bootstrap refits (%.1fs elapsed)",
-                            model_name.upper(), b + 1, n_bootstrap, time.perf_counter() - t0_model)
+                logger.info("[%s] Completed %d/%d bootstrap refits (%d successful, %.1fs elapsed)",
+                            model_name.upper(), b + 1, n_bootstrap, successful_count, time.perf_counter() - t0_model)
 
-        # 4. Compute Pairwise Correlations
+        # 4. Compute Pairwise Correlations across successful refits
         taus, rhos = compute_pairwise_correlations(model_rankings[model_name])
         model_distributions[model_name] = {
             "kendallTau": [round(v, 4) for v in taus],
@@ -226,6 +226,9 @@ def run_scaled_stability_experiment(
         model_summaries.append({
             "modelId": model_name,
             "displayName": display_names.get(model_name, model_name),
+            "targetRefits": n_bootstrap,
+            "successfulRefits": successful_count,
+            "refitsDifferFromTarget": bool(successful_count != n_bootstrap),
             "totalComparisons": len(taus),
             "kendallTau": tau_stats,
             "spearmanRho": rho_stats
@@ -306,6 +309,9 @@ def run_scaled_stability_experiment(
         csv_rows.append({
             "model": s["modelId"],
             "display_name": s["displayName"],
+            "target_refits": s["targetRefits"],
+            "successful_refits": s["successfulRefits"],
+            "refits_differ_from_target": s["refitsDifferFromTarget"],
             "comparisons": s["totalComparisons"],
             "kendall_tau_mean": s["kendallTau"]["mean"],
             "kendall_tau_std": s["kendallTau"]["std"],
