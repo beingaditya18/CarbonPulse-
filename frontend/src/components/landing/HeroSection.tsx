@@ -76,7 +76,7 @@ export function HeroSection({ onboardingComplete, isDark = false }: HeroSectionP
           </div>
           <strong className={`block font-bold text-sm ${isDark ? 'text-white' : 'text-slate-900'}`}>Quantify Cuts</strong>
           <span className={`text-xs mt-1 block leading-normal ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>
-            Log verifiable reductions with automated audit manifests.
+            Log lifestyle reductions with automated audit manifests.
           </span>
         </li>
       </ol>
@@ -84,7 +84,7 @@ export function HeroSection({ onboardingComplete, isDark = false }: HeroSectionP
       {/* Environmental Standard Proof Metrics */}
       <div
         aria-label="Platform impact statistics"
-        className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2"
         role="list"
       >
         <div role="listitem" className={`p-4 rounded-2xl border ${isDark ? 'bg-zinc-900/40 border-zinc-800' : 'bg-white border-emerald-100 shadow-sm'}`}>
@@ -98,13 +98,6 @@ export function HeroSection({ onboardingComplete, isDark = false }: HeroSectionP
           <strong className="text-2xl sm:text-3xl font-black text-[#047857] block">16.5%</strong>
           <span className={`text-xs font-semibold uppercase tracking-wider mt-0.5 block ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>
             Error Reduction vs Median
-          </span>
-        </div>
-
-        <div role="listitem" className={`p-4 rounded-2xl border ${isDark ? 'bg-zinc-900/40 border-zinc-800' : 'bg-white border-emerald-100 shadow-sm'}`}>
-          <strong className="text-2xl sm:text-3xl font-black text-[#047857] block">&lt; 0.009 g</strong>
-          <span className={`text-xs font-semibold uppercase tracking-wider mt-0.5 block ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>
-            Green AI Compute Footprint
           </span>
         </div>
       </div>

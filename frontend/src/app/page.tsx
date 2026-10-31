@@ -57,7 +57,7 @@ export default function LandingPage() {
             <span>•</span>
             <span className="flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" />
-              ISO 14064 Standard
+              SMC 22.920 Compliance
             </span>
           </div>
         </div>
@@ -171,8 +171,8 @@ export default function LandingPage() {
               <ul className="space-y-2.5 text-xs text-emerald-200/80">
                 <li><span className="text-white font-semibold">EPA ENERGY STAR</span> Factor Calibration</li>
                 <li><span className="text-white font-semibold">City of Seattle OSE</span> Open Data</li>
-                <li><span className="text-white font-semibold">ISO 14064-1</span> Boundary Principles</li>
-                <li><span className="text-white font-semibold">Zero Synthetic Injection</span> Verified</li>
+                <li><span className="text-white font-semibold">Facility Holdout</span> Group Partitioning</li>
+                <li><span className="text-white font-semibold">SHA-256 Provenance</span> Manifest</li>
               </ul>
             </div>
           </div>

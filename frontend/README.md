@@ -1,6 +1,6 @@
 # 🌱 CarbonPulse AI+
 
-> **Live Demo**: https://carbon-pulse-umber.vercel.app/ — **Try it now, no sign-up required.**
+> **Live Demo**: https://carbon-pulse-3ciymie91-beingaditya18s-projects.vercel.app/ — **Try it now, no sign-up required.**
 
 > **From Awareness to Action: The intelligent, automated carbon tracking PWA powered by Explainable AI (SHAP), Digital Carbon Twins, and Google Cloud Enterprise Stack.**
 
@@ -93,7 +93,7 @@ How CarbonPulse AI+ satisfies each judging axis specifically:
 * **Google Gemini API**: Powers the streaming **AI Climate Coach** with context-aware insights based on the user's active logs.
 * **Google Cloud Vision OCR**: Automatically extracts item lines and merchant details from receipt uploads to classify emission types.
 * **Google Cloud Storage (GCS)**: Hosts raw receipt uploads under secure IAM policies.
-* **Google Identity-Aware Proxy (IAP) & Cloud Armor**: Configured at the network layer to secure OAuth2 entries and filter out malicious traffic.
+* **Google Identity-Aware Proxy (IAP)**: Configured at the network layer to secure OAuth2 entries and filter out unauthorized traffic.
 * **Google Maps API**: Feeds the **Eco-Locator Map** in the community module.
 
 ---
@@ -160,7 +160,7 @@ $$y = m \cdot x + c$$
                  │                Google Cloud Platform                   │
                  │       • Cloud Vision API   • Gemini Pro Engine         │
                  │       • Cloud Storage GCS  • Vertex AI ML Platform     │
-                 │       • Identity Proxy     • Cloud Armor Network Guard │
+                 │       • Identity Proxy     • Edge Security Guard       │
                  └────────────────────────────────────────────────────────┘
 ```
 

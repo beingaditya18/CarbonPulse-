@@ -61,7 +61,7 @@ export function FeaturesGrid({ isDark }: FeaturesGridProps) {
               Replace black-box neural nets with TreeSHAP and SplineGAM. Local additivity verified with error &lt; 10⁻⁵ on native log target scale.
             </p>
             <div className="mt-4 pt-4 border-t border-slate-100 dark:border-zinc-800 flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Exact Additive Proofs
+              <CheckCircle2 className="w-3.5 h-3.5" /> Numerical additivity checked on the log1p scale (Random Forest, XGBoost)
             </div>
           </div>
 
@@ -94,7 +94,7 @@ export function FeaturesGrid({ isDark }: FeaturesGridProps) {
             <div className="text-xs font-extrabold text-[#047857] uppercase tracking-wider mb-1">Pillar 4</div>
             <h3 className={`text-xl font-black mb-2.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>4. Target Reductions</h3>
             <p className={`text-sm leading-relaxed ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
-              Execute community and enterprise challenges. Track verifiable reductions toward the Paris-aligned 2.3 Tonnes/person science-based target.
+              Execute community and enterprise challenges. Track lifestyle reductions toward recommended science-based targets.
             </p>
             <div className="mt-4 pt-4 border-t border-slate-100 dark:border-zinc-800 flex items-center gap-1.5 text-xs font-semibold text-emerald-700">
               <CheckCircle2 className="w-3.5 h-3.5" /> Cluster-Aware Verification

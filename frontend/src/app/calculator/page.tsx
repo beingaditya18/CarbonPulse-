@@ -702,7 +702,7 @@ export default function CalculatorPage() {
       </main>
 
       <footer className="text-center text-xs text-slate-500 py-4 max-w-xl mx-auto w-full font-medium">
-        By submitting your details, you consent to secure client-side encryption under ISO 14064 standards.
+        By submitting your details, you consent to secure client-side storage.
       </footer>
 
     </div>

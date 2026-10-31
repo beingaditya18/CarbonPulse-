@@ -1,14 +1,13 @@
-# Explainable AI for Carbon Emissions Estimation: A Comparative Evaluation of Predictive Accuracy, Interpretability, and Computational Efficiency
+# Explainable Machine Learning for Screening-Level Building Emissions Estimation Without Meter Data: Accuracy, Cluster-Aware Inference, and Explanation Stability
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 
 **License:** MIT (code); dataset terms per City of Seattle Open Data.
 
 This repository contains the complete, reproducible, scientifically defensible experimental research pipeline supporting the Springer Nature book chapter:
 
-> **“Explainable AI for Carbon Emissions Estimation: A Comparative Evaluation of Predictive Accuracy, Interpretability, and Computational Efficiency.”**
+> **“Explainable Machine Learning for Screening-Level Building Emissions Estimation Without Meter Data: Accuracy, Cluster-Aware Inference, and Explanation Stability.”**
 
 ---
 
@@ -22,9 +21,10 @@ This research investigates three foundational dimensions of environmental machin
 ### Key Empirical Results:
 * **Conventional Accounting Identity:** When metered utility data is available, standard regulatory accounting ($E = \sum AD_i \times EF_i$) achieves **$R^2 = 1.0000$** with **MAE = 0.33 MT $\text{CO}_2\text{e}$** ($0.22\%$ WAPE). Machine learning is redundant when meters exist.
 * **Unmetered Structural Prediction:** When utility meters are absent (pre-construction, zoning, screening), **XGBoost Regressor** is the top-performing ML architecture (**MAE = 95.40 MT $\text{CO}_2\text{e}$**, **$R^2 = 0.2747$**, **WAPE = 63.61%**), achieving a statistically significant error reduction of **$-18.80 \text{ MT}$** over the conventional property median baseline ($p_{\text{adj}} = 8.0 \times 10^{-4}$ via cluster sign-flip permutation test, Cluster Wilcoxon $p = 1.09 \times 10^{-8}$, 95% Clustered CI $[-27.35, -11.13]$ MT across 757 held-out facilities). Note that when compared against Ridge Regression, the 95% clustered confidence interval spans zero ($[-9.10, +3.04]$ MT, cluster permutation $p_{\text{adj}} = 0.659$, cluster-robust $t = -0.86$), confirming that regularized linear modeling is statistically indistinguishable from XGBoost when accounting for facility-level grouping.
+* **Model Training & Target Transformation:** All ML models are trained on log1p(TotalGHGEmissions) and predictions are back-transformed with expm1; the property-median benchmark is not.
 * **Linear & Additive Pareto Efficiency:** **Ridge Regression** achieves an MAE of **97.99 MT** (within 2.59 MT of XGBoost) with ultra-fast inference ($0.225 \text{ ms/sample}$, 437k samples/s throughput) and $5.2 \text{ KB}$ serialized footprint.
 * **EBM Trade-off:** Explainable Boosting Machines (EBM) enforce exact mathematical additivity but required extensive training and yielded higher error (**MAE = 125.99 MT**) on unseen complex facilities.
-* **Explanation Stability:** Random Forest achieved the highest global feature ranking stability across bootstrap resamples (Kendall's $\tau = 0.9418 \pm 0.0062$). Under physical $+5\%$ Gross Floor Area perturbation preserving simplex constraints, SplineGAM and Ridge attributions demonstrated $\ge 0.997$ cosine stability.
+* **Explanation Stability:** Random Forest achieved the highest global feature ranking stability across five random 80% subsamples (without replacement) (Kendall's $\tau = 0.9418 \pm 0.0062$). Under physical $+5\%$ Gross Floor Area perturbation preserving simplex constraints, SplineGAM and Ridge attributions demonstrated $\ge 0.997$ cosine stability.
 
 ### Exploratory Computational-Energy Outputs
 These outputs were measured on one Windows host with CodeCarbon, have no validated measurement protocol, and are NOT used in the accompanying chapter.
@@ -95,7 +95,7 @@ CarbonPulse/
 ├── figures/                            # 15 publication figures (PNG + PDF)
 ├── tables/                             # 8 publication Markdown tables
 ├── reports/                            # Detailed analytical and audit reports
-├── frontend/                           # Isolated Next.js PWA personal sustainability application
+├── frontend/                           # Separate demo application (illustrative UI)
 ├── CITATION.cff                        # Machine-readable citation metadata
 ├── LICENSE                             # MIT Open Source License
 ├── requirements.txt                    # Pinned Python environment dependencies
@@ -245,6 +245,8 @@ If you use this codebase, methodology, or empirical benchmarks, please cite:
 
 ---
 
-## 6. Preservation of Existing Frontend Codebase
+## 6. Demo Application
 
-The pre-existing Next.js 16 / React 19 web application in `frontend/` remains fully preserved and operational. The research pipeline operates at the repository root and accesses clean interfaces without overwriting web application components.
+frontend/ is a separate demo application. It is not part of the evaluated results in the chapter, and any figures shown in it are illustrative.
+
+Live Demo: https://carbon-pulse-3ciymie91-beingaditya18s-projects.vercel.app/

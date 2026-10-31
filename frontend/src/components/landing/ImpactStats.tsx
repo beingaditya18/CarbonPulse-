@@ -11,10 +11,8 @@ export function ImpactStats({ isDark }: ImpactStatsProps) {
   const credentials = [
     { title: 'Seattle SMC 22.920', desc: 'Statutory municipal benchmark alignment' },
     { title: 'EPA Portfolio Manager', desc: 'Direct Scope 1 & 2 stoichiometric calibration' },
-    { title: 'ISO 14064-1 Standards', desc: 'Organizational boundary principles' },
-    { title: 'Zero Synthetic Injections', desc: '100% verified observational data census' },
-    { title: 'Cloud Armor WAF', desc: 'Enterprise security & data encryption at rest' },
-    { title: 'Green AI Profile', desc: '< 0.009g CO₂e per 10k model evaluations' },
+    { title: 'Cluster-Aware Holdout', desc: 'Facility-level grouped holdout evaluation' },
+    { title: 'Cryptographic Provenance', desc: 'SHA-256 data verification manifest' },
   ];
 
   return (
@@ -33,7 +31,7 @@ export function ImpactStats({ isDark }: ImpactStatsProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 pt-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-2">
           {credentials.map((cred) => (
             <div
               key={cred.title}

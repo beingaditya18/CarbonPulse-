@@ -118,7 +118,7 @@ export function LandingTwinPreview({ isDark }: LandingTwinPreviewProps) {
         {/* Savings banner */}
         <div className="bg-[#047857] text-white p-3.5 rounded-2xl text-center text-xs font-bold shadow-sm flex items-center justify-center gap-2">
           <Sparkles className="w-4 h-4 text-emerald-200 shrink-0" />
-          <span>Verifiable reduction of <strong className="text-emerald-200 underline">{totalSavings} kg CO₂e / month</strong></span>
+          <span>Simulated change (illustrative, not a measured saving): <strong className="text-emerald-200 underline">{totalSavings} kg CO₂e / month</strong></span>
         </div>
       </div>
     </div>
