@@ -1,0 +1,26 @@
+feature,source,why included
+BuildingAge,Engineered Architectural Feature (DataYear - YearBuilt),Architectural vintage dictates thermal insulation envelope and baseline HVAC energy efficiency standards.
+NumberofFloors,Seattle Building Energy Benchmarking (Statutory Filing),Vertical geometry correlates with building surface-to-volume ratio and stack-effect heating/cooling losses.
+NumberofBuildings,Seattle Building Energy Benchmarking (Statutory Filing),Differentiates single standalone structures from campus topologies with shared or decentralized utility plants.
+PropertyGFATotal,Seattle Building Energy Benchmarking (Statutory Filing),"Primary physical scale determinant of conditioned volume, space conditioning demand, and aggregate emissions."
+PropertyGFABuildings,Seattle Building Energy Benchmarking (Statutory Filing),"Isolates fully enclosed, occupied, and conditioned building space from unconditioned accessory structures."
+PropertyGFAParking,Seattle Building Energy Benchmarking (Statutory Filing),Quantifies unconditioned or minimally ventilated vehicle storage area that exhibits near-zero thermal load.
+FloorAreaPerFloor,Engineered Architectural Feature (PropertyGFABuildings / NumberofFloors),"Proxies structural floorplate aspect ratio, core-to-perimeter depth, and natural daylight penetration potential."
+ParkingRatio,Engineered Architectural Feature (PropertyGFAParking / PropertyGFATotal),Controls for the dilution of gross building square footage caused by unconditioned structured parking.
+LogGFATotal,Engineered Architectural Feature (log1p(PropertyGFATotal)),Compresses heavy-tailed building size distribution into linear/additive feature space.
+LogGFABuildings,Engineered Architectural Feature (log1p(PropertyGFABuildings)),Linearizes power-law relationship between conditioned square footage and annual greenhouse gas emissions.
+Latitude,Seattle Building Energy Benchmarking / GIS Centroid,"Encodes spatial coordinates to capture microclimatic gradients, topography, and urban density variations."
+Longitude,Seattle Building Energy Benchmarking / GIS Centroid,Encodes spatial coordinates to capture geographic orientation relative to Puget Sound and Lake Washington.
+BuildingType,Seattle Building Energy Benchmarking (Statutory Filing),"Categorizes building archetype (NonResidential, Multifamily LR/MR/HR, Campus) governing primary occupancy schedules."
+PrimaryUseCategory,Engineered Categorical Feature (from EPAPropertyType / LargestPropertyUseType),"Defines primary programmatic function (Office, School, Hospital, Warehouse, Retail) driving internal process loads."
+Neighborhood,Seattle Municipal Neighborhood Districts,"Captures municipal sub-market zoning constraints, local grid topology, and urban fabric density."
+VintageEra,"Engineered Regulatory Feature (Pre-1950, 1951-1980, 1981-2000, Post-2000)","Categorizes construction against major historical energy code milestones (pre-code, early ASHRAE 90.1, modern WSEC)."
+CouncilDistrict,Seattle Municipal City Council Districts (District_1 to District_7),"Captures municipal planning, political administrative boundaries, and local civil infrastructure investments."
+Electricity(kWh) [EXCLUDED],Utility Meter Billing Record,EXCLUDED: Direct utility meter reading; violates meter-free mandate and introduces circular target leakage.
+NaturalGas(therms) [EXCLUDED],Utility Meter Billing Record,EXCLUDED: Direct on-site fuel combustion meter reading; violates meter-free mandate.
+SteamUse(kBtu) [EXCLUDED],District Energy Utility Meter,EXCLUDED: Direct district thermal energy meter reading; violates meter-free mandate.
+SiteEnergyUse(kBtu) [EXCLUDED],Portfolio Manager Aggregate Consumption,EXCLUDED: Aggregate annual site energy consumption directly derived from utility meters.
+SiteEUI(kBtu/sf) [EXCLUDED],Portfolio Manager Derived Intensity,EXCLUDED: Normalized energy use intensity derived from utility meter consumption.
+ENERGYSTARScore [EXCLUDED],EPA Portfolio Manager Benchmark Rating (1-100),EXCLUDED: Rating algorithm embeds empirical weather-normalized utility meter consumption against CBECS.
+GHGEmissionsIntensity [EXCLUDED],Statutory Annual Benchmark Target,EXCLUDED: Target-derived ratio (TotalGHGEmissions / PropertyGFATotal); constitutes fatal target leakage.
+TotalGHGEmissions [TARGET],Statutory Annual Benchmark Target,TARGET VARIABLE: Ground truth annual emissions in Metric Tons CO2e; withheld from feature matrices.
