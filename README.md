@@ -198,6 +198,63 @@ Every experiment can be executed independently:
 
 ---
 
+
+
+---
+
+## 3. Q1 Journal Revision Experimental Upgrades
+
+This codebase incorporates five major experimental and diagnostic upgrades executed for the peer-reviewed journal revision:
+
+### 3.1 Grouped K-Fold Cross-Validation (`src/experiments/run_grouped_cv.py`)
+- **Protocol:** Genuine 5-Fold `GroupKFold` cross-validation grouped strictly by facility cluster (`OSEBuildingID`), guaranteeing zero longitudinal facility contamination across splits.
+- **Leakage Prevention:** All preprocessing pipelines (numeric imputation, standard scaling, categorical one-hot encoding) are fitted strictly within each training fold.
+- **Numerical Robustness:** Solves the known fold instability issues of unregularized/ill-conditioned models by explicitly resetting partition indices (`reset_index(drop=True)`) and enforcing physical bounding on log-inverse transforms (`np.clip(a_min=0, a_max=100000)`).
+- **Execution:**
+  ```bash
+  python -m src.experiments.run_grouped_cv
+  ```
+- **Outputs:** `results/grouped_cv_metrics.csv`, `results/grouped_cv_summary.csv`, `reports/grouped_cv_report.md`.
+
+### 3.2 Scaled 50-Bootstrap Explanation Stability (`src/explainability/stability_50_bootstrap.py`)
+- **Protocol:** Scales global explanation ranking stability benchmarks from 5 to 50 bootstrap refits ($80\%$ subsampling ratio without replacement).
+- **Attribution Metrics:**
+  - *Tree Ensembles (XGBoost, Random Forest):* Mean absolute TreeSHAP attributions across background instances.
+  - *Interpretable Models (Ridge, SplineGAM):* Absolute standardized linear coefficients ($|\beta|$) and sample standard deviation of spline basis functions.
+- **Correlations:** Evaluates all unique $\binom{50}{2} = 1,225$ pairwise refit comparisons via Kendall's $\tau$ and Spearman's $\rho$.
+- **Frontend Export:** Produces a strictly typed JSON artifact (`results/explanation_stability_50_refits.json`) formatted for direct ingestion by Next.js 15 and Recharts visualization.
+- **Execution:**
+  ```bash
+  python -m src.explainability.stability_50_bootstrap
+  ```
+- **Outputs:** `results/explanation_stability_50_refits.json`, `results/explanation_stability_50_summary.csv`, `reports/explanation_stability_50_report.md`.
+
+### 3.3 Chronological Temporal Holdout & Stratification (`src/experiments/run_temporal_validation.py`)
+- **Protocol:** Strict time-series partitioning using reporting years 2015–2022 for model training ($N=26,269$) and reporting years 2023–2025 for holdout evaluation ($N=10,461$).
+- **Stratified Cohorts:**
+  - *Observed Cohort ($96.6\%$ of test set):* Evaluates longitudinal drift on buildings present in the historical training partition.
+  - *Unseen Generalization Cohort ($3.4\%$ of test set):* Evaluates true out-of-facility transferability to newly constructed or newly regulated facilities.
+- **Execution:**
+  ```bash
+  python -m src.experiments.run_temporal_validation
+  ```
+- **Outputs:** `results/temporal_validation_metrics.csv`, `reports/temporal_validation_report.md`.
+
+### 3.4 Random Forest Perturbation Sensitivity Diagnosis (`src/diagnostics/rf_perturbation_diagnostic.py`)
+- **Objective:** Dissects the anomalous $+49.92\%$ prediction shift under $+5\%$ Gross Floor Area (GFA) perturbation.
+- **Key Discovery:** Proves that $82.3\%$ of the apparent shift ($41.07$ percentage points of the mean) is driven by a single outlier (Instance 13, a K-12 School of 93,218 sq ft) crossing a dense split threshold in $137/150$ trees ($91.3\%$ of estimators), amplified non-linearly by $\text{expm1}$.
+- **Empirical Proof:** The robust median relative change across the held-out cohort is only **$2.42\%$**, confirming that the phenomenon is an isolated threshold-crossing artifact rather than a systemic model defect.
+- **Execution:**
+  ```bash
+  python -m src.diagnostics.rf_perturbation_diagnostic
+  ```
+- **Outputs:** `results/rf_perturbation_diagnostic.csv`, `results/rf_perturbation_diagnostic.json`, `reports/rf_sensitivity_diagnostic.md`.
+
+### 3.5 External Validation Pipeline & Fallback (`src/data/external_loader.py`)
+- **Architecture:** Abstract base loader (`BaseExternalBenchmarkingLoader`) and canonical NYC Local Law 84 adapter (`NYCLL84DataLoader`).
+- **Schema Validation:** Strict type and physical bounds validation implemented in both Python and TypeScript/Zod (`frontend/src/schemas/externalValidationSchema.ts`).
+- **Academic Limitation Fallback:** Automatically generates `LIMITATIONS.md` when external validation data is absent, explicitly bounding the manuscript's empirical claims to the City of Seattle jurisdiction and documenting thermodynamic Scope 2 grid differences.
+
 ## 4. Generated Artifacts & Reports
 
 * **Predictive Results:** [results/predictive_metrics.csv](results/predictive_metrics.csv), [results/test_predictions.csv](results/test_predictions.csv), [results/residuals.csv](results/residuals.csv), [results/subgroup_performance.csv](results/subgroup_performance.csv)

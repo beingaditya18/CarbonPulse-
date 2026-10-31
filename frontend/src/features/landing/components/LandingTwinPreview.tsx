@@ -38,8 +38,8 @@ export function LandingTwinPreview({ isDark }: LandingTwinPreviewProps) {
           </div>
         </div>
         <span className={`text-[11px] px-2.5 py-1 rounded-full font-bold border ${isDark
-            ? 'bg-zinc-800 text-zinc-300 border-zinc-700'
-            : 'bg-emerald-50 text-[#047857] border-emerald-200'
+          ? 'bg-zinc-800 text-zinc-300 border-zinc-700'
+          : 'bg-emerald-50 text-[#047857] border-emerald-200'
           }`}>
           30-Day Forecast
         </span>

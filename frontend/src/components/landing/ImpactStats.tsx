@@ -36,8 +36,8 @@ export function ImpactStats({ isDark }: ImpactStatsProps) {
             <div
               key={cred.title}
               className={`p-4 rounded-xl border text-left flex flex-col justify-between transition-all hover:border-emerald-400 ${isDark
-                  ? 'bg-zinc-900/50 border-zinc-800'
-                  : 'bg-emerald-50/40 border-emerald-100/80 shadow-xs'
+                ? 'bg-zinc-900/50 border-zinc-800'
+                : 'bg-emerald-50/40 border-emerald-100/80 shadow-xs'
                 }`}
             >
               <div className="w-6 h-6 rounded-full bg-emerald-100 text-[#047857] flex items-center justify-center mb-3">

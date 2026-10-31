@@ -1,0 +1,14 @@
+# Git Archive Export Rules for Clean Peer-Review Release
+# Excludes development caches, virtual environments, and unneeded frontend packages
+
+frontend/node_modules/ export-ignore
+frontend/.next/ export-ignore
+frontend/.vite/ export-ignore
+.pytest_cache/ export-ignore
+__pycache__/ export-ignore
+*.pyc export-ignore
+.git/ export-ignore
+.github/ export-ignore
+.vscode/ export-ignore
+.env* export-ignore
+scratch/ export-ignore

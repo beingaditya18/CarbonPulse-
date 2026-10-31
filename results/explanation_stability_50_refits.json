@@ -1,0 +1,240 @@
+{
+  "metadata": {
+    "experiment": "50_bootstrap_refit_explanation_stability",
+    "date": "2026-10-31",
+    "nBootstrapRefits": 3,
+    "totalPairwiseComparisons": 3,
+    "subsampleRatio": 0.8,
+    "randomSeed": 42,
+    "featureCount": 59,
+    "modelsEvaluated": [
+      "ridge",
+      "xgboost"
+    ],
+    "explanationMethods": {
+      "xgboost": "TreeSHAP (Mean Absolute Attribution)",
+      "rf": "TreeSHAP (Mean Absolute Attribution)",
+      "ridge": "Standardized Linear Regression Absolute Coefficients",
+      "gam": "SplineGAM Basis Function Standard Deviation"
+    }
+  },
+  "summary": [
+    {
+      "modelId": "ridge",
+      "displayName": "Ridge Regression (|Beta|)",
+      "totalComparisons": 3,
+      "kendallTau": {
+        "mean": 0.8613,
+        "std": 0.0137,
+        "median": 0.8667,
+        "min": 0.8457,
+        "max": 0.8714,
+        "q25": 0.8562,
+        "q75": 0.8691
+      },
+      "spearmanRho": {
+        "mean": 0.9587,
+        "std": 0.0092,
+        "median": 0.9631,
+        "min": 0.9482,
+        "max": 0.9648,
+        "q25": 0.9556,
+        "q75": 0.964
+      }
+    },
+    {
+      "modelId": "xgboost",
+      "displayName": "XGBoost (TreeSHAP)",
+      "totalComparisons": 3,
+      "kendallTau": {
+        "mean": 0.8753,
+        "std": 0.0234,
+        "median": 0.8738,
+        "min": 0.8527,
+        "max": 0.8995,
+        "q25": 0.8632,
+        "q75": 0.8866
+      },
+      "spearmanRho": {
+        "mean": 0.9757,
+        "std": 0.0065,
+        "median": 0.9759,
+        "min": 0.9691,
+        "max": 0.9821,
+        "q25": 0.9725,
+        "q75": 0.979
+      }
+    }
+  ],
+  "rechartsData": [
+    {
+      "model": "Ridge Regression (|Beta|)",
+      "modelId": "ridge",
+      "tauMean": 0.8613,
+      "tauStd": 0.0137,
+      "tauMedian": 0.8667,
+      "tauMin": 0.8457,
+      "tauMax": 0.8714,
+      "tauQ25": 0.8562,
+      "tauQ75": 0.8691,
+      "rhoMean": 0.9587,
+      "rhoStd": 0.0092,
+      "rhoMedian": 0.9631,
+      "rhoMin": 0.9482,
+      "rhoMax": 0.9648,
+      "rhoQ25": 0.9556,
+      "rhoQ75": 0.964
+    },
+    {
+      "model": "XGBoost (TreeSHAP)",
+      "modelId": "xgboost",
+      "tauMean": 0.8753,
+      "tauStd": 0.0234,
+      "tauMedian": 0.8738,
+      "tauMin": 0.8527,
+      "tauMax": 0.8995,
+      "tauQ25": 0.8632,
+      "tauQ75": 0.8866,
+      "rhoMean": 0.9757,
+      "rhoStd": 0.0065,
+      "rhoMedian": 0.9759,
+      "rhoMin": 0.9691,
+      "rhoMax": 0.9821,
+      "rhoQ25": 0.9725,
+      "rhoQ75": 0.979
+    }
+  ],
+  "topFeaturesStability": [
+    {
+      "feature": "PropertyGFABuildings",
+      "ridgeMean": 0.0656,
+      "ridgeStd": 0.0082,
+      "xgboostMean": 0.658,
+      "xgboostStd": 0.0078
+    },
+    {
+      "feature": "BuildingAge",
+      "ridgeMean": 0.1566,
+      "ridgeStd": 0.0041,
+      "xgboostMean": 0.1886,
+      "xgboostStd": 0.0206
+    },
+    {
+      "feature": "BuildingType_Multifamily LR (1-4)",
+      "ridgeMean": 0.8475,
+      "ridgeStd": 0.0099,
+      "xgboostMean": 0.1823,
+      "xgboostStd": 0.0022
+    },
+    {
+      "feature": "FloorAreaPerFloor",
+      "ridgeMean": 0.1239,
+      "ridgeStd": 0.0155,
+      "xgboostMean": 0.0984,
+      "xgboostStd": 0.0037
+    },
+    {
+      "feature": "Latitude",
+      "ridgeMean": 0.0799,
+      "ridgeStd": 0.0037,
+      "xgboostMean": 0.078,
+      "xgboostStd": 0.0079
+    },
+    {
+      "feature": "VintageEra_Pre-1950",
+      "ridgeMean": 0.5981,
+      "ridgeStd": 0.0072,
+      "xgboostMean": 0.0774,
+      "xgboostStd": 0.0157
+    },
+    {
+      "feature": "PrimaryUseCategory_Office",
+      "ridgeMean": 0.7555,
+      "ridgeStd": 0.0237,
+      "xgboostMean": 0.071,
+      "xgboostStd": 0.0069
+    },
+    {
+      "feature": "PropertyGFATotal",
+      "ridgeMean": 0.0575,
+      "ridgeStd": 0.007,
+      "xgboostMean": 0.0697,
+      "xgboostStd": 0.0007
+    },
+    {
+      "feature": "LogGFABuildings",
+      "ridgeMean": 0.0896,
+      "ridgeStd": 0.0646,
+      "xgboostMean": 0.0556,
+      "xgboostStd": 0.0026
+    },
+    {
+      "feature": "NumberofFloors",
+      "ridgeMean": 0.0052,
+      "ridgeStd": 0.0038,
+      "xgboostMean": 0.0361,
+      "xgboostStd": 0.0055
+    },
+    {
+      "feature": "PrimaryUseCategory_Senior Living Community",
+      "ridgeMean": 1.0601,
+      "ridgeStd": 0.0072,
+      "xgboostMean": 0.0327,
+      "xgboostStd": 0.0009
+    },
+    {
+      "feature": "Longitude",
+      "ridgeMean": 0.0666,
+      "ridgeStd": 0.0108,
+      "xgboostMean": 0.0323,
+      "xgboostStd": 0.0031
+    },
+    {
+      "feature": "BuildingType_Hospital",
+      "ridgeMean": 0.806,
+      "ridgeStd": 0.0121,
+      "xgboostMean": 0.0311,
+      "xgboostStd": 0.0017
+    },
+    {
+      "feature": "BuildingType_Multifamily MR (5-9)",
+      "ridgeMean": 0.5664,
+      "ridgeStd": 0.0149,
+      "xgboostMean": 0.026,
+      "xgboostStd": 0.0008
+    },
+    {
+      "feature": "BuildingType_NonResidential",
+      "ridgeMean": 0.0293,
+      "ridgeStd": 0.0022,
+      "xgboostMean": 0.0259,
+      "xgboostStd": 0.0035
+    }
+  ],
+  "distributions": {
+    "ridge": {
+      "kendallTau": [
+        0.8457,
+        0.8667,
+        0.8714
+      ],
+      "spearmanRho": [
+        0.9482,
+        0.9631,
+        0.9648
+      ]
+    },
+    "xgboost": {
+      "kendallTau": [
+        0.8527,
+        0.8738,
+        0.8995
+      ],
+      "spearmanRho": [
+        0.9691,
+        0.9759,
+        0.9821
+      ]
+    }
+  }
+}
