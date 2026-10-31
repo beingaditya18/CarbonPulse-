@@ -84,17 +84,20 @@ def run_rf_sensitivity_diagnosis(
     encoded_cat = cat_encoder.get_feature_names_out(cat_features).tolist()
     feature_names = list(num_features) + encoded_cat
 
-    # Apply strictly bounded physical perturbation: +5% GFA
+    # Apply strictly bounded physical perturbation: +5% GFA with consistent derived feature recomputation
     sample_pert = df_raw_test.copy()
-    area_cols = ["PropertyGFATotal", "PropertyGFABuildings", "FloorAreaPerFloor"]
-    for col in area_cols:
-        if col in sample_pert.columns:
-            sample_pert[col] = sample_pert[col] * gfa_perturbation_factor
-
+    if "PropertyGFATotal" in sample_pert.columns:
+        sample_pert["PropertyGFATotal"] = sample_pert["PropertyGFATotal"] * gfa_perturbation_factor
+    if "PropertyGFABuildings" in sample_pert.columns:
+        sample_pert["PropertyGFABuildings"] = sample_pert["PropertyGFABuildings"] * gfa_perturbation_factor
+    if "FloorAreaPerFloor" in sample_pert.columns:
+        sample_pert["FloorAreaPerFloor"] = sample_pert["PropertyGFABuildings"] / np.maximum(1.0, sample_pert["NumberofFloors"])
+    if "ParkingRatio" in sample_pert.columns and "PropertyGFAParking" in sample_pert.columns and "PropertyGFATotal" in sample_pert.columns:
+        sample_pert["ParkingRatio"] = np.clip(sample_pert["PropertyGFAParking"] / np.maximum(1.0, sample_pert["PropertyGFATotal"]), 0.0, 1.0)
     if "LogGFATotal" in sample_pert.columns:
         sample_pert["LogGFATotal"] = np.log1p(sample_pert["PropertyGFATotal"])
     if "LogGFABuildings" in sample_pert.columns:
-        sample_pert["LogGFABuildings"] = np.log1p(sample_pert["PropertyGFABuildings"])
+        sample_pert["LogGFABuildings"] = np.log1p(np.maximum(0, sample_pert["PropertyGFABuildings"]))
 
     # Transform through fitted pipeline
     X_orig_mat = preprocessor.transform(df_raw_test)
@@ -272,8 +275,9 @@ def run_rf_sensitivity_diagnosis(
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(full_payload, f, indent=2)
 
-    # Generate Markdown Report
+    # Generate Markdown Report in both results/ and reports/
     report_path = os.path.join(REPORTS_DIR, "rf_sensitivity_diagnostic.md")
+    results_report_path = os.path.join(RESULTS_DIR, "rf_sensitivity_diagnosis.md")
     report_content = f"""# Random Forest Perturbation Sensitivity Diagnostic Report
 
 **Diagnostic Target:** Dissection of the anomalous $+49.92\\%$ prediction change under $+5\\%$ Gross Floor Area (GFA) expansion.  
@@ -317,6 +321,8 @@ def run_rf_sensitivity_diagnosis(
         )
 
     with open(report_path, "w", encoding="utf-8") as f:
+        f.write(report_content)
+    with open(results_report_path, "w", encoding="utf-8") as f:
         f.write(report_content)
 
     # Print Console Diagnostic Summary

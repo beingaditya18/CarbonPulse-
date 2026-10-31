@@ -7,10 +7,10 @@
       "target_scale": "Trained on log1p(TotalGHGEmissions), inverted via expm1"
     },
     "aggregate_sensitivity_metrics": {
-      "mean_relative_change_pct": 49.92,
-      "median_relative_change_pct": 2.42,
-      "ratio_mean_to_median": 20.67,
-      "without_top_driver_mean_pct": 9.22,
+      "mean_relative_change_pct": 50.72,
+      "median_relative_change_pct": 4.04,
+      "ratio_mean_to_median": 12.56,
+      "without_top_driver_mean_pct": 10.06,
       "top_driver_share_of_mean_pct": 41.07
     },
     "top_driver_isolation": {
@@ -61,7 +61,7 @@
       "log_pred_delta": -0.0219,
       "trees_diverged_count": 35,
       "trees_diverged_pct": 23.3,
-      "area_shap_shift": 0.0869
+      "area_shap_shift": 0.0847
     },
     {
       "instance_idx": 2,
@@ -126,7 +126,7 @@
       "pred_rel_change_pct": 0.0,
       "log_pred_orig": 7.4767,
       "log_pred_pert": 7.4767,
-      "log_pred_delta": 0.0,
+      "log_pred_delta": -0.0,
       "trees_diverged_count": 0,
       "trees_diverged_pct": 0.0,
       "area_shap_shift": 0.0
@@ -146,7 +146,7 @@
       "log_pred_delta": 0.0,
       "trees_diverged_count": 0,
       "trees_diverged_pct": 0.0,
-      "area_shap_shift": 0.0062
+      "area_shap_shift": 0.0072
     },
     {
       "instance_idx": 7,
@@ -180,7 +180,7 @@
       "log_pred_delta": 0.0086,
       "trees_diverged_count": 18,
       "trees_diverged_pct": 12.0,
-      "area_shap_shift": 0.0445
+      "area_shap_shift": 0.0378
     },
     {
       "instance_idx": 9,
@@ -189,15 +189,15 @@
       "gfa_orig_sqft": 438093.0,
       "gfa_pert_sqft": 459997.65,
       "pred_orig_mt": 195.26,
-      "pred_pert_mt": 196.21,
-      "pred_abs_change_mt": 0.95,
-      "pred_rel_change_pct": 0.49,
+      "pred_pert_mt": 219.41,
+      "pred_abs_change_mt": 24.15,
+      "pred_rel_change_pct": 12.3,
       "log_pred_orig": 5.2795,
-      "log_pred_pert": 5.2843,
-      "log_pred_delta": 0.0048,
-      "trees_diverged_count": 11,
-      "trees_diverged_pct": 7.3,
-      "area_shap_shift": 0.0304
+      "log_pred_pert": 5.3955,
+      "log_pred_delta": 0.116,
+      "trees_diverged_count": 32,
+      "trees_diverged_pct": 21.3,
+      "area_shap_shift": 0.0755
     },
     {
       "instance_idx": 10,
@@ -231,7 +231,7 @@
       "log_pred_delta": 0.0215,
       "trees_diverged_count": 6,
       "trees_diverged_pct": 4.0,
-      "area_shap_shift": 0.0202
+      "area_shap_shift": 0.0247
     },
     {
       "instance_idx": 12,
@@ -309,7 +309,7 @@
       "gfa_pert_sqft": 267249.15,
       "pred_orig_mt": 187.28,
       "pred_pert_mt": 187.28,
-      "pred_abs_change_mt": -0.0,
+      "pred_abs_change_mt": 0.0,
       "pred_rel_change_pct": 0.0,
       "log_pred_orig": 5.2379,
       "log_pred_pert": 5.2379,
@@ -342,15 +342,15 @@
       "gfa_orig_sqft": 135520.0,
       "gfa_pert_sqft": 142296.0,
       "pred_orig_mt": 74.21,
-      "pred_pert_mt": 106.0,
-      "pred_abs_change_mt": 31.79,
-      "pred_rel_change_pct": 42.27,
+      "pred_pert_mt": 112.35,
+      "pred_abs_change_mt": 38.14,
+      "pred_rel_change_pct": 50.71,
       "log_pred_orig": 4.3203,
-      "log_pred_pert": 4.6729,
-      "log_pred_delta": 0.3526,
-      "trees_diverged_count": 39,
-      "trees_diverged_pct": 26.0,
-      "area_shap_shift": 0.31
+      "log_pred_pert": 4.7305,
+      "log_pred_delta": 0.4102,
+      "trees_diverged_count": 45,
+      "trees_diverged_pct": 30.0,
+      "area_shap_shift": 0.3331
     },
     {
       "instance_idx": 19,
@@ -376,15 +376,15 @@
       "gfa_orig_sqft": 207656.0,
       "gfa_pert_sqft": 218038.80000000002,
       "pred_orig_mt": 145.19,
-      "pred_pert_mt": 156.15,
-      "pred_abs_change_mt": 10.96,
-      "pred_rel_change_pct": 7.5,
+      "pred_pert_mt": 155.7,
+      "pred_abs_change_mt": 10.51,
+      "pred_rel_change_pct": 7.19,
       "log_pred_orig": 4.9849,
-      "log_pred_pert": 5.0572,
-      "log_pred_delta": 0.0723,
+      "log_pred_pert": 5.0543,
+      "log_pred_delta": 0.0694,
       "trees_diverged_count": 100,
       "trees_diverged_pct": 66.7,
-      "area_shap_shift": 0.2016
+      "area_shap_shift": 0.1988
     },
     {
       "instance_idx": 21,
@@ -452,7 +452,7 @@
       "log_pred_delta": -0.5466,
       "trees_diverged_count": 145,
       "trees_diverged_pct": 96.7,
-      "area_shap_shift": 0.6324
+      "area_shap_shift": 0.6323
     }
   ],
   "splitsSample": [
