@@ -47,6 +47,16 @@ def evaluate_all_models():
     bldg_ids = test_groups["OSEBuildingID"].values
     n_unique_bldgs = len(np.unique(bldg_ids))
     print(f"Test partition: {len(y_test):,} observations across {n_unique_bldgs:,} facility clusters.")
+
+    # Load tracking identifiers (DataYear, row_id) if present
+    tracking_path = os.path.join(PROCESSED_DIR, "test_tracking.parquet")
+    if os.path.exists(tracking_path):
+        track_df = pd.read_parquet(tracking_path)
+        year_vals = track_df["DataYear"].values
+        row_ids = track_df["row_id"].values
+    else:
+        year_vals = np.zeros(len(y_test), dtype=int)
+        row_ids = np.arange(len(y_test))
     
     model_names = [
         "accounting",
@@ -133,11 +143,65 @@ def evaluate_all_models():
     metrics_df = pd.DataFrame(metrics_list)
     metrics_df.to_csv(os.path.join(RESULTS_DIR, "predictive_metrics.csv"), index=False)
     
+    # Save standard test_predictions.csv
     preds_df = pd.DataFrame(predictions_dict)
     preds_df.to_csv(os.path.join(RESULTS_DIR, "test_predictions.csv"), index=False)
+
+    # Save canonical predictions.csv as required by journal spec (id, facility, year, y_true, y_pred per model)
+    canonical_preds = {
+        "id": row_ids,
+        "facility": bldg_ids,
+        "year": year_vals,
+        "y_true": y_test
+    }
+    for m in model_names:
+        if m in predictions_dict:
+            canonical_preds[m] = predictions_dict[m]
+            canonical_preds[f"y_pred_{m}"] = predictions_dict[m]
+    canonical_preds_df = pd.DataFrame(canonical_preds)
+    canonical_preds_df.to_csv(os.path.join(RESULTS_DIR, "predictions.csv"), index=False)
+    print(f"Saved predictions to {os.path.join(RESULTS_DIR, 'predictions.csv')}")
     
     resids_df = pd.DataFrame(residuals_dict)
     resids_df.to_csv(os.path.join(RESULTS_DIR, "residuals.csv"), index=False)
+
+    # Compare against reference paper values and verify mismatch <= 1%
+    paper_mae_targets = {
+        "xgboost": 95.3972,
+        "ridge": 97.9904,
+        "rf": 101.1776,
+        "gam": 98.8912,
+        "ebm": 125.9947,
+        "mlp": 128.9753,
+        "median": 114.2013
+    }
+    print("\n" + "=" * 90)
+    print("BASELINE REPRODUCIBILITY AUDIT: COMPARISON TO PAPER TARGET VALUES")
+    print("=" * 90)
+    print(f"{'Model':<12} | {'Obtained MAE':<12} | {'Paper MAE':<12} | {'Delta':<10} | {'Rel Diff (%)':<12} | {'Status'}")
+    print("-" * 90)
+    reproducibility_records = []
+    any_mismatch_over_1pct = False
+    for m_id, target_mae in paper_mae_targets.items():
+        sub = metrics_df[metrics_df["model_id"] == m_id]
+        if not sub.empty:
+            obs_mae = float(sub["mae"].iloc[0])
+            delta = obs_mae - target_mae
+            rel_diff_pct = abs(delta) / target_mae * 100.0
+            status = "MATCH (<=1%)" if rel_diff_pct <= 1.0 else "MISMATCH (>1%)"
+            if rel_diff_pct > 1.0:
+                any_mismatch_over_1pct = True
+            print(f"{m_id:<12} | {obs_mae:<12.4f} | {target_mae:<12.4f} | {delta:<+10.4f} | {rel_diff_pct:<12.3f}% | {status}")
+            reproducibility_records.append({
+                "model_id": m_id,
+                "obtained_mae": obs_mae,
+                "paper_target_mae": target_mae,
+                "delta": delta,
+                "relative_diff_pct": rel_diff_pct,
+                "status": status
+            })
+    print("=" * 90)
+    assert not any_mismatch_over_1pct, "CRITICAL: Baseline reproducibility mismatch >1% detected!"
 
     # Subgroup Performance Breakdown (Investigating Heterogeneity & Heavy Tails)
     subgroup_records = []
