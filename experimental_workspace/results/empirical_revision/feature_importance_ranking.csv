@@ -1,0 +1,60 @@
+feature,mean_abs_shap,rank
+PropertyGFABuildings,0.54469573,1
+BuildingType_Multifamily LR (1-4),0.1748134,2
+BuildingAge,0.13691849,3
+LogGFABuildings,0.1012614,4
+FloorAreaPerFloor,0.09820595,5
+Latitude,0.07715379,6
+PropertyGFATotal,0.06275198,7
+VintageEra_Pre-1950,0.06252641,8
+PrimaryUseCategory_Office,0.06227788,9
+BuildingType_Multifamily MR (5-9),0.043139644,10
+PrimaryUseCategory_Non-Refrigerated Warehouse,0.03146637,11
+Longitude,0.029895607,12
+NumberofFloors,0.027100513,13
+BuildingType_Hospital,0.021210399,14
+PrimaryUseCategory_Supermarket/Grocery Store,0.021019962,15
+PrimaryUseCategory_Hotel,0.020793675,16
+LogGFATotal,0.020515596,17
+BuildingType_NonResidential,0.01885252,18
+VintageEra_Post-2000,0.01457969,19
+VintageEra_1981-2000,0.013905238,20
+PrimaryUseCategory_Senior Living Community,0.012922691,21
+PrimaryUseCategory_Other,0.012354209,22
+PrimaryUseCategory_Mixed Use Property,0.01209737,23
+PrimaryUseCategory_Distribution Center,0.0115423445,24
+PropertyGFAParking,0.01084946,25
+Neighborhood_DOWNTOWN,0.009098476,26
+BuildingType_University,0.008037717,27
+ParkingRatio,0.007268512,28
+VintageEra_1951-1980,0.0066731987,29
+Neighborhood_SOUTHWEST,0.006319122,30
+Neighborhood_GREATER DUWAMISH,0.006210057,31
+CouncilDistrict_District_7,0.0059833406,32
+BuildingType_School,0.0058622356,33
+Neighborhood_NORTH,0.005473508,34
+PrimaryUseCategory_Retail Store,0.0050515514,35
+NumberofBuildings,0.0048164995,36
+PrimaryUseCategory_K-12 School,0.004491083,37
+Neighborhood_EAST,0.0041553155,38
+CouncilDistrict_District_1,0.0031369936,39
+Neighborhood_MAGNOLIA / QUEEN ANNE,0.0025119071,40
+Neighborhood_NORTHEAST,0.0017574169,41
+Neighborhood_LAKE UNION,0.0016821073,42
+CouncilDistrict_District_3,0.001641445,43
+Neighborhood_MAGNOLIA/QUEEN ANNE,0.00159038,44
+CouncilDistrict_District_2,0.0010736714,45
+Neighborhood_NORTHWEST,0.00089585176,46
+Neighborhood_DELRIDGE NEIGHBORHOODS,0.00082249276,47
+BuildingType_Multifamily HR (10+),0.000753163,48
+CouncilDistrict_District_6,0.00074101024,49
+CouncilDistrict_District_4,0.0007355365,50
+CouncilDistrict_District_5,0.00067203236,51
+PrimaryUseCategory_Hospital (General Medical & Surgical),0.0006329132,52
+Neighborhood_CENTRAL,0.0005955207,53
+Neighborhood_SOUTHEAST,0.00045388905,54
+PrimaryUseCategory_College/University,0.0003798761,55
+PrimaryUseCategory_Medical Office,0.00029557888,56
+PrimaryUseCategory_Worship Facility,0.0001813561,57
+Neighborhood_BALLARD,0.00016408501,58
+PrimaryUseCategory_Multifamily Housing,1.4086252e-05,59

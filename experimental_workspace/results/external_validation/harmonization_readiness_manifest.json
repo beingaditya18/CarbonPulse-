@@ -1,0 +1,63 @@
+{
+  "experiment": "exp8_external_validation_readiness",
+  "status": "INTERFACE_READY_AWAITING_EMPIRICAL_DATA",
+  "isolation_guarantee": "VERIFIED (0 external rows in Seattle train matrix)",
+  "readiness_audits": {
+    "NYC_LL84": {
+      "status": "READY_FOR_DATA_PLACEMENT",
+      "jurisdiction": "New York City, NY",
+      "statutory_mandate": "NYC Local Law 84 / Local Law 97 Compliance Benchmarking",
+      "raw_file_path": "experimental_workspace/data/external\\nyc_ll84_raw.csv",
+      "raw_file_present": false,
+      "required_fields": [
+        "NYC_BIN",
+        "Year_Ending",
+        "Total_GHG_Emissions_Metric_Tons_CO2e",
+        "Gross_Floor_Area_ft2",
+        "Primary_Property_Type",
+        "Year_Built",
+        "Number_of_Floors"
+      ],
+      "units_compatibility": {
+        "target_emissions": "Metric Tons CO2e",
+        "floor_area": "sq ft",
+        "thermodynamic_grid_factor": "0.285 kg CO2e/kWh (Dual-fuel natural gas and nuclear generation mix (Zone J NYC))"
+      },
+      "leakage_safeguard_required": [
+        "Electricity(kWh)",
+        "NaturalGas(therms)",
+        "FuelOil(gallons)",
+        "DistrictSteam(kBtu)"
+      ],
+      "isolation_rule": "External municipal records must remain in dedicated holdout partition and NEVER be merged into Seattle training matrix."
+    },
+    "Boston_BERDO": {
+      "status": "READY_FOR_DATA_PLACEMENT",
+      "jurisdiction": "Boston, MA",
+      "statutory_mandate": "Building Energy Reporting and Disclosure Ordinance (BERDO 2.0)",
+      "raw_file_path": "experimental_workspace/data/external\\boston_berdo_raw.csv",
+      "raw_file_present": false,
+      "required_fields": [
+        "Building_ID",
+        "Reporting_Year",
+        "Total_Site_Emissions_MTCO2e",
+        "Gross_Square_Feet",
+        "Property_Type",
+        "Year_Built",
+        "Floors"
+      ],
+      "units_compatibility": {
+        "target_emissions": "Metric Tons CO2e",
+        "floor_area": "sq ft",
+        "thermodynamic_grid_factor": "0.25 kg CO2e/kWh (Natural gas and regional imported hydro/nuclear (ISO-NE))"
+      },
+      "leakage_safeguard_required": [
+        "Electricity(kWh)",
+        "NaturalGas(therms)",
+        "FuelOil(gallons)",
+        "DistrictSteam(kBtu)"
+      ],
+      "isolation_rule": "External municipal records must remain in dedicated holdout partition and NEVER be merged into Seattle training matrix."
+    }
+  }
+}

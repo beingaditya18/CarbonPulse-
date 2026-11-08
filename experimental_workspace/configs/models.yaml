@@ -1,0 +1,83 @@
+# CarbonPulse AI+ — Model Architectures and Hyperparameters
+baseline_models:
+  accounting:
+    description: "Conventional Scope 1+2 activity-data-times-emission-factors baseline"
+    factors:
+      electricity_kwh: 1.972e-05
+      naturalgas_therms: 0.005299
+      steamuse_kbtu: 8.1e-05
+  property_median:
+    description: "Property-Type Median Intensity Baseline for unmetered prediction"
+    group_feature: "BuildingType"
+    intensity_metric: "median"
+  ridge:
+    alpha: 10.0
+    random_state: 42
+  spline_gam:
+    description: "Spline Generalized Additive Model via SplineTransformer and Ridge regression"
+    n_knots: 5
+    degree: 3
+    alpha: 10.0
+    random_state: 42
+  ebm:
+    description: "Explainable Boosting Machine (InterpretML)"
+    max_bins: 256
+    max_interaction_bins: 32
+    interactions: 10
+    outer_bags: 8
+    inner_bags: 0
+    learning_rate: 0.05
+    random_state: 42
+  random_forest:
+    n_estimators: 150
+    max_depth: 16
+    min_samples_split: 5
+    min_samples_leaf: 2
+    n_jobs: -1
+    random_state: 42
+  xgboost:
+    n_estimators: 200
+    learning_rate: 0.05
+    max_depth: 6
+    subsample: 0.8
+    colsample_bytree: 0.8
+    n_jobs: -1
+    random_state: 42
+  mlp:
+    hidden_layer_sizes: [128, 64]
+    activation: "relu"
+    alpha: 0.001
+    learning_rate_init: 0.001
+    max_iter: 200
+    early_stopping: true
+    validation_fraction: 0.1
+    random_state: 42
+
+experimental_models:
+  tabnet:
+    description: "TabNet: Attentive Interpretable Tabular Learning (PytorchTabnet)"
+    n_d: 16
+    n_a: 16
+    n_steps: 4
+    gamma: 1.3
+    cat_emb_dim: 2
+    n_independent: 2
+    n_shared: 2
+    momentum: 0.02
+    clip_value: 2.0
+    lambda_sparse: 1e-4
+    optimizer_fn: "adam"
+    optimizer_params:
+      lr: 0.02
+    scheduler_fn: "step"
+    scheduler_params:
+      step_size: 10
+      gamma: 0.95
+    mask_type: "sparsemax"
+    max_epochs: 100
+    patience: 15
+    batch_size: 256
+    virtual_batch_size: 64
+    seed: 42
+    device_name: "cpu"
+

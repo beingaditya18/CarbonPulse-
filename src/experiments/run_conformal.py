@@ -1,6 +1,7 @@
 """
 Module: run_conformal.py
-Author: CarbonPulse Research Engineering Team
+Author: Aditya Mandloi, Dr. Ashok Kumar Gupta
+Affiliation: School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India
 Description:
     Implements Facility-Level Conformal Prediction and Conformalized Quantile Regression (CQR)
     for meter-free building GHG emissions estimation.

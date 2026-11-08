@@ -269,4 +269,4 @@ CarbonPulse AI+ turns invisible greenhouse gas footprints into tangible local me
 
 ---
 
-*Developed with 💚 by the CarbonPulse AI+ team.*
+*Developed with 💚 by Aditya Mandloi and Dr. Ashok Kumar Gupta (School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India).*

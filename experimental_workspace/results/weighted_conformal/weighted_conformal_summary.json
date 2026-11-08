@@ -1,0 +1,169 @@
+{
+  "experiment": "exp4_locally_weighted_conformal",
+  "status": "COMPLETED",
+  "coverage_levels": [
+    0.8,
+    0.9,
+    0.95
+  ],
+  "overall_metrics": [
+    {
+      "target_coverage": 0.8,
+      "target_alpha": 0.19999999999999996,
+      "method": "Standard Split Conformal",
+      "empirical_coverage": 0.7124626663046429,
+      "coverage_error": 0.0875373336953571,
+      "mean_interval_width": 75.10626220703125,
+      "median_interval_width": 76.84072875976562,
+      "conformal_quantile": 45.86406121859281
+    },
+    {
+      "target_coverage": 0.8,
+      "target_alpha": 0.19999999999999996,
+      "method": "Locally Weighted Conformal",
+      "empirical_coverage": 0.7018734727124627,
+      "coverage_error": 0.09812652728753735,
+      "mean_interval_width": 100.92124917035076,
+      "median_interval_width": 64.06033783486856,
+      "conformal_quantile": 1.3505111287254654
+    },
+    {
+      "target_coverage": 0.9,
+      "target_alpha": 0.09999999999999998,
+      "method": "Standard Split Conformal",
+      "empirical_coverage": 0.8342383926147162,
+      "coverage_error": 0.0657616073852838,
+      "mean_interval_width": 133.03195190429688,
+      "median_interval_width": 123.30716705322266,
+      "conformal_quantile": 92.33049669780158
+    },
+    {
+      "target_coverage": 0.9,
+      "target_alpha": 0.09999999999999998,
+      "method": "Locally Weighted Conformal",
+      "empirical_coverage": 0.810073309801792,
+      "coverage_error": 0.08992669019820798,
+      "mean_interval_width": 142.306011327007,
+      "median_interval_width": 88.2653946864102,
+      "conformal_quantile": 2.0813543052476358
+    },
+    {
+      "target_coverage": 0.95,
+      "target_alpha": 0.050000000000000044,
+      "method": "Standard Split Conformal",
+      "empirical_coverage": 0.9137931034482759,
+      "coverage_error": 0.036206896551724044,
+      "mean_interval_width": 216.81129455566406,
+      "median_interval_width": 196.16891479492188,
+      "conformal_quantile": 165.19222969850333
+    },
+    {
+      "target_coverage": 0.95,
+      "target_alpha": 0.050000000000000044,
+      "method": "Locally Weighted Conformal",
+      "empirical_coverage": 0.855145262014662,
+      "coverage_error": 0.09485473798533794,
+      "mean_interval_width": 174.11469480023723,
+      "median_interval_width": 105.54199867194845,
+      "conformal_quantile": 2.708087794668021
+    }
+  ],
+  "subgroups_90_summary": [
+    {
+      "target_coverage": 0.9,
+      "subgroup_dimension": "Building Size Strata",
+      "subgroup": "Small (<50k)",
+      "n_observations": 3688,
+      "std_coverage": 0.9360086767895879,
+      "weighted_coverage": 0.8286334056399133,
+      "std_median_width": 108.89868927001953,
+      "weighted_median_width": 56.60607625468524,
+      "coverage_gap_std": 0.03600867678958786,
+      "coverage_gap_weighted": -0.07136659436008674
+    },
+    {
+      "target_coverage": 0.9,
+      "subgroup_dimension": "Building Size Strata",
+      "subgroup": "Medium (50k-200k)",
+      "n_observations": 2685,
+      "std_coverage": 0.8264432029795158,
+      "weighted_coverage": 0.819366852886406,
+      "std_median_width": 136.4333953857422,
+      "weighted_median_width": 119.27240749419616,
+      "coverage_gap_std": -0.07355679702048423,
+      "coverage_gap_weighted": -0.08063314711359404
+    },
+    {
+      "target_coverage": 0.9,
+      "subgroup_dimension": "Building Size Strata",
+      "subgroup": "Large (>200k)",
+      "n_observations": 993,
+      "std_coverage": 0.4773413897280967,
+      "weighted_coverage": 0.716012084592145,
+      "std_median_width": 184.6610107421875,
+      "weighted_median_width": 359.4370560456832,
+      "coverage_gap_std": -0.4226586102719033,
+      "coverage_gap_weighted": -0.18398791540785497
+    },
+    {
+      "target_coverage": 0.9,
+      "subgroup_dimension": "Building Type",
+      "subgroup": "NonResidential",
+      "n_observations": 3070,
+      "std_coverage": 0.7485342019543973,
+      "weighted_coverage": 0.7661237785016287,
+      "std_median_width": 131.59564208984375,
+      "weighted_median_width": 125.17722350283788,
+      "coverage_gap_std": -0.15146579804560267,
+      "coverage_gap_weighted": -0.1338762214983713
+    },
+    {
+      "target_coverage": 0.9,
+      "subgroup_dimension": "Building Type",
+      "subgroup": "Multifamily LR (1-4)",
+      "n_observations": 2167,
+      "std_coverage": 0.9880018458698662,
+      "weighted_coverage": 0.8800184586986618,
+      "std_median_width": 102.78736877441406,
+      "weighted_median_width": 50.68627084794149,
+      "coverage_gap_std": 0.08800184586986615,
+      "coverage_gap_weighted": -0.019981541301338224
+    },
+    {
+      "target_coverage": 0.9,
+      "subgroup_dimension": "Building Type",
+      "subgroup": "Multifamily MR (5-9)",
+      "n_observations": 1255,
+      "std_coverage": 0.9083665338645418,
+      "weighted_coverage": 0.8653386454183267,
+      "std_median_width": 123.59306335449219,
+      "weighted_median_width": 87.86715982224511,
+      "coverage_gap_std": 0.00836653386454178,
+      "coverage_gap_weighted": -0.0346613545816733
+    },
+    {
+      "target_coverage": 0.9,
+      "subgroup_dimension": "Building Type",
+      "subgroup": "Multifamily HR (10+)",
+      "n_observations": 314,
+      "std_coverage": 0.5127388535031847,
+      "weighted_coverage": 0.7133757961783439,
+      "std_median_width": 184.6610107421875,
+      "weighted_median_width": 457.1629298467655,
+      "coverage_gap_std": -0.3872611464968153,
+      "coverage_gap_weighted": -0.18662420382165612
+    },
+    {
+      "target_coverage": 0.9,
+      "subgroup_dimension": "Building Type",
+      "subgroup": "School",
+      "n_observations": 306,
+      "std_coverage": 0.8496732026143791,
+      "weighted_coverage": 0.8202614379084967,
+      "std_median_width": 143.32861328125,
+      "weighted_median_width": 108.27647907317919,
+      "coverage_gap_std": -0.05032679738562096,
+      "coverage_gap_weighted": -0.07973856209150332
+    }
+  ]
+}

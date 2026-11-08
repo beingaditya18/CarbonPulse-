@@ -1,0 +1,32 @@
+{
+  "status": "COMPLETED",
+  "scenarios": [
+    {
+      "scenario": "Baseline_Clean_Reporting",
+      "policy": "Standard_Inference",
+      "audit_budget_pct": 51.520499592723326,
+      "high_emitter_recall_pct": 80.86642599277978,
+      "large_stratum_recall_pct": 100.0,
+      "missed_emissions_mt": 59629.78,
+      "missed_emitters_count": 583
+    },
+    {
+      "scenario": "Adversarial_MNAR_Top10pct",
+      "policy": "Blind_Median_Imputation",
+      "audit_budget_pct": 45.94080912299756,
+      "high_emitter_recall_pct": 68.19822776501478,
+      "large_stratum_recall_pct": 45.48022598870056,
+      "missed_emissions_mt": 172932.16999999998,
+      "missed_emitters_count": 969
+    },
+    {
+      "scenario": "Adversarial_MNAR_Top10pct",
+      "policy": "Strict_Abstention_AUDIT_REQUIRED",
+      "audit_budget_pct": 51.520499592723326,
+      "high_emitter_recall_pct": 80.86642599277978,
+      "large_stratum_recall_pct": 100.0,
+      "missed_emissions_mt": 59629.78,
+      "missed_emitters_count": 583
+    }
+  ]
+}

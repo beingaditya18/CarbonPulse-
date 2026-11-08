@@ -1,6 +1,7 @@
 """
 Module: finalize_release.py
-Author: CarbonPulse Research Engineering Team
+Author: Aditya Mandloi, Dr. Ashok Kumar Gupta
+Affiliation: School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India
 Description:
     Final orchestration and release reconciliation script for Q1 journal revision.
     1. Orchestrates the execution of all new rigorous evaluation benchmarks:

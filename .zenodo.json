@@ -4,10 +4,12 @@
   "description": "Replication package and empirical benchmarking pipeline for screening-level greenhouse gas emissions estimation using municipal building energy benchmarking records, physics-constrained feature engineering, and cluster-aware statistical evaluation.",
   "creators": [
     {
-      "name": "Mandloi, Aditya"
+      "name": "Mandloi, Aditya",
+      "affiliation": "School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India"
     },
     {
-      "name": "Agrawal, Anshika"
+      "name": "Gupta, Ashok Kumar",
+      "affiliation": "School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India"
     }
   ],
   "access_right": "open",

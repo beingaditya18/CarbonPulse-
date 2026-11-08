@@ -1,6 +1,7 @@
 """
 Module: rf_perturbation_diagnostic.py
-Author: CarbonPulse Research Engineering Team
+Author: Aditya Mandloi, Dr. Ashok Kumar Gupta
+Affiliation: School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India
 Description:
     In-depth diagnostic script dissecting the anomalous +49.92% prediction response
     observed in Random Forest under physically bounded +5% Gross Floor Area (GFA) perturbation.

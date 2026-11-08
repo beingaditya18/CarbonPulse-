@@ -1,6 +1,7 @@
 """
 Master Reproducibility Script: run_all.py
-Author: CarbonPulse Research Engineering Team
+Author: Aditya Mandloi, Dr. Ashok Kumar Gupta
+Affiliation: School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India
 Description:
     One-command master pipeline executing all required tasks (T1-T8)
     for the Journal of Building Engineering research paper:

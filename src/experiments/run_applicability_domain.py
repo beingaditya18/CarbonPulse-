@@ -1,6 +1,7 @@
 """
 Module: run_applicability_domain.py
-Author: CarbonPulse Research Engineering Team
+Author: Aditya Mandloi, Dr. Ashok Kumar Gupta
+Affiliation: School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India
 Description:
     Implements Applicability Domain (AD) assessment for building carbon emissions models:
     1. Nearest-Neighbour Distance using Gower metric for mixed continuous and categorical features.

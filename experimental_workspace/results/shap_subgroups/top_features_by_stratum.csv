@@ -1,0 +1,31 @@
+stratum,rank,feature_name,mean_abs_shap
+Small (<50k sq ft),1,PropertyGFABuildings,0.44125789403915405
+Small (<50k sq ft),2,BuildingType_Multifamily LR (1-4),0.18084023892879486
+Small (<50k sq ft),3,BuildingAge,0.1470169574022293
+Small (<50k sq ft),4,FloorAreaPerFloor,0.1466931700706482
+Small (<50k sq ft),5,PropertyGFATotal,0.11321517080068588
+Small (<50k sq ft),6,VintageEra_Pre-1950,0.10373210906982422
+Small (<50k sq ft),7,LogGFABuildings,0.08325798809528351
+Small (<50k sq ft),8,Latitude,0.07109344005584717
+Small (<50k sq ft),9,PrimaryUseCategory_Non-Refrigerated Warehouse,0.05241534113883972
+Small (<50k sq ft),10,Longitude,0.03918369859457016
+Medium (50k-200k sq ft),1,PropertyGFABuildings,0.2749330401420593
+Medium (50k-200k sq ft),2,BuildingType_Multifamily LR (1-4),0.12838181853294373
+Medium (50k-200k sq ft),3,BuildingAge,0.09565771371126175
+Medium (50k-200k sq ft),4,PropertyGFATotal,0.07950916141271591
+Medium (50k-200k sq ft),5,Latitude,0.07141442596912384
+Medium (50k-200k sq ft),6,FloorAreaPerFloor,0.0698942020535469
+Medium (50k-200k sq ft),7,PrimaryUseCategory_Office,0.06152423843741417
+Medium (50k-200k sq ft),8,LogGFABuildings,0.055322762578725815
+Medium (50k-200k sq ft),9,NumberofFloors,0.04726304113864899
+Medium (50k-200k sq ft),10,PrimaryUseCategory_Hotel,0.0467158742249012
+Large (>200k sq ft),1,PropertyGFABuildings,1.088214635848999
+Large (>200k sq ft),2,PropertyGFATotal,0.29346591234207153
+Large (>200k sq ft),3,LogGFABuildings,0.21160513162612915
+Large (>200k sq ft),4,PrimaryUseCategory_Office,0.14611510932445526
+Large (>200k sq ft),5,FloorAreaPerFloor,0.10222508758306503
+Large (>200k sq ft),6,BuildingType_Hospital,0.08781960606575012
+Large (>200k sq ft),7,BuildingType_Multifamily LR (1-4),0.07667160034179688
+Large (>200k sq ft),8,BuildingAge,0.07114126533269882
+Large (>200k sq ft),9,Latitude,0.06706909835338593
+Large (>200k sq ft),10,NumberofFloors,0.05396267771720886

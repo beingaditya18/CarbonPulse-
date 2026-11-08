@@ -1,0 +1,4 @@
+scenario,policy,audit_budget_pct,high_emitter_recall_pct,large_stratum_recall_pct,missed_emissions_mt,missed_emitters_count
+Baseline_Clean_Reporting,Standard_Inference,51.520499592723326,80.86642599277978,100.0,59629.78,583
+Adversarial_MNAR_Top10pct,Blind_Median_Imputation,45.94080912299756,68.19822776501478,45.48022598870056,172932.16999999998,969
+Adversarial_MNAR_Top10pct,Strict_Abstention_AUDIT_REQUIRED,51.520499592723326,80.86642599277978,100.0,59629.78,583

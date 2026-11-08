@@ -1,0 +1,88 @@
+{
+  "master_evaluation": {
+    "split_id": "master_evaluation_holdout_seed42",
+    "split_uuid": "df719ae6-40c8-5bec-ac43-3ad553024f82",
+    "random_seed": 42,
+    "train_observations": 29364,
+    "test_observations": 7366,
+    "train_buildings": 3024,
+    "test_buildings": 757,
+    "zero_leakage": true,
+    "overlap_count": 0,
+    "split_path": "experimental_workspace/data/splits\\master_evaluation_holdout_seed42.parquet"
+  },
+  "conformal_calibration": {
+    "split_id": "conformal_calibration_split_seed42",
+    "split_uuid": "375b2787-c823-5742-9ce6-0531efa38e00",
+    "random_seed": 42,
+    "calibration_fraction": 0.25,
+    "train_proper_observations": 21967,
+    "calibration_observations": 7397,
+    "train_proper_buildings": 2268,
+    "calibration_buildings": 756,
+    "zero_leakage": true,
+    "overlap_count": 0,
+    "split_path": "experimental_workspace/data/splits\\conformal_calibration_split_seed42.parquet"
+  },
+  "temporal_validation": {
+    "split_id": "temporal_chronological_split_2015_2022_to_2023_2025",
+    "split_uuid": "a9e7d7e6-6687-5cbe-a22f-b21326fab6db",
+    "train_years": "2015-2022",
+    "test_years": "2023-2025",
+    "train_observations": 25866,
+    "test_observations": 10420,
+    "train_unique_buildings": 3550,
+    "test_unique_buildings": 3714,
+    "test_observed_buildings_count": 3538,
+    "test_unseen_buildings_count": 176,
+    "test_observed_observations_count": 10061,
+    "test_unseen_observations_count": 359,
+    "temporal_chronology_preserved": true,
+    "split_path": "experimental_workspace/data/splits\\temporal_chronological_split_2015_2022_to_2023_2025.parquet"
+  },
+  "grouped_kfold": {
+    "split_id": "grouped_5fold_cross_validation",
+    "split_uuid": "add3c263-9f89-521f-8598-08eb7236920d",
+    "n_folds": 5,
+    "all_folds_zero_overlap": true,
+    "folds": [
+      {
+        "fold": 0,
+        "train_obs": 23491,
+        "val_obs": 5873,
+        "val_unique_buildings": 605,
+        "overlap": 0
+      },
+      {
+        "fold": 1,
+        "train_obs": 23491,
+        "val_obs": 5873,
+        "val_unique_buildings": 605,
+        "overlap": 0
+      },
+      {
+        "fold": 2,
+        "train_obs": 23491,
+        "val_obs": 5873,
+        "val_unique_buildings": 605,
+        "overlap": 0
+      },
+      {
+        "fold": 3,
+        "train_obs": 23491,
+        "val_obs": 5873,
+        "val_unique_buildings": 605,
+        "overlap": 0
+      },
+      {
+        "fold": 4,
+        "train_obs": 23492,
+        "val_obs": 5872,
+        "val_unique_buildings": 604,
+        "overlap": 0
+      }
+    ],
+    "split_path": "experimental_workspace/data/splits\\grouped_5fold_cross_validation.parquet"
+  },
+  "integrity_passed": true
+}

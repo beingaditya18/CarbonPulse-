@@ -2,8 +2,13 @@
 
 **Project:** Explainable AI for Carbon Emissions Estimation: A Comparative Evaluation of Predictive Accuracy, Interpretability, and Computational Efficiency  
 **Repository:** `CarbonPulse AI+`  
-**Author / Maintainer:** Senior Machine Learning & Environmental Data Science Research Team  
+**Authors:** Aditya Mandloi (Corresponding Author: [adityamandloi10@gmail.com](mailto:adityamandloi10@gmail.com)), Dr. Ashok Kumar Gupta  
+**Affiliation:** School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India  
 **Standard Environment:** Python 3.12.6, Windows / Linux / macOS  
+
+### Author Contributions (CRediT)
+* **Aditya Mandloi:** Conceptualization, methodology, software, validation, formal analysis, investigation, data curation, writing – original draft, and visualization.
+* **Dr. Ashok Kumar Gupta:** Supervision, academic mentoring, guidance, and validation.  
 
 ---
 

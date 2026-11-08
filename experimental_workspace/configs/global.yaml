@@ -1,0 +1,35 @@
+# CarbonPulse AI+ — Global Experimental Environment Configuration
+system:
+  environment_name: "carbonpulse_experiments"
+  python_version: "3.12.6"
+  hardware_target: "cpu"
+  threads: 8
+  random_seed: 42
+  experimenter: "Aditya Mandloi"
+  supervisor: "Dr. Ashok Kumar Gupta"
+  institution: "School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India"
+
+directories:
+  base_dir: "experimental_workspace"
+  configs_dir: "experimental_workspace/configs"
+  data_dir: "experimental_workspace/data"
+  manifests_dir: "experimental_workspace/data/manifests"
+  external_data_dir: "experimental_workspace/data/external"
+  validation_dir: "experimental_workspace/data/validation"
+  splits_dir: "experimental_workspace/data/splits"
+  logs_dir: "experimental_workspace/logs"
+  results_dir: "experimental_workspace/results"
+  figures_dir: "experimental_workspace/figures"
+  reports_dir: "experimental_workspace/reports"
+  baseline_data_raw: "data/raw/seattle_building_energy_benchmarking_raw.csv"
+  baseline_data_processed: "data/processed"
+  baseline_models_dir: "models"
+  baseline_results_dir: "results"
+
+logging:
+  level: "INFO"
+  format: "[%(asctime)s] [%(levelname)s] [%(name)s]: %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+  log_to_file: true
+  log_to_console: true
+

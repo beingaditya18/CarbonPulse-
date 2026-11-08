@@ -1,0 +1,72 @@
+{
+  "experiment": "exp3_full_perturbation",
+  "status": "COMPLETED",
+  "n_buildings_evaluated": 757,
+  "scales_evaluated": [
+    0.01,
+    0.05,
+    0.1,
+    -0.05
+  ],
+  "models_evaluated": [
+    "rf",
+    "xgboost",
+    "ridge"
+  ],
+  "plus5_summary": [
+    {
+      "model": "rf",
+      "delta": 0.05,
+      "delta_pct_nominal": 5.0,
+      "n_buildings": 757,
+      "mean_pct_change": 47.667751618235116,
+      "median_pct_change": 0.21717685831209166,
+      "p25_pct_change": -28.317918705591797,
+      "p75_pct_change": 73.09924227274801,
+      "p5_pct_change": -63.95440968740682,
+      "p95_pct_change": 342.0593125677558,
+      "std_pct_change": 123.48691611790724,
+      "mean_elasticity": 9.533550323647024,
+      "median_elasticity": 0.04343537166241833,
+      "extreme_outliers_over_20pct": 538,
+      "extreme_outliers_over_40pct": 369,
+      "non_monotonic_buildings": 377
+    },
+    {
+      "model": "xgboost",
+      "delta": 0.05,
+      "delta_pct_nominal": 5.0,
+      "n_buildings": 757,
+      "mean_pct_change": 8.437236785888672,
+      "median_pct_change": 1.1513768434524536,
+      "p25_pct_change": -13.724409103393555,
+      "p75_pct_change": 22.151140213012695,
+      "p5_pct_change": -37.74321823120117,
+      "p95_pct_change": 70.0798477172851,
+      "std_pct_change": 39.04296875,
+      "mean_elasticity": 1.6874473094940186,
+      "median_elasticity": 0.23027536273002625,
+      "extreme_outliers_over_20pct": 332,
+      "extreme_outliers_over_40pct": 120,
+      "non_monotonic_buildings": 367
+    },
+    {
+      "model": "ridge",
+      "delta": 0.05,
+      "delta_pct_nominal": 5.0,
+      "n_buildings": 757,
+      "mean_pct_change": 35.91002648538054,
+      "median_pct_change": 18.192947574596136,
+      "p25_pct_change": -44.99844623531866,
+      "p75_pct_change": 109.74681661951841,
+      "p5_pct_change": -76.43642270244565,
+      "p95_pct_change": 196.49225066796785,
+      "std_pct_change": 89.38548735606719,
+      "mean_elasticity": 7.182005297076109,
+      "median_elasticity": 3.6385895149192273,
+      "extreme_outliers_over_20pct": 648,
+      "extreme_outliers_over_40pct": 542,
+      "non_monotonic_buildings": 326
+    }
+  ]
+}

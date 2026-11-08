@@ -1,6 +1,7 @@
 """
 Module: external_loader.py
-Author: CarbonPulse Research Engineering Team
+Author: Aditya Mandloi, Dr. Ashok Kumar Gupta
+Affiliation: School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India
 Description:
     Modular external validation infrastructure for evaluating CarbonPulse ML models
     on cross-municipal benchmarking registries (e.g., New York City Local Law 84 / LL84,

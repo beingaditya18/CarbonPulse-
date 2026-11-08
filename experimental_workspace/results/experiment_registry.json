@@ -1,0 +1,126 @@
+[
+  {
+    "experiment_id": "exp1_risk_control",
+    "run_uuid": "6ce15749-126f-4882-9f8e-b512c250018c",
+    "status": "COMPLETED",
+    "staged_timestamp": "2026-11-08T12:41:42.212529",
+    "git_commit": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
+    "random_seed": 42,
+    "split_ref": "master_evaluation_holdout_seed42",
+    "artifacts_count": 4,
+    "warnings_count": 0,
+    "timestamp_staged": "2026-11-08T12:41:42.212529"
+  },
+  {
+    "experiment_id": "exp2_tabnet_baseline",
+    "run_uuid": "b98bf7a7-3309-4da3-831d-8f11d3d95da9",
+    "status": "COMPLETED",
+    "staged_timestamp": "2026-11-08T12:41:42.212529",
+    "git_commit": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
+    "random_seed": 42,
+    "split_ref": "master_evaluation_holdout_seed42",
+    "artifacts_count": 4,
+    "warnings_count": 0,
+    "timestamp_staged": "2026-11-08T12:41:42.212529"
+  },
+  {
+    "experiment_id": "exp3_full_perturbation",
+    "run_uuid": "580e67cf-9817-45f8-a431-bd1d718d9cdd",
+    "status": "COMPLETED",
+    "staged_timestamp": "2026-11-08T12:41:42.212529",
+    "git_commit": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
+    "random_seed": 42,
+    "split_ref": "master_evaluation_holdout_seed42",
+    "artifacts_count": 4,
+    "warnings_count": 0,
+    "timestamp_staged": "2026-11-08T12:41:42.212529"
+  },
+  {
+    "experiment_id": "exp4_locally_weighted_conformal",
+    "run_uuid": "7cdb07a3-11c2-4b58-8c66-142592a9ac7c",
+    "status": "COMPLETED",
+    "staged_timestamp": "2026-11-08T12:41:42.212529",
+    "git_commit": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
+    "random_seed": 42,
+    "split_ref": "master_evaluation_holdout_seed42",
+    "artifacts_count": 5,
+    "warnings_count": 0,
+    "timestamp_staged": "2026-11-08T12:41:42.212529"
+  },
+  {
+    "experiment_id": "exp5_paired_audit_budget",
+    "run_uuid": "3797cd2f-6b9d-467b-8717-ec5cf7fc4f68",
+    "status": "COMPLETED",
+    "staged_timestamp": "2026-11-08T12:41:42.212529",
+    "git_commit": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
+    "random_seed": 42,
+    "split_ref": "master_evaluation_holdout_seed42",
+    "artifacts_count": 4,
+    "warnings_count": 0,
+    "timestamp_staged": "2026-11-08T12:41:42.212529"
+  },
+  {
+    "experiment_id": "exp6_shap_subgroups",
+    "run_uuid": "7aaf37c6-ff30-4fa1-937d-47016d8f6490",
+    "status": "COMPLETED",
+    "staged_timestamp": "2026-11-08T12:41:42.212529",
+    "git_commit": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
+    "random_seed": 42,
+    "split_ref": "master_evaluation_holdout_seed42",
+    "artifacts_count": 4,
+    "warnings_count": 0,
+    "timestamp_staged": "2026-11-08T12:41:42.212529"
+  },
+  {
+    "experiment_id": "exp7_regularized_mahalanobis",
+    "run_uuid": "8673e1e6-1d73-4336-9d98-5f3dab619474",
+    "status": "COMPLETED",
+    "staged_timestamp": "2026-11-08T12:41:42.212529",
+    "git_commit": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
+    "random_seed": 42,
+    "split_ref": "master_evaluation_holdout_seed42",
+    "artifacts_count": 4,
+    "warnings_count": 0,
+    "timestamp_staged": "2026-11-08T12:41:42.212529"
+  },
+  {
+    "experiment_id": "exp8_external_validation_readiness",
+    "run_uuid": "44709be0-e980-4e45-8284-76e6644d1e44",
+    "status": "COMPLETED",
+    "staged_timestamp": "2026-11-08T12:41:42.212529",
+    "git_commit": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
+    "random_seed": 42,
+    "split_ref": "master_evaluation_holdout_seed42",
+    "artifacts_count": 2,
+    "warnings_count": 0,
+    "timestamp_staged": "2026-11-08T12:41:42.212529"
+  },
+  {
+    "experiment_id": "test_staging_verification",
+    "run_uuid": "99844df7-5873-409d-a694-e240974db4d7",
+    "description": "Verification of experiment registry functionality",
+    "status": "STAGED",
+    "timestamp_staged": "2026-11-08T14:34:44.399395",
+    "timestamp_start": null,
+    "timestamp_end": null,
+    "runtime_seconds": 0.0,
+    "git_commit": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
+    "random_seed": 42,
+    "config_path": "experimental_workspace/configs/global.yaml",
+    "config_hash": "E7EDC524556C24113B81B9B1D76B7E9378B09EB7A1B49A29F1F3E4E8413D8CBA",
+    "input_hashes": {
+      "data/raw/seattle_building_energy_benchmarking_raw.csv": "D1A8227BF9C7C82AEA8279A67405ADD617271852A985D96BB6E4AC9070E8250F"
+    },
+    "split_ref": "master_evaluation_holdout_seed42",
+    "execution_command": "C:\\Users\\adity\\AppData\\Roaming\\Python\\Python312\\site-packages\\pytest\\__main__.py experimental_workspace/tests/ -v",
+    "environment": {
+      "python_version": "3.12.6",
+      "platform": "Windows-11-10.0.26300-SP0",
+      "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+      "machine": "AMD64"
+    },
+    "output_artifacts": [],
+    "errors_and_warnings": [],
+    "metrics": {}
+  }
+]

@@ -54,3 +54,8 @@ node_modules/
 .next/
 **/.next/
 out/
+
+# Backups and Archives
+*.zip
+baseline_backup/
+

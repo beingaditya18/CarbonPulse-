@@ -1,0 +1,9 @@
+Canonical Field Concept,Seattle Benchmark (Baseline),NYC LL84 / LL97,Boston BERDO 2.0,Data Type,Harmonization Action
+Building Identifier,OSEBuildingID,NYC_BIN (or BBL),Building_ID,Integer / String,Direct key mapping; facility-level cluster unit
+Reporting Year,DataYear,Year_Ending,Reporting_Year,Integer,Temporal filter; longitudinal alignment
+Emissions Target,TotalGHGEmissions,Total_GHG_Emissions_Metric_Tons_CO2e,Total_Site_Emissions_MTCO2e,Float,Direct metric tonnes CO2e; zero conversion needed
+Total Floor Area,PropertyGFATotal,Gross_Floor_Area_ft2,Gross_Square_Feet,Float,Square footage basis; log1p transformation
+Primary Property Type,BuildingType,Primary_Property_Type,Property_Type,Categorical,Ontological mapping to standard 7 macro-categories
+Year Built / Vintage,BuildingAge (derived from YearBuilt),Year_Built,Year_Built,Integer,Age = ReportingYear - YearBuilt
+Floor Count,NumberofFloors,Number_of_Floors,Floors,Integer,Direct integer floor count; FloorAreaPerFloor derived
+Grid Emissions Factor,0.015 kg CO2e/kWh (Hydro-dominant Seattle City Light),0.285 kg CO2e/kWh (NYISO Zone J Gas/Nuclear),0.250 kg CO2e/kWh (ISO-NE Regional Mix),Float,Marginal carbon intensity adjustment in transfer inference

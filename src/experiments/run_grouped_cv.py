@@ -1,6 +1,7 @@
 """
 Module: run_grouped_cv.py
-Author: CarbonPulse Research Engineering Team
+Author: Aditya Mandloi, Dr. Ashok Kumar Gupta
+Affiliation: School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India
 Description:
     Production-ready Grouped K-Fold Cross-Validation pipeline for building emissions estimation.
     Uses scikit-learn GroupKFold strictly on OSEBuildingID to enforce zero facility-level

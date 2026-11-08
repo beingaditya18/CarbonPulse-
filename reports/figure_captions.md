@@ -2,6 +2,9 @@
 
 **Manuscript Title:** Explainable AI for Carbon Emissions Estimation: A Comparative Evaluation of Predictive Accuracy, Interpretability, and Computational Efficiency  
 **Date:** October 2026  
+**Authors:** Aditya Mandloi¹, Dr. Ashok Kumar Gupta¹  
+*¹School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India*  
+*Corresponding email:* [adityamandloi10@gmail.com](mailto:adityamandloi10@gmail.com)  
 
 ---
 

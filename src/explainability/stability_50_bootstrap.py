@@ -1,6 +1,7 @@
 """
 Module: stability_50_bootstrap.py
-Author: CarbonPulse Research Engineering Team
+Author: Aditya Mandloi, Dr. Ashok Kumar Gupta
+Affiliation: School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India
 Description:
     Scaled Explanation Stability Experiment executing 50 bootstrap refits.
     Quantifies the rank stability of global feature importance and SHAP attributions:

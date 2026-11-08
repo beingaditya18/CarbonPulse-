@@ -1,0 +1,25 @@
+# CarbonPulse AI+ — Pinned Experimental Environment Specification
+# Python Runtime: 3.12.6 (x86_64 / AMD64)
+# Hardware Target: CPU execution (Torch CPU, Multi-core OpenMP)
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+numpy==2.0.2
+pandas==3.0.3
+scipy==1.18.0
+scikit-learn==1.9.0
+xgboost==1.7.6
+lightgbm==4.7.0
+torch==2.6.0+cpu; sys_platform == 'win32'
+torch==2.6.0; sys_platform != 'win32'
+pytorch-tabnet==4.1.0
+shap==0.52.0
+matplotlib==3.8.4
+seaborn==0.13.2
+statsmodels==0.14.6
+PyYAML==6.0.2
+joblib==1.5.3
+pytest==7.4.3
+psutil==7.0.0
+pyarrow==25.0.0
+tqdm==4.67.1

@@ -1,0 +1,79 @@
+# CarbonPulse AI+ — Eight Scientific Experiments Specification
+experiments:
+  exp1_risk_control:
+    name: "Formal Conformal Risk Control & Prespecified Screening Thresholds"
+    enabled: true
+    risk_metric: "excess_emissions_risk"
+    target_alpha: 0.10
+    conformal_bounds: [0.05, 0.10, 0.15, 0.20]
+    calibration_partition: "experimental_workspace/data/splits/conformal_calibration_split_seed42.parquet"
+    test_partition: "experimental_workspace/data/splits/master_evaluation_holdout_seed42.parquet"
+    methodology: "Learn-then-Test (LTT) and Fixed Sequence Testing"
+    output_dir: "experimental_workspace/results/risk_control"
+
+  exp2_tabnet_baseline:
+    name: "TabNet Deep Tabular Baseline with Sparsemax Interpretability"
+    enabled: true
+    model_config_ref: "models.yaml:experimental_models.tabnet"
+    input_features: "data/processed/train_features.parquet"
+    test_features: "data/processed/test_features.parquet"
+    benchmark_comparators: ["xgboost", "rf", "ridge", "ebm"]
+    output_dir: "experimental_workspace/results/tabnet"
+
+  exp3_full_perturbation:
+    name: "Full 757-Building Systematic Physical Perturbation Analysis"
+    enabled: true
+    target_buildings_count: 757
+    perturbation_scales: [0.01, 0.05, 0.10, -0.05]
+    focus_feature: "PropertyGFATotal"
+    simplex_constrained_features: ["PropertyGFABuildings", "PropertyGFAParking"]
+    diagnostic_models: ["rf", "xgboost", "ridge"]
+    output_dir: "experimental_workspace/results/perturbation"
+
+  exp4_locally_weighted_conformal:
+    name: "Locally Weighted Conformal Prediction Under Heteroscedasticity"
+    enabled: true
+    weighting_estimator: "RandomForestRegressor"
+    coverage_levels: [0.80, 0.90, 0.95]
+    local_distance_metric: "gower"
+    output_dir: "experimental_workspace/results/weighted_conformal"
+
+  exp5_paired_audit_budget:
+    name: "Formal Paired Audit-Budget Statistical Hypothesis Testing"
+    enabled: true
+    budget_fractions: [0.01, 0.05, 0.10, 0.20]
+    bootstrap_resamples: 2000
+    test_methods: ["paired_wilcoxon", "cluster_sign_flip_permutation"]
+    output_dir: "experimental_workspace/results/paired_audit"
+
+  exp6_shap_subgroups:
+    name: "Size-Class-Specific SHAP Feature Attribution Stability"
+    enabled: true
+    size_bins_sqft:
+      small: [0, 50000]
+      medium: [50000, 200000]
+      large: [200000, 10000000]
+    refits_count: 50
+    correlation_metrics: ["kendall_tau", "spearman_rho"]
+    output_dir: "experimental_workspace/results/shap_subgroups"
+
+  exp7_regularized_mahalanobis:
+    name: "Regularized Mahalanobis Distance Applicability Domain Calculation"
+    enabled: true
+    covariance_estimator: "LedoitWolf"
+    threshold_percentiles: [95, 99]
+    output_dir: "experimental_workspace/results/mahalanobis"
+
+  exp8_external_validation_readiness:
+    name: "Cross-Municipal Schema Harmonization & Readiness Ingestion"
+    enabled: true
+    target_municipalities:
+      - name: "NYC_LL84"
+        jurisdiction: "New York City, NY"
+        mandate: "Local Law 84 / Local Law 97"
+      - name: "Boston_BERDO"
+        jurisdiction: "Boston, MA"
+        mandate: "Building Energy Reporting and Disclosure Ordinance"
+    status: "interface_ready_awaiting_raw_dataset_integration"
+    output_dir: "experimental_workspace/results/external_validation"
+

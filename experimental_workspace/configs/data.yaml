@@ -1,0 +1,87 @@
+# CarbonPulse AI+ — Dataset Schema and Partitioning Specification
+dataset:
+  name: "Seattle Building Energy Benchmarking"
+  statutory_authority: "City of Seattle Office of Sustainability & Environment (SMC 22.920)"
+  raw_path: "data/raw/seattle_building_energy_benchmarking_raw.csv"
+  processed_dir: "data/processed"
+  sha256_raw: "D1A8227BF9C7C82AEA8279A67405ADD617271852A985D96BB6E4AC9070E8250F"
+
+identifiers:
+  building_id: "OSEBuildingID"
+  annual_observation_id: "DataYear"
+  compound_key: ["OSEBuildingID", "DataYear"]
+  tracking_row_id: "row_id"
+
+target:
+  column: "TotalGHGEmissions"
+  units: "Metric Tons CO2e / yr"
+  log_transform: true
+  transform_fn: "log1p"
+  inverse_transform_fn: "expm1"
+  clip_bounds: [0.0, 100000.0]
+
+benchmarks:
+  intensity_column: "GHGEmissionsIntensity"
+  intensity_units: "kg CO2e / sq ft / yr"
+  floor_area_column: "PropertyGFATotal"
+  floor_area_units: "sq ft"
+
+features:
+  numeric:
+    - "BuildingAge"
+    - "NumberofFloors"
+    - "NumberofBuildings"
+    - "PropertyGFATotal"
+    - "PropertyGFABuildings"
+    - "PropertyGFAParking"
+    - "FloorAreaPerFloor"
+    - "ParkingRatio"
+    - "LogGFATotal"
+    - "LogGFABuildings"
+    - "Latitude"
+    - "Longitude"
+  categorical:
+    - "BuildingType"
+    - "PrimaryUseCategory"
+    - "Neighborhood"
+    - "VintageEra"
+    - "CouncilDistrict"
+  total_transformed_count: 59
+
+leakage_prevention:
+  withheld_meter_columns:
+    - "Electricity(kWh)"
+    - "NaturalGas(therms)"
+    - "SteamUse(kBtu)"
+    - "SiteEnergyUse(kBtu)"
+    - "SiteEUI(kBtu/sf)"
+    - "SourceEUI(kBtu/sf)"
+    - "SiteEUIWN(kBtu/sf)"
+    - "SourceEUIWN(kBtu/sf)"
+    - "Electricity(kBtu)"
+    - "SteamUse(kBtu)"
+
+split_rules:
+  master_evaluation:
+    strategy: "GroupShuffleSplit"
+    group_column: "OSEBuildingID"
+    test_size: 0.20
+    random_seed: 42
+    expected_train_buildings: 3024
+    expected_test_buildings: 757
+    expected_train_records: 29364
+    expected_test_records: 7366
+  conformal_calibration:
+    strategy: "GroupShuffleSplit"
+    group_column: "OSEBuildingID"
+    source_partition: "train_development"
+    calibration_size: 0.25
+    random_seed: 42
+  temporal_validation:
+    strategy: "ChronologicalYearSplit"
+    time_column: "DataYear"
+    train_years: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+    test_years: [2023, 2024, 2025]
+    expected_train_records: 26269
+    expected_test_records: 10461
+

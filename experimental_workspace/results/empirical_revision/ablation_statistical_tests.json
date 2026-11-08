@@ -1,0 +1,35 @@
+[
+  {
+    "comparison": "Top-8 Features vs Full 59 Features",
+    "obs_mean_diff_mae": 15.426630991770784,
+    "ci_95_diff": [
+      12.674140481469362,
+      18.246827077678766
+    ],
+    "permutation_p_value": 0.0,
+    "wilcoxon_stat": 11549457.5,
+    "wilcoxon_p_value": 2.1827756983900157e-28
+  },
+  {
+    "comparison": "Top-5 Features vs Full 59 Features",
+    "obs_mean_diff_mae": 12.610310912893546,
+    "ci_95_diff": [
+      8.35570156171537,
+      16.582809672998916
+    ],
+    "permutation_p_value": 0.0,
+    "wilcoxon_stat": 10818153.5,
+    "wilcoxon_p_value": 3.097351875231299e-51
+  },
+  {
+    "comparison": "Top-8 Features vs Median Baseline",
+    "obs_mean_diff_mae": -25.411478212232538,
+    "ci_95_diff": [
+      -28.542982340224828,
+      -22.279382699374043
+    ],
+    "permutation_p_value": 0.0,
+    "wilcoxon_stat": 7877914.0,
+    "wilcoxon_p_value": 3.01674807442318e-213
+  }
+]

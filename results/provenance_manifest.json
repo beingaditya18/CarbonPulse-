@@ -1,8 +1,8 @@
 {
   "manifest_version": "2.0.0",
-  "generated_timestamp": "2026-10-29T18:25:35.052247",
+  "generated_timestamp": "2026-11-08T11:41:03.375924",
   "git_provenance": {
-    "commit_hash": "64f2d2c331d090a82bf2a48e643748fa37f740b2",
+    "commit_hash": "b21bcdd52a03f12a47c711628fc11a7d028ca82f",
     "branch": "main",
     "clean": false
   },
@@ -49,20 +49,20 @@
       {
         "path": "results/cross_validation_metrics.csv",
         "exists": true,
-        "size_bytes": 2329,
-        "sha256": "E5C69FE9C4C4371A79DB527C1B0280B9CBA70A6439B0C8C0EB042F6754B32C00"
+        "size_bytes": 2169,
+        "sha256": "37914A946E70B917FE4DF4FFB073FBC43E6BAE5F6F1DF4CD9396E9C60693A1AE"
       },
       {
         "path": "results/cross_validation_summary.csv",
         "exists": true,
-        "size_bytes": 731,
-        "sha256": "7CDBE3BFAA44CB312A1D71F8476405B86A7A457B4C4EC00DD76EBF5A9D05E536"
+        "size_bytes": 1236,
+        "sha256": "74ED0E023F3D8A2B934BC0B0563A61B2144B1BB4493BFC907D82AC839D678356"
       },
       {
         "path": "reports/cross_validation_report.md",
         "exists": true,
-        "size_bytes": 5002,
-        "sha256": "AFF05389F237311F887902E3208492C8D7450A07C684ADBC6A7C238A577A131B"
+        "size_bytes": 5774,
+        "sha256": "23F5311191AE036D8E47AB08ADE1A5B74E1891F50BB86EA55B923AAB08553349"
       }
     ],
     "final_held_out_test_partition": [
@@ -75,14 +75,14 @@
       {
         "path": "results/test_predictions.csv",
         "exists": true,
-        "size_bytes": 1069455,
-        "sha256": "CB343DFF1F8ED7B93B2E9854AB046EDACF542F471E0108B40DB771BAA08B4114"
+        "size_bytes": 1069536,
+        "sha256": "3803399F61B968F373B84942D186471A34D6A70B94CB3E92300F302D597AAE2A"
       },
       {
         "path": "results/residuals.csv",
         "exists": true,
-        "size_bytes": 1174854,
-        "sha256": "9866A8C35954D02036CFD4647972E9E32F3FDA0141972DCD711F95D27650FA51"
+        "size_bytes": 1174853,
+        "sha256": "CB699D663A9EA609F625ACF4EDCF2E5486DA1AD4A0717CD035E74C940CC3E577"
       },
       {
         "path": "results/subgroup_performance.csv",
@@ -93,8 +93,8 @@
       {
         "path": "results/paired_model_comparisons.csv",
         "exists": true,
-        "size_bytes": 1858,
-        "sha256": "44FBCF89B7958F4ACF2DF7BD31B48E447266B9430B139A4676DB805889765510"
+        "size_bytes": 1977,
+        "sha256": "2533F8E75D0313B145C54CC4D53F64DF641C1289EF87B209273B6916D647EDE7"
       },
       {
         "path": "results/pareto_analysis.csv",
@@ -111,8 +111,8 @@
       {
         "path": "reports/statistical_validation.md",
         "exists": true,
-        "size_bytes": 3915,
-        "sha256": "6C2227375B5DAD8C69D237261186EC662543BDE481833EB38C5E976942023221"
+        "size_bytes": 3541,
+        "sha256": "404B2FA38A5EDC6574A12C03CF597ACA5DAE9CF593E2E615768454EF5FE179D0"
       }
     ],
     "explainability_and_stability": [
@@ -187,8 +187,8 @@
       {
         "path": "reports/computational_efficiency.md",
         "exists": true,
-        "size_bytes": 2953,
-        "sha256": "1499BC478C7EF6A8132D20E6219BE3C82FDB4DF0601A6B7F4AA7248705BAB040"
+        "size_bytes": 3158,
+        "sha256": "3DFEC03850A572FBEEA9B52F082F46D6F2F1A8D4FF45AF10901F433F8EE849D7"
       }
     ],
     "dataset_and_partitioning_provenance": [
@@ -219,22 +219,22 @@
       {
         "path": "reports/dataset_audit.md",
         "exists": true,
-        "size_bytes": 7261,
-        "sha256": "228F0533E1F464872FC5F300CCCF045D18534D048690D92839D7EA468811A3D0"
+        "size_bytes": 7426,
+        "sha256": "C3B493541EB1DEA69AA5185EBE94A77FBF2643DED21637A8394C1C3222AC61CD"
       },
       {
         "path": "reports/data_quality_report.md",
         "exists": true,
-        "size_bytes": 3918,
-        "sha256": "A4EE5346B3CF97F2933BB5883508F1C4E9889FB5448BB31B7A6C20A515DB52C3"
+        "size_bytes": 3995,
+        "sha256": "E042CAEC02BDCE24CB96FE204EA8C4DC2567BD8AF5610555AC38E037CB99BFB9"
       }
     ],
     "publication_tables": [
       {
         "path": "tables/tab01_dataset_properties.md",
         "exists": true,
-        "size_bytes": 1829,
-        "sha256": "27176D67EF7FB1BC41D6B2DEB82A295B83B2067A015E602400B2BEE1B57617A6"
+        "size_bytes": 1851,
+        "sha256": "BD933A132E3CDB0C1B840AD894AAD4231B638C5BF1AC462656771923E78D8A64"
       },
       {
         "path": "tables/tab02_experimental_configurations.md",
@@ -251,8 +251,8 @@
       {
         "path": "tables/tab04_explanation_stability.md",
         "exists": true,
-        "size_bytes": 975,
-        "sha256": "77A4F034BB100E8275C4EDED0EE63487B7E6E7894E5CB018B5DB018F7A464C0A"
+        "size_bytes": 963,
+        "sha256": "4C311821EF7D4C541A059AEDD4F63E56AC392FE3712CA494DF6BF3E9CB159487"
       },
       {
         "path": "tables/tab05_computational_efficiency.md",
@@ -263,8 +263,8 @@
       {
         "path": "tables/tab06_statistical_comparisons.md",
         "exists": true,
-        "size_bytes": 1351,
-        "sha256": "69C61A1B6DF9DFED1C289D2D5A2239190911AF1FF045565FBE77080CCB54E2C2"
+        "size_bytes": 1239,
+        "sha256": "4D14F15B0E89E0EBAF79E76CA438DB3EF70ED9C609B71E611A5463A3D98047DE"
       },
       {
         "path": "tables/tab07_ablation_analysis.md",

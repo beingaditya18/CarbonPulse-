@@ -1,0 +1,58 @@
+# CarbonPulse AI+ — Empirical Revision Configuration
+# Addressing Top-Tier Peer Review Feedback
+seed: 42
+compute:
+  device: "cpu"
+  num_threads: 8
+
+task1_probabilistic_ensemble:
+  num_models: 5
+  hidden_dims: [128, 64, 32]
+  dropout: 0.15
+  adversarial_training: true
+  adversarial_epsilon: 0.01
+  learning_rate: 0.005
+  weight_decay: 1.0e-4
+  max_epochs: 45
+  batch_size: 256
+  loss_type: "heteroscedastic_nll" # Predicts mean and variance
+
+task1_parsimonious_ablation:
+  feature_counts: [3, 5, 8, 12, 20, 35, 59]
+  selector_method: "treeshar_rfe"
+  eval_models: ["xgboost", "ridge", "rf"]
+
+task2_prespecified_risk_control:
+  historical_derivation_years: [2021, 2022]
+  statutory_fixed_taus: [50.0, 100.0]
+  target_alphas: [0.05, 0.10, 0.15, 0.20]
+  delta_confidence: 0.10 # 90% confidence
+  concentration_bound: "empirical_bernstein"
+
+task3_mnar_simulation:
+  adversarial_underreporting_fraction: 0.20
+  target_size_percentile: 90.0 # Top 10% largest facilities
+  primary_features:
+    - "PropertyGFATotal"
+    - "PropertyGFABuildings"
+    - "NumberofFloors"
+    - "BuildingAge"
+  abstention_policy:
+    enabled: true
+    missing_action: "ABSTAIN_AUDIT_REQUIRED"
+
+task4_multiplicity_correction:
+  correction_method: "holm"
+  budget_fractions: [0.01, 0.05, 0.10, 0.20]
+  permutation_iterations: 2000
+  alpha: 0.05
+
+task5_domain_adaptation:
+  large_strata_cutoff_sqft: 200000.0
+  area_density_weighting:
+    enabled: true
+    scaling_exponent: 0.65
+    min_weight: 1.0
+    max_weight: 8.0
+  conformal_coverage_targets: [0.80, 0.90, 0.95]
+

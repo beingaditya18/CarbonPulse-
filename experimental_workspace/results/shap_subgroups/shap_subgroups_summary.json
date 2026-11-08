@@ -1,0 +1,248 @@
+{
+  "experiment": "exp6_shap_subgroups",
+  "status": "COMPLETED",
+  "refits_count": 50,
+  "strata_evaluated": [
+    "Small (<50k sq ft)",
+    "Medium (50k-200k sq ft)",
+    "Large (>200k sq ft)"
+  ],
+  "stability_summary": [
+    {
+      "stratum": "Small (<50k sq ft)",
+      "n_refits": 50,
+      "n_pairwise_comparisons": 1225,
+      "mean_kendall_tau": 0.6999193429946899,
+      "median_kendall_tau": 0.700759768486023,
+      "std_kendall_tau": 0.03632161393761635,
+      "p5_kendall_tau": 0.6384098529815674,
+      "p95_kendall_tau": 0.7564312219619751,
+      "mean_spearman_rho": 0.8626070751210314,
+      "median_spearman_rho": 0.8640979559361316,
+      "std_spearman_rho": 0.03078582825737911,
+      "p5_spearman_rho": 0.8087435527390596,
+      "p95_spearman_rho": 0.9093427627926005,
+      "top1_feature": "PropertyGFABuildings",
+      "top2_feature": "BuildingType_Multifamily LR (1-4)",
+      "top3_feature": "BuildingAge"
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "n_refits": 50,
+      "n_pairwise_comparisons": 1225,
+      "mean_kendall_tau": 0.7421807050704956,
+      "median_kendall_tau": 0.743642270565033,
+      "std_kendall_tau": 0.030100323259830475,
+      "p5_kendall_tau": 0.6915834546089172,
+      "p95_kendall_tau": 0.790412187576294,
+      "mean_spearman_rho": 0.9028158061318212,
+      "median_spearman_rho": 0.9053714434776391,
+      "std_spearman_rho": 0.022218452046558212,
+      "p5_spearman_rho": 0.8634591679895112,
+      "p95_spearman_rho": 0.9364477735765195,
+      "top1_feature": "PropertyGFABuildings",
+      "top2_feature": "BuildingType_Multifamily LR (1-4)",
+      "top3_feature": "BuildingAge"
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "n_refits": 50,
+      "n_pairwise_comparisons": 1225,
+      "mean_kendall_tau": 0.7430287599563599,
+      "median_kendall_tau": 0.7432748675346375,
+      "std_kendall_tau": 0.03071918524801731,
+      "p5_kendall_tau": 0.6910303235054016,
+      "p95_kendall_tau": 0.7918858528137207,
+      "mean_spearman_rho": 0.9010152104417888,
+      "median_spearman_rho": 0.9027469316189365,
+      "std_spearman_rho": 0.023000657497677678,
+      "p5_spearman_rho": 0.8601930539006659,
+      "p95_spearman_rho": 0.9357413171851767,
+      "top1_feature": "PropertyGFABuildings",
+      "top2_feature": "PropertyGFATotal",
+      "top3_feature": "LogGFABuildings"
+    }
+  ],
+  "top_features": [
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 1,
+      "feature_name": "PropertyGFABuildings",
+      "mean_abs_shap": 0.44125789403915405
+    },
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 2,
+      "feature_name": "BuildingType_Multifamily LR (1-4)",
+      "mean_abs_shap": 0.18084023892879486
+    },
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 3,
+      "feature_name": "BuildingAge",
+      "mean_abs_shap": 0.1470169574022293
+    },
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 4,
+      "feature_name": "FloorAreaPerFloor",
+      "mean_abs_shap": 0.1466931700706482
+    },
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 5,
+      "feature_name": "PropertyGFATotal",
+      "mean_abs_shap": 0.11321517080068588
+    },
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 6,
+      "feature_name": "VintageEra_Pre-1950",
+      "mean_abs_shap": 0.10373210906982422
+    },
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 7,
+      "feature_name": "LogGFABuildings",
+      "mean_abs_shap": 0.08325798809528351
+    },
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 8,
+      "feature_name": "Latitude",
+      "mean_abs_shap": 0.07109344005584717
+    },
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 9,
+      "feature_name": "PrimaryUseCategory_Non-Refrigerated Warehouse",
+      "mean_abs_shap": 0.05241534113883972
+    },
+    {
+      "stratum": "Small (<50k sq ft)",
+      "rank": 10,
+      "feature_name": "Longitude",
+      "mean_abs_shap": 0.03918369859457016
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 1,
+      "feature_name": "PropertyGFABuildings",
+      "mean_abs_shap": 0.2749330401420593
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 2,
+      "feature_name": "BuildingType_Multifamily LR (1-4)",
+      "mean_abs_shap": 0.12838181853294373
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 3,
+      "feature_name": "BuildingAge",
+      "mean_abs_shap": 0.09565771371126175
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 4,
+      "feature_name": "PropertyGFATotal",
+      "mean_abs_shap": 0.07950916141271591
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 5,
+      "feature_name": "Latitude",
+      "mean_abs_shap": 0.07141442596912384
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 6,
+      "feature_name": "FloorAreaPerFloor",
+      "mean_abs_shap": 0.0698942020535469
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 7,
+      "feature_name": "PrimaryUseCategory_Office",
+      "mean_abs_shap": 0.06152423843741417
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 8,
+      "feature_name": "LogGFABuildings",
+      "mean_abs_shap": 0.055322762578725815
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 9,
+      "feature_name": "NumberofFloors",
+      "mean_abs_shap": 0.04726304113864899
+    },
+    {
+      "stratum": "Medium (50k-200k sq ft)",
+      "rank": 10,
+      "feature_name": "PrimaryUseCategory_Hotel",
+      "mean_abs_shap": 0.0467158742249012
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 1,
+      "feature_name": "PropertyGFABuildings",
+      "mean_abs_shap": 1.088214635848999
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 2,
+      "feature_name": "PropertyGFATotal",
+      "mean_abs_shap": 0.29346591234207153
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 3,
+      "feature_name": "LogGFABuildings",
+      "mean_abs_shap": 0.21160513162612915
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 4,
+      "feature_name": "PrimaryUseCategory_Office",
+      "mean_abs_shap": 0.14611510932445526
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 5,
+      "feature_name": "FloorAreaPerFloor",
+      "mean_abs_shap": 0.10222508758306503
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 6,
+      "feature_name": "BuildingType_Hospital",
+      "mean_abs_shap": 0.08781960606575012
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 7,
+      "feature_name": "BuildingType_Multifamily LR (1-4)",
+      "mean_abs_shap": 0.07667160034179688
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 8,
+      "feature_name": "BuildingAge",
+      "mean_abs_shap": 0.07114126533269882
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 9,
+      "feature_name": "Latitude",
+      "mean_abs_shap": 0.06706909835338593
+    },
+    {
+      "stratum": "Large (>200k sq ft)",
+      "rank": 10,
+      "feature_name": "NumberofFloors",
+      "mean_abs_shap": 0.05396267771720886
+    }
+  ]
+}

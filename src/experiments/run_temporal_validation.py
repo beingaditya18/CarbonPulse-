@@ -1,6 +1,7 @@
 """
 Module: run_temporal_validation.py
-Author: CarbonPulse Research Engineering Team
+Author: Aditya Mandloi, Dr. Ashok Kumar Gupta
+Affiliation: School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India
 Description:
     Dedicated temporal validation and cohort stratification experiment.
     Evaluates out-of-time model generalization by partitioning the Seattle Building

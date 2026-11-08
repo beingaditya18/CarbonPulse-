@@ -9,6 +9,17 @@ This repository contains the complete, reproducible, scientifically defensible e
 
 > **“Explainable Machine Learning for Screening-Level Building Emissions Estimation Without Meter Data: Accuracy, Cluster-Aware Inference, and Explanation Stability.”**
 
+### Authors & Affiliation
+* **Aditya Mandloi**¹* ([adityamandloi10@gmail.com](mailto:adityamandloi10@gmail.com))
+* **Dr. Ashok Kumar Gupta**¹
+
+¹ *School of Data Science and Forecasting, Devi Ahilya Vishwavidyalaya, Indore, India*  
+*\* Corresponding author*
+
+### Author Contributions (CRediT)
+* **Aditya Mandloi:** Conceptualization, methodology, software, validation, formal analysis, investigation, data curation, writing – original draft, and visualization.
+* **Dr. Ashok Kumar Gupta:** Supervision, academic mentoring, guidance, and validation.
+
 ---
 
 ## 1. Research Objectives & Core Findings
@@ -291,7 +302,7 @@ If you use this codebase, methodology, or empirical benchmarks, please cite:
 
 ```bibtex
 @software{mandloi2026carbonpulse,
-  author = {Mandloi, Aditya and Agrawal, Anshika},
+  author = {Mandloi, Aditya and Gupta, Ashok Kumar},
   title = {CarbonPulse: Explainable Machine Learning for Screening-Level Building Emissions Estimation Without Meter Data},
   year = {2026},
   version = {1.0.0},

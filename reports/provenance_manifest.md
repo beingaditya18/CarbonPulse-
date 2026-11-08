@@ -1,7 +1,7 @@
 # Artifact Provenance & Traceability Manifest
 
-**Manifest Generation Date:** 2026-10-29T18:25:35.052247  
-**Git Commit:** `64f2d2c331d090a82bf2a48e643748fa37f740b2` (`main`)  
+**Manifest Generation Date:** 2026-11-08T11:41:03.375924  
+**Git Commit:** `b21bcdd52a03f12a47c711628fc11a7d028ca82f` (`main`)  
 **Raw Dataset SHA-256:** `D1A8227BF9C7C82AEA8279A67405ADD617271852A985D96BB6E4AC9070E8250F`  
 **Hardware Platform:** AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD (Windows-11-10.0.26300-SP0)  
 
@@ -21,21 +21,21 @@
 ### 2.1 Cross-Validation (Development Partition Only)
 | Artifact Path | Size (Bytes) | SHA-256 Checksum |
 | :--- | :--- | :--- |
-| `results/cross_validation_metrics.csv` | 2,329 | `E5C69FE9C4C4371A...` |
-| `results/cross_validation_summary.csv` | 731 | `7CDBE3BFAA44CB31...` |
-| `reports/cross_validation_report.md` | 5,002 | `AFF05389F237311F...` |
+| `results/cross_validation_metrics.csv` | 2,169 | `37914A946E70B917...` |
+| `results/cross_validation_summary.csv` | 1,236 | `74ED0E023F3D8A2B...` |
+| `reports/cross_validation_report.md` | 5,774 | `23F5311191AE036D...` |
 
 ### 2.2 Final Evaluation (Held-Out Test Partition)
 | Artifact Path | Size (Bytes) | SHA-256 Checksum |
 | :--- | :--- | :--- |
 | `results/predictive_metrics.csv` | 1,021 | `7D10FE7A764C7C6B...` |
-| `results/test_predictions.csv` | 1,069,455 | `CB343DFF1F8ED7B9...` |
-| `results/residuals.csv` | 1,174,854 | `9866A8C35954D020...` |
+| `results/test_predictions.csv` | 1,069,536 | `3803399F61B968F3...` |
+| `results/residuals.csv` | 1,174,853 | `CB699D663A9EA609...` |
 | `results/subgroup_performance.csv` | 5,379 | `2691720E250C3CAC...` |
-| `results/paired_model_comparisons.csv` | 1,858 | `44FBCF89B7958F4A...` |
+| `results/paired_model_comparisons.csv` | 1,977 | `2533F8E75D0313B1...` |
 | `results/pareto_analysis.csv` | 1,528 | `A32E96C95F7FA1B8...` |
 | `reports/predictive_performance.md` | 14,145 | `D1C43427F7A1E715...` |
-| `reports/statistical_validation.md` | 3,915 | `6C2227375B5DAD8C...` |
+| `reports/statistical_validation.md` | 3,541 | `404B2FA38A5EDC65...` |
 
 ### 2.3 Explainability & Stability
 | Artifact Path | Size (Bytes) | SHA-256 Checksum |
@@ -55,4 +55,4 @@
 | `results/memory_benchmarks.csv` | 325 | `0F991784F47138DB...` |
 | `results/energy_benchmarks.csv` | 2,285 | `C392B6099FE14CE6...` |
 | `results/computational_benchmarks.csv` | 2,593 | `1D3864C26C835952...` |
-| `reports/computational_efficiency.md` | 2,953 | `1499BC478C7EF6A8...` |
+| `reports/computational_efficiency.md` | 3,158 | `3DFEC03850A572FB...` |

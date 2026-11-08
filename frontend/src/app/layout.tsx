@@ -29,7 +29,10 @@ export const metadata: Metadata = {
     "digital twin",
     "climate action",
   ],
-  authors: [{ name: "CarbonPulse AI+" }],
+  authors: [
+    { name: "Aditya Mandloi", url: "mailto:adityamandloi10@gmail.com" },
+    { name: "Dr. Ashok Kumar Gupta" },
+  ],
   openGraph: {
     title: "CarbonPulse AI+ — Intelligent Carbon Footprint Tracker",
     description:
