@@ -1,0 +1,42 @@
+{
+  "status": "COMPLETED",
+  "target_municipality": "Boston_BERDO",
+  "n_records": 1760,
+  "spearman_rank_correlation": 0.8052664834820272,
+  "ad_threshold_lw": 9.140837505587676,
+  "metrics": [
+    {
+      "evaluation_regime": "Raw_Seattle_Transfer_Zero_Recalibration",
+      "n_buildings": 1760,
+      "mae_physical": 1763.8899128679795,
+      "rmse_physical": 23220.234124729617,
+      "medae_physical": 249.18038825988768,
+      "r2_physical": -0.0028731784807181082,
+      "spearman_rank_rho": 0.8052664834820272,
+      "recall_statutory_50mt": 84.8894348894349,
+      "recall_statutory_100mt": 73.29700272479565
+    },
+    {
+      "evaluation_regime": "Thermodynamic_Grid_Recalibrated_Transfer",
+      "n_buildings": 1760,
+      "mae_physical": 1568.5367562327262,
+      "rmse_physical": 23121.465198512662,
+      "medae_physical": 168.29335317611697,
+      "r2_physical": 0.005640262215309999,
+      "spearman_rank_rho": 0.7027397462748916,
+      "recall_statutory_50mt": 99.75429975429975,
+      "recall_statutory_100mt": 98.36512261580381
+    },
+    {
+      "evaluation_regime": "In_Applicability_Domain (n=1514)",
+      "n_buildings": 1514,
+      "mae_physical": 1127.2458154819628,
+      "rmse_physical": 24543.751433946,
+      "medae_physical": 144.26228545074457,
+      "r2_physical": 0.003480028793150347,
+      "spearman_rank_rho": 0.6022610577955976,
+      "recall_statutory_50mt": 99.71119133574007,
+      "recall_statutory_100mt": 98.0456026058632
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "status": "ALL_UNIFIED_COMPONENTS_COMPLETED_SUCCESSFULLY",
+  "models_evaluated": [
+    "Lag1_Persistence",
+    "XGBoost_Monotonic",
+    "XGBoost_DomainAdapted",
+    "XGBoost_Standard",
+    "Ridge",
+    "TabNet",
+    "RandomForest",
+    "DeepEnsemble_M5",
+    "EBM",
+    "Median_Baseline"
+  ],
+  "top_model_r2": 0.9354135252466009,
+  "top_model_mae": 25.780869428269725,
+  "monotonicity_anomaly_rate": 0.0,
+  "reconciled_audit_tests_count": 16
+}

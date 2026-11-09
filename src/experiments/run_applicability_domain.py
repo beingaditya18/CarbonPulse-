@@ -25,7 +25,7 @@ from typing import Dict, Any, Tuple
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import RobustScaler
-from sklearn.covariance import MinCovDet
+from sklearn.covariance import LedoitWolf
 
 logging.basicConfig(
     level=logging.INFO,
@@ -191,32 +191,34 @@ def run_applicability_domain_analysis() -> Dict[str, Any]:
     )
 
     # -------------------------------------------------------------
-    # 4. Robust Mahalanobis Distance (MinCovDet) on Numeric Features
+    # 4. Regularized Mahalanobis Distance (Ledoit-Wolf) on Numeric Features
     # -------------------------------------------------------------
-    logger.info("Fitting Robust MinCovDet estimator on dev numeric features...")
-    # Add micro-jitter to prevent zero-determinant on discrete ties
-    rng = np.random.RandomState(42)
-    dev_num_mat = dev_fac_ref[NUMERIC_AD_COLS].values
-    dev_num_jittered = dev_num_mat + rng.normal(0, 1e-4, size=dev_num_mat.shape)
-
+    logger.info("Fitting Ledoit-Wolf analytical shrinkage covariance on dev numeric features...")
     scaler = RobustScaler()
-    dev_scaled = scaler.fit_transform(dev_num_jittered)
+    dev_scaled = scaler.fit_transform(dev_fac_ref[NUMERIC_AD_COLS].values)
 
-    mcd = MinCovDet(random_state=42, support_fraction=0.90)
-    mcd.fit(dev_scaled)
+    lw = LedoitWolf(assume_centered=False)
+    lw.fit(dev_scaled)
+    cov_lw = lw.covariance_
+    inv_cov_lw = np.linalg.pinv(cov_lw)
+    mean_lw = lw.location_
+    logger.info("Ledoit-Wolf shrinkage coefficient: %.4f", lw.shrinkage_)
 
     # Dev Mahalanobis threshold (95th percentile)
-    dev_mcd_dists = np.sqrt(mcd.mahalanobis(dev_scaled))
+    diff_dev = dev_scaled - mean_lw
+    dev_mcd_dists = np.sqrt(np.maximum(0.0, np.sum(diff_dev @ inv_cov_lw * diff_dev, axis=1)))
     mcd_threshold = float(np.percentile(dev_mcd_dists, 95.0))
-    logger.info("Dev Robust Mahalanobis 95th percentile threshold: %.4f", mcd_threshold)
+    logger.info("Dev Ledoit-Wolf Mahalanobis 95th percentile threshold: %.4f", mcd_threshold)
 
     # Score test facilities
     test_fac_scaled = scaler.transform(test_fac_eval[NUMERIC_AD_COLS].values)
-    test_fac_mcd = np.sqrt(mcd.mahalanobis(test_fac_scaled))
+    diff_fac = test_fac_scaled - mean_lw
+    test_fac_mcd = np.sqrt(np.maximum(0.0, np.sum(diff_fac @ inv_cov_lw * diff_fac, axis=1)))
 
     # Score test observations
     test_obs_scaled = scaler.transform(raw_test[NUMERIC_AD_COLS].values)
-    test_obs_mcd = np.sqrt(mcd.mahalanobis(test_obs_scaled))
+    diff_obs = test_obs_scaled - mean_lw
+    test_obs_mcd = np.sqrt(np.maximum(0.0, np.sum(diff_obs @ inv_cov_lw * diff_obs, axis=1)))
 
     # -------------------------------------------------------------
     # 5. Composite Applicability Domain Classification

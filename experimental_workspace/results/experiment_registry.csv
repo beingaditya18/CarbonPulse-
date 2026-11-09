@@ -7,4 +7,4 @@ exp5_paired_audit_budget,3797cd2f-6b9d-467b-8717-ec5cf7fc4f68,COMPLETED,2026-11-
 exp6_shap_subgroups,7aaf37c6-ff30-4fa1-937d-47016d8f6490,COMPLETED,2026-11-08T12:41:42.212529,b21bcdd52a03f12a47c711628fc11a7d028ca82f,42,master_evaluation_holdout_seed42,4,0
 exp7_regularized_mahalanobis,8673e1e6-1d73-4336-9d98-5f3dab619474,COMPLETED,2026-11-08T12:41:42.212529,b21bcdd52a03f12a47c711628fc11a7d028ca82f,42,master_evaluation_holdout_seed42,4,0
 exp8_external_validation_readiness,44709be0-e980-4e45-8284-76e6644d1e44,COMPLETED,2026-11-08T12:41:42.212529,b21bcdd52a03f12a47c711628fc11a7d028ca82f,42,master_evaluation_holdout_seed42,2,0
-test_staging_verification,99844df7-5873-409d-a694-e240974db4d7,STAGED,2026-11-08T14:34:44.399395,b21bcdd52a03f12a47c711628fc11a7d028ca82f,42,master_evaluation_holdout_seed42,0,0
+test_staging_verification,3dda127b-9ca4-42bf-b174-95a9a20c64d2,STAGED,2026-11-09T10:24:18.190292,eff0e07b842a5b084aa081f0ace82ecd594fb4da,42,master_evaluation_holdout_seed42,0,0
